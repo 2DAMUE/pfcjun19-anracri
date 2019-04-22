@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "342823179170",
+    "firebase_url": "https://moveyourschool-c3483.firebaseio.com",
+    "project_id": "moveyourschool-c3483",
+    "storage_bucket": "moveyourschool-c3483.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:342823179170:android:8464c39e7971602e",
+        "android_client_info": {
+          "package_name": "com.dam.moveyourschool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "342823179170-va52c91dssd8i10gap7uc24rat4km7ke.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dam.moveyourschool",
+            "certificate_hash": "c01b2ac7b3734608c44cd6b89ec74aa97f3a4cc8"
+          }
+        },
+        {
+          "client_id": "342823179170-68ueisml67j41i20f767ajt3cljinvjv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrW8amDraRwTzsCSMh_NiJtb9vl2cksn0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "342823179170-68ueisml67j41i20f767ajt3cljinvjv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
