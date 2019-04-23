@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    tools:context=".activities.SplashScreen">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieClouds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:alpha="0.1"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="4396-clouds.json"
+        app:lottie_loop="true" />
+
+    <ImageView
+        android:id="@+id/imgLogo"
+        android:layout_width="300dp"
+        android:layout_height="109dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="false"
+        android:layout_marginTop="60dp"
+        android:contentDescription="@string/TODO"
+        app:srcCompat="@drawable/ic_moveschool" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieBus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:adjustViewBounds="true"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="ex-splash.json"
+        app:lottie_loop="true" />
+
+    <Button
+        android:id="@+id/btnSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgLogo"
+        android:layout_centerInParent="false"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/button_inverted"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:text="@string/sign_up"
+        android:textColor="@color/mochila" />
+
+    <TextView
+        android:id="@+id/link_signup"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnSignUp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/bambino_light"
+        android:gravity="center"
+        android:text="¿No tienes cuenta? Date de alta"
+        android:onClick="signUp"
+        android:textSize="16dip" />
+
+    <Button
+        android:id="@+id/btnComenzar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnSignUp"
+        android:layout_centerInParent="false"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/button_border"
+        android:gravity="center|center_horizontal|center_vertical"
+        android:text="@string/comenzar"
+        android:onClick="comenzar"
+        android:textColor="@android:color/background_light" />
+</RelativeLayout>

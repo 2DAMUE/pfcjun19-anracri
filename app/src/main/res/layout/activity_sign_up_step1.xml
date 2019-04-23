@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mochila"
+    android:orientation="vertical"
+    android:weightSum="11"
+    tools:context=".activities.SignUpStep1">
+
+    <TextView
+        android:id="@+id/tvOpcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.5"
+        android:fontFamily="@font/slubby"
+        android:gravity="center|center_horizontal"
+        android:text="@string/elige_una_opcion"
+        android:textColor="@android:color/background_light"
+        android:textSize="30sp" />
+
+    <ImageView
+        android:id="@+id/imgSombrero"
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:layout_weight="2"
+        android:contentDescription="@string/TODO"
+        android:onClick="signUpInstitucionEducativa"
+        app:srcCompat="@drawable/ic_sombrero" />
+
+    <TextView
+        android:id="@+id/tvinstitucion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_weight="2"
+        android:contentDescription="@string/TODO"
+        android:fontFamily="@font/bambino_light"
+        android:gravity="center_horizontal"
+        android:text="@string/instituci_n_educativa"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/imgEdificio"
+        android:layout_width="match_parent"
+        android:layout_height="47dp"
+        android:layout_weight="2"
+        android:contentDescription="@string/TODO"
+        android:onClick="signUpEmpresaActividades"
+        app:srcCompat="@drawable/ic_edificio" />
+
+    <TextView
+        android:id="@+id/tvEmpresa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_weight="2"
+        android:fontFamily="@font/bambino_light"
+        android:gravity="center_horizontal"
+        android:text="@string/empresa_de_actividads"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tvPaso"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/bambino_light"
+        android:gravity="center_horizontal"
+        android:text="@string/paso_1_2"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp" />
+</LinearLayout>

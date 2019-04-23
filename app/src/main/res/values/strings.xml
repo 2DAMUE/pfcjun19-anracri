@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">MoveYourSchool</string>
+    <string name="TODO">TODO</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="comenzar">Comenzar</string>
+    <string name="elige_una_opcion">Elige una opcion</string>
+    <string name="empresa_de_actividads">Ofrezco Actividades Culturales</string>
+    <string name="instituci_n_educativa">Soy una Institución Educativa</string>
+    <string name="paso_1_2">Paso 1/2</string>
+    <string name="ya_casi_est">¡Ya casi está!</string>
+    <string name="registrar">Registrar</string>
+
+    <!--SIGN UP SUCCESS-->
+    <string name="VAL_BIENVENIDO">Bienvenido</string>
+    <string name="VAL_CORREO_CONFIRMACION">Te enviaremos un correo a <b>%1$s</b> confirmando el alta de tu cuenta.</string>
+    <string name="title_activity_base">BaseActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
 </resources>
