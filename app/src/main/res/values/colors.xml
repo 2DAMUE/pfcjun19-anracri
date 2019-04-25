@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#E2584D</color>
-    <color name="colorPrimaryDark">#E2584D</color>
+    <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#EFC85E</color>
     <color name="mochila">#E2584D</color>
     <color name="logo_yellow">#EFC85E</color>
+    <color name="blue_pastel">#AEC6CF</color>
+    <color name="green_pastel">#77dd77</color>
 </resources>

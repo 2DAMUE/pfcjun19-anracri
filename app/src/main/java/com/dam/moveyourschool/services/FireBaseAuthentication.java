@@ -3,7 +3,6 @@ package com.dam.moveyourschool.services;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
-
 import com.dam.moveyourschool.bean.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -53,16 +52,14 @@ public abstract class FireBaseAuthentication {
             firebaseAuth.signOut();
         }
 
-        Log.e("ENTRA METODO", "metodo entra");
         firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if (task.isSuccessful()) {
-                    Log.e("EN SERVICE", firebaseAuth.getCurrentUser().getEmail().toString());
                     callBackLogin(true);
                 } else {
-                    Log.e("excepcion", task.getException().toString());
+                    Log.e("EXCEPCION_AUTENTICACION", task.getException().toString());
                     callBackLogin(false);
                 }
             }

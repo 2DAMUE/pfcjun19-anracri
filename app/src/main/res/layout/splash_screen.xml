@@ -49,7 +49,8 @@
         android:layout_marginRight="30dp"
         android:background="@drawable/button_inverted"
         android:gravity="center|center_horizontal|center_vertical"
-        android:text="@string/TXT_SIGN_UP"
+        android:onClick="signIn"
+        android:text="@string/TXT_SIGN_IN"
         android:textColor="@color/mochila" />
 
     <TextView
@@ -61,8 +62,8 @@
         android:layout_marginBottom="24dp"
         android:fontFamily="@font/bambino_light"
         android:gravity="center"
-        android:text="¿No tienes cuenta? Date de alta"
         android:onClick="signUp"
+        android:text="¿No tienes cuenta? Date de alta"
         android:textSize="16dip" />
 
     <Button

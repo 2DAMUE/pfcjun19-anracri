@@ -13,40 +13,35 @@
         android:layout_height="match_parent">
 
 
-        <ImageView
-            android:id="@+id/header_cover_image"
+        <View
+            android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
-            android:background="@color/colorPrimary"
-            android:scaleType="centerCrop"
+            android:layout_height="122dp" />
 
-            />
-
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <de.hdodenhof.circleimageview.CircleImageView
 
             android:id="@+id/profile"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
 
-            android:layout_below="@+id/header_cover_image"
+
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="-130dp"
             android:clickable="true"
             android:elevation="5dp"
             android:padding="20dp"
             android:scaleType="centerCrop"
             android:src="@drawable/idea"
-            app:civ_border_color="#FFFFFFFF"
+            app:civ_border_color="@android:color/white"
             app:civ_border_width="3dp" />
 
         <RelativeLayout
             android:id="@+id/profile_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/header_cover_image"
-            android:layout_marginTop="-58dp"
-            android:background="@color/logo_yellow"
-            android:elevation="4dp"
+
+
+            android:layout_below="@+id/view"
+
             android:paddingBottom="24dp">
 
 
@@ -60,6 +55,7 @@
                 android:layout_marginRight="16dp"
                 android:clickable="true"
 
+                android:onClick="editProfile"
                 app:srcCompat="@drawable/ic_create_black_24dp" />
 
             <TextView
@@ -68,8 +64,9 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="70dp"
+                android:fontFamily="@font/bambino_light"
                 android:text="Laxman Marothiya"
-                android:textColor="#fff"
+                android:textColor="@android:color/black"
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
@@ -80,8 +77,9 @@
                 android:layout_below="@+id/tvTitular"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="10dp"
+                android:fontFamily="@font/bambino_light"
                 android:text="(Adhyaksh)"
-                android:textColor="#fff"
+                android:textColor="@android:color/black"
                 android:textSize="18sp" />
         </RelativeLayout>
 
@@ -103,7 +101,7 @@
                 android:textSize="20sp"
                 android:fontFamily="@font/slubby"
                 android:text="Quienes Somos:"
-                android:textColor="@color/mochila" />
+                android:textColor="@color/blue_pastel" />
 
             <com.ms.square.android.expandabletextview.ExpandableTextView xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:expandableTextView="http://schemas.android.com/apk/res-auto"
@@ -143,7 +141,7 @@
                 android:layout_marginTop="-15dp"
                 android:fontFamily="@font/slubby"
                 android:text="Nuestro Correo:"
-                android:textColor="@color/mochila"
+                android:textColor="@color/blue_pastel"
                 android:textSize="20sp" />
 
             <TextView
@@ -162,10 +160,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="40dp"
-                android:textSize="20sp"
                 android:fontFamily="@font/slubby"
                 android:text="Nos encontramos en:"
-                android:textColor="@color/mochila" />
+                android:textColor="@color/blue_pastel"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvDirRes"
@@ -182,11 +180,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:textSize="20sp"
                 android:layout_marginTop="40dp"
                 android:fontFamily="@font/slubby"
                 android:text="Localidad:"
-                android:textColor="@color/mochila" />
+                android:textColor="@color/blue_pastel"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/tvLocRes"
@@ -219,11 +217,11 @@
             android:layout_marginTop="40dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="30dp"
-            android:background="@drawable/button_border"
+            android:background="@drawable/button_pastel"
             android:fontFamily="@font/bambino_light"
             android:onClick="editProfile"
             android:text="@string/TXT_ENVIAR_MENSAJE"
-            android:textColor="@android:color/background_light" />
+            android:textColor="@android:color/white" />
 
 
     </RelativeLayout>

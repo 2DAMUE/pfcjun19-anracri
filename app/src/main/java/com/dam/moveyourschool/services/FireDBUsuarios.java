@@ -65,6 +65,10 @@ public abstract class FireDBUsuarios {
         dbr.child(usuario.getUid()).setValue(usuario);
     }
 
+    public void updateUserById(Usuario usuario) {
+        dbr.child(usuario.getUid()).setValue(usuario);
+    }
+
     public abstract void nodoAgregado(@NonNull DataSnapshot dataSnapshot, @Nullable String s);
     public abstract void nodoModificado(@NonNull DataSnapshot dataSnapshot, @Nullable String s);
     public abstract void nodoEliminado(@NonNull DataSnapshot dataSnapshot);

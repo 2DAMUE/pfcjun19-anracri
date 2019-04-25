@@ -2,9 +2,9 @@ package com.dam.moveyourschool.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,21 +14,64 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import com.dam.moveyourschool.R;
+import com.dam.moveyourschool.bean.Usuario;
+import com.dam.moveyourschool.services.FireDBUsuarios;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 
 public abstract class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    private static final String EMPRESA = "EMPRESA";
+    private static final String INSTITUCION_EDUCATIVA = "EDUCACION";
+    private Usuario user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+
+        final FirebaseUser userAuth = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (userAuth != null) {
+            new FireDBUsuarios() {
+                @Override
+                public void nodoAgregado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    if (dataSnapshot.getKey().equals(userAuth.getUid())) {
+                        user = dataSnapshot.getValue(Usuario.class);
+                    }
+                }
+
+                @Override
+                public void nodoModificado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                }
+
+                @Override
+                public void nodoEliminado(@NonNull DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void nodoMovido(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                }
+
+                @Override
+                public void nodoCancelado(@NonNull DatabaseError databaseError) {
+
+                }
+            };
+        }
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setLogo(R.drawable.ic_movehoriz_large);
 
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -116,6 +159,19 @@ public abstract class BaseActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        if (user != null && user.getTipo().equals(EMPRESA)) {
+
+
+
+        } else if (user != null  && user.getTipo().equals(INSTITUCION_EDUCATIVA)) {
+
+
+
+        } else {
+
+        }
+
+
         if (id == R.id.nav_Usuarios) {
             startActivity(new Intent(this, UsuariosList.class));
         } else if (id == R.id.nav_gallery) {
@@ -133,5 +189,12 @@ public abstract class BaseActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    protected void logOut() {
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            FirebaseAuth.getInstance().signOut();
+            user = null;
+        }
     }
 }

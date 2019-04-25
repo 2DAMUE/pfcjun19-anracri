@@ -2,19 +2,14 @@ package com.dam.moveyourschool.adapters;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.bumptech.glide.RequestManager;
 import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.bean.Usuario;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AdapterUsuarios extends RecyclerView.Adapter<AdapterUsuarios.UsuarioHolder> implements View.OnClickListener {
@@ -38,9 +33,9 @@ public class AdapterUsuarios extends RecyclerView.Adapter<AdapterUsuarios.Usuari
 
     @Override
     public void onBindViewHolder(@NonNull UsuarioHolder usuarioHolder, int i) {
-        Log.e("ADAPTER", listaUsuarios.get(i).toString());
-        usuarioHolder.tvNombre.setText(listaUsuarios.get(i).getUid());
-        usuarioHolder.tvInstituciones.setText(listaUsuarios.get(i).getEmail());
+
+        usuarioHolder.tvNombre.setText(listaUsuarios.get(i).getNombre());
+        usuarioHolder.tvInstituciones.setText(listaUsuarios.get(i).getTitular());
 
         if (listaUsuarios.get(i).getUrlFoto() == null) {
             glide.load(R.drawable.ic_edificio).into(usuarioHolder.imageView);

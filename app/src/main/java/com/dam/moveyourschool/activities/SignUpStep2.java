@@ -1,6 +1,5 @@
 package com.dam.moveyourschool.activities;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
@@ -13,21 +12,23 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
 import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.services.FireBaseAuthentication;
 import com.dam.moveyourschool.services.FireDBUsuarios;
+import com.dam.moveyourschool.views.ProgressBarAlert;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
 public class SignUpStep2 extends AppCompatActivity {
     private FireBaseAuthentication fireBaseAuthentication;
     private FireDBUsuarios serviceDBUsuarios;
-    private TextView etxEmail;
-    private TextView etxPassword;
+    private EditText etxEmail;
+    private EditText etxPassword;
+    private EditText etxPasswordRepeat;
     private boolean matchPattern = false;
-    private Dialog alert;
+    private ProgressBarAlert alert;
     private int tipo;
 
     @Override
@@ -44,10 +45,10 @@ public class SignUpStep2 extends AppCompatActivity {
         //Inicialización de los atributos
         etxEmail = findViewById(R.id.etxEmail);
         etxPassword = findViewById(R.id.etxPassword);
+        etxPasswordRepeat = findViewById(R.id.etxPasswordRepeat);
 
         //Inicialización del Dialogo de alerta con el progressbar
-        alert = new Dialog(this, R.style.Theme_AppCompat_Dialog);
-        alert.setContentView(R.layout.progressbar);
+        alert = new ProgressBarAlert(this);
 
         // Inicialización del servicio de autenticación
         // Listener que proporciona el resultado del intento de alta de usuario
@@ -76,7 +77,8 @@ public class SignUpStep2 extends AppCompatActivity {
 
     //Metodo que comprueba las reglas
     private boolean checkFields() {
-        if (etxEmail.toString().isEmpty() || etxPassword.toString().isEmpty() || !matchPattern) {
+        if (etxEmail.toString().isEmpty() || etxPassword.toString().isEmpty() || !matchPattern
+        || !etxPassword.getText().toString().equals(etxPasswordRepeat.getText().toString())) {
             return false;
         } else {
             return true;

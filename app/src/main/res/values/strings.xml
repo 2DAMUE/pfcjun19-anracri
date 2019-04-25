@@ -48,6 +48,8 @@
     <string name="KEY_TYPE">KEY_TYPE</string>
     <string name="KEY_MAIL">KEY_MAIL</string>
     <string name="KEY_USER">KEY_USER</string>
+    <string name="HINT_REPETIR_PASS">Repetir Password</string>
+    <string name="TXT_SIGN_IN">SIGN IN</string>
 
 
 </resources>
