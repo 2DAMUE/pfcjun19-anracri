@@ -49,7 +49,7 @@
         android:layout_marginRight="30dp"
         android:background="@drawable/button_inverted"
         android:gravity="center|center_horizontal|center_vertical"
-        android:text="@string/sign_up"
+        android:text="@string/TXT_SIGN_UP"
         android:textColor="@color/mochila" />
 
     <TextView
@@ -76,7 +76,7 @@
         android:layout_marginRight="30dp"
         android:background="@drawable/button_border"
         android:gravity="center|center_horizontal|center_vertical"
-        android:text="@string/comenzar"
+        android:text="@string/BTN_COMENZAR"
         android:onClick="comenzar"
         android:textColor="@android:color/background_light" />
 </RelativeLayout>

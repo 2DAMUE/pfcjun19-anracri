@@ -1,23 +1,53 @@
 <resources>
+    <!--TEXTOS GENERICOS COMPARTIDOS-->
     <string name="app_name">MoveYourSchool</string>
     <string name="TODO">TODO</string>
-    <string name="sign_up">Sign Up</string>
-    <string name="comenzar">Comenzar</string>
-    <string name="elige_una_opcion">Elige una opcion</string>
-    <string name="empresa_de_actividads">Ofrezco Actividades Culturales</string>
-    <string name="instituci_n_educativa">Soy una Institución Educativa</string>
-    <string name="paso_1_2">Paso 1/2</string>
-    <string name="ya_casi_est">¡Ya casi está!</string>
-    <string name="registrar">Registrar</string>
-
-    <!--SIGN UP SUCCESS-->
-    <string name="VAL_BIENVENIDO">Bienvenido</string>
-    <string name="VAL_CORREO_CONFIRMACION">Te enviaremos un correo a <b>%1$s</b> confirmando el alta de tu cuenta.</string>
-    <string name="title_activity_base">BaseActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_base">BaseActivity</string>
+    <string name="TXT_DEBE_RELLENAR_CORRECTAMENTE">Debe rellenar todos los campos correctamente</string>
+    <string name="TXT_NO_SE_HA_PODIDO_REGISTRAR">No se ha podido registrar el usuario</string>
+
+    <!--LOGIN-->
+    <string name="STRING_FILL">%1$s</string>
+    <string name="HINT_USUARIO">Usuario</string>
+
+    <!--SPLASH SCREEN-->
+    <string name="TXT_SIGN_UP">Sign Up</string>
+    <string name="BTN_COMENZAR">Comenzar</string>
+    <string name="TXT_ERROR_GENERICO">Ha ocurrido un error al realizar la operación. Vuelva a intentarlo y sino póngase en contacto con el administrador de la aplicación.</string>
+    <string name="TXT_ERROR_PASSWORD_DIFERENTE">Error, las contraseñas que introduzca han de ser idénticas.</string>
+    <string name="TXT_ERROR_EMAIL">La dirección de correo que ha consignado no tiene formato adecuado.</string>
+
+    <!--TEXTOS SIGN UP STEP 2-->
+    <string name="TXT_ELIGE_OPCION">Elige una opcion</string>
+    <string name="TXT_EMPRESA_ACTIVIDADES">Ofrezco Actividades Culturales</string>
+    <string name="TXT_INSTITUCION_EDUCATIVA">Soy una Institución Educativa</string>
+    <string name="TXT_PASO_1_2">Paso 1/2</string>
+    <string name="TXT_YA_CASI_ESTA">¡Ya casi está!</string>
+    <string name="BTN_REGISTRAR">Registrar</string>
+
+    <!--TEXTOS USER DETAIL-->
+    <string name="TXT_ENVIAR_MENSAJE">Enviar Mensaje</string>
+    <string name="TXT_DESC">El Museo Nacional del Prado, desde que fue inaugurado en 1819 y a lo largo de su historia centenaria, ha cumplido con la alta misión de conservar, exponer y enriquecer el conjunto de las colecciones y obras de arte que, estrechamente vinculadas a la historia de España, constituyen una de las más elevadas manifestaciones de expresión artística de reconocido valor universal.</string>
+
+    <!--TEXTOS SIGN UP SUCCESS-->
+    <string name="TXT_BIENVENIDO">Bienvenido</string>
+    <string name="TXT_CORREO_CONFIRMACION">Te enviaremos un correo a <b>%1$s</b> confirmando el alta de tu cuenta.</string>
+
+    <string name="usuarios">Usuarios</string>
+
+    <!--MENUS-->
+    <string name="MENU_MI_PERFIL">Mi Perfil</string>
+
+    <!--CLAVES-->
+    <string name="KEY_TYPE">KEY_TYPE</string>
+    <string name="KEY_MAIL">KEY_MAIL</string>
+    <string name="KEY_USER">KEY_USER</string>
+
+
 </resources>

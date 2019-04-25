@@ -29,7 +29,7 @@
         android:layout_marginTop="75dp"
         android:fontFamily="@font/bambino_light"
         android:gravity="center"
-        android:text="@string/VAL_BIENVENIDO"
+        android:text="@string/TXT_BIENVENIDO"
         android:textColor="@color/mochila"
         android:textSize="40sp" />
 
@@ -42,7 +42,7 @@
         android:layout_marginRight="30dp"
         android:fontFamily="@font/bambino_light"
         android:gravity="center"
-        android:text="@string/VAL_CORREO_CONFIRMACION"
+        android:text="@string/TXT_CORREO_CONFIRMACION"
         android:textColor="@android:color/background_dark"
         android:textSize="20sp" />
 

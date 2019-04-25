@@ -1,5 +1,6 @@
 package com.dam.moveyourschool.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -15,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.dam.moveyourschool.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 public abstract class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -39,7 +41,7 @@ public abstract class BaseActivity extends AppCompatActivity
         });
 
          */
-        
+
         //Carga el Drawer
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -87,34 +89,35 @@ public abstract class BaseActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.base, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            item.setVisible(false);
         }
 
+        if (item.isVisible()) {
+            if (id == R.id.menu_Perfil) {
+                startActivity(new Intent(this, UserDetail.class));
+                return true;
+
+            }
+        }
         return super.onOptionsItemSelected(item);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
+        if (id == R.id.nav_Usuarios) {
+            startActivity(new Intent(this, UsuariosList.class));
         } else if (id == R.id.nav_gallery) {
 
         } else if (id == R.id.nav_slideshow) {

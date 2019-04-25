@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_User"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:paddingBottom="50dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/fotoUsuario"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:scaleType="centerCrop"
+        app:civ_border_color="#FF000000"
+        tools:src="@drawable/idea" />
+
+    <LinearLayout
+        android:id="@+id/lmText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bambino_light"
+            android:paddingLeft="15dp"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvInstituciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

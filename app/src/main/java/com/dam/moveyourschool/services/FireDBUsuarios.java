@@ -22,7 +22,7 @@ public abstract class FireDBUsuarios {
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                     nodoAgregado(dataSnapshot, s);
-                    ; }
+                }
 
                 @Override
                 public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {

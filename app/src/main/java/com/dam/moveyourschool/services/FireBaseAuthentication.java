@@ -2,6 +2,8 @@ package com.dam.moveyourschool.services;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
+
 import com.dam.moveyourschool.bean.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -47,7 +49,24 @@ public abstract class FireBaseAuthentication {
     }
 
     public void login(String username, String password){
+        if (firebaseAuth.getCurrentUser() != null) {
+            firebaseAuth.signOut();
+        }
 
+        Log.e("ENTRA METODO", "metodo entra");
+        firebaseAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                if (task.isSuccessful()) {
+                    Log.e("EN SERVICE", firebaseAuth.getCurrentUser().getEmail().toString());
+                    callBackLogin(true);
+                } else {
+                    Log.e("excepcion", task.getException().toString());
+                    callBackLogin(false);
+                }
+            }
+        });
     }
 
     //Metodo que agrega el usuario al FirebaseAuth y a la Database con su Tipo de Usuario
@@ -81,4 +100,5 @@ public abstract class FireBaseAuthentication {
     }
 
     public abstract void callBackSignUp(boolean result);
+    public abstract void callBackLogin(boolean result);
 }

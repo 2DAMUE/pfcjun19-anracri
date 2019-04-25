@@ -17,7 +17,7 @@ public class SignUpSuccess extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up_success);
         tvCorreo = findViewById(R.id.tvcorreo);
         String correo = getIntent().getStringExtra("KEY_MAIL");
-        tvCorreo.setText(String.format(getString(R.string.VAL_CORREO_CONFIRMACION), correo));
+        tvCorreo.setText(String.format(getString(R.string.TXT_CORREO_CONFIRMACION), correo));
 
         new Handler().postDelayed(new Runnable() {
             @Override

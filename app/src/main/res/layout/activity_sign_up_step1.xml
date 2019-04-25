@@ -16,7 +16,7 @@
         android:layout_weight="1.5"
         android:fontFamily="@font/slubby"
         android:gravity="center|center_horizontal"
-        android:text="@string/elige_una_opcion"
+        android:text="@string/TXT_ELIGE_OPCION"
         android:textColor="@android:color/background_light"
         android:textSize="30sp" />
 
@@ -38,7 +38,7 @@
         android:contentDescription="@string/TODO"
         android:fontFamily="@font/bambino_light"
         android:gravity="center_horizontal"
-        android:text="@string/instituci_n_educativa"
+        android:text="@string/TXT_INSTITUCION_EDUCATIVA"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />
 
@@ -52,14 +52,14 @@
         app:srcCompat="@drawable/ic_edificio" />
 
     <TextView
-        android:id="@+id/tvEmpresa"
+        android:id="@+id/tvDescripcion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_weight="2"
         android:fontFamily="@font/bambino_light"
         android:gravity="center_horizontal"
-        android:text="@string/empresa_de_actividads"
+        android:text="@string/TXT_EMPRESA_ACTIVIDADES"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />
 
@@ -70,7 +70,7 @@
         android:layout_weight="1"
         android:fontFamily="@font/bambino_light"
         android:gravity="center_horizontal"
-        android:text="@string/paso_1_2"
+        android:text="@string/TXT_PASO_1_2"
         android:textColor="@android:color/background_light"
         android:textSize="18sp" />
 </LinearLayout>

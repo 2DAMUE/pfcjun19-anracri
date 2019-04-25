@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 public class Usuario implements Parcelable {
     private String uid;
+    private String nombre;
     private String cif;
     private String titular;
     private String email;
@@ -20,6 +21,7 @@ public class Usuario implements Parcelable {
 
     protected Usuario(Parcel in) {
         uid = in.readString();
+        nombre = in.readString();
         cif = in.readString();
         titular = in.readString();
         email = in.readString();
@@ -35,6 +37,7 @@ public class Usuario implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(uid);
+        dest.writeString(nombre);
         dest.writeString(cif);
         dest.writeString(titular);
         dest.writeString(email);
@@ -70,6 +73,14 @@ public class Usuario implements Parcelable {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getCif() {
@@ -150,5 +161,23 @@ public class Usuario implements Parcelable {
 
     public void setUrlFoto(String urlFoto) {
         this.urlFoto = urlFoto;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "uid='" + uid + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", cif='" + cif + '\'' +
+                ", titular='" + titular + '\'' +
+                ", email='" + email + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", localidad='" + localidad + '\'' +
+                ", municipio='" + municipio + '\'' +
+                ", codigo_postal='" + codigo_postal + '\'' +
+                ", tipo='" + tipo + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", urlFoto='" + urlFoto + '\'' +
+                '}';
     }
 }
