@@ -39,20 +39,27 @@ public class SplashScreen extends AppCompatActivity {
 
         fireBaseAuthentication = new FireBaseAuthentication() {
             @Override
-            public void callBackSignUp(boolean result) {
+            public void callBackSignUp(int result) {
 
             }
 
             @Override
-            public void callBackLogin(boolean result) {
-                if (result == true && FirebaseAuth.getInstance().getCurrentUser() != null) {
-                    progressBarAlert.cancel();
+            public void callBackLogin(int result) {
+                progressBarAlert.cancel();
+
+                if (result == 0 && FirebaseAuth.getInstance().getCurrentUser() != null) {
                     startActivity(new Intent(SplashScreen.this, Actividades.class)
                             .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                } else {
-                    progressBarAlert.cancel();
 
-                    //startActivity(new Intent(SplashScreen.this, Actividades.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                } else if (result == 1) {
+                    new CustomDialog(SplashScreen.this, R.string.VAL_USER_INEXISTENT).show();
+
+                } else if (result == 2) {
+                    new CustomDialog(SplashScreen.this, R.string.VAL_INVALID_PASSWORD).show();
+
+                } else if (result == 3) {
+                    new CustomDialog(SplashScreen.this, R.string.VAL_SERVER_TIMEOUT).show();
+
                 }
             }
         };

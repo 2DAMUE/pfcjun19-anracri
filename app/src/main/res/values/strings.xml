@@ -51,5 +51,13 @@
     <string name="HINT_REPETIR_PASS">Repetir Password</string>
     <string name="TXT_SIGN_IN">SIGN IN</string>
 
-
+    <!--AUTH EXCEPTIONS-->
+    <string name="EXCEPT_USER_INEXISTENT">com.google.firebase.auth.FirebaseAuthInvalidUserException: There is no user record corresponding to this identifier. The user may have been deleted.</string>
+    <string name="EXCEPT_INVALIDA_PASSWORD">com.google.firebase.auth.FirebaseAuthInvalidCredentialsException: The password is invalid or the user does not have a password.</string>
+    <string name="EXCEPT_SERVER_TIMEOUT">com.google.firebase.FirebaseNetworkException: A network error (such as timeout, interrupted connection or unreachable host) has occurred.</string>
+    <string name="VAL_USER_INEXISTENT">No se ha encontrado usuario con la dirección proporcionada</string>
+    <string name="VAL_INVALID_PASSWORD">La contraseña introducida es inválida</string>
+    <string name="VAL_SERVER_TIMEOUT">El Sevidor no ha respondido o no hay conexión a la red.</string>
+    <string name="VAL_INVALID_PASSWORD_STRENGTH">La contraseña debe tener al menos 6 caracteres</string>
+    <string name="VAL_ACCOUNT_ALREADY_EXISTS">La cuenta de correo es inválida. Ya se encuentra registrada en el sistema.</string>
 </resources>

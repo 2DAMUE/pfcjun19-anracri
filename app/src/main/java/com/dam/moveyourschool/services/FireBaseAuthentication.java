@@ -2,7 +2,6 @@ package com.dam.moveyourschool.services;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import com.dam.moveyourschool.bean.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -12,12 +11,21 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
 public abstract class FireBaseAuthentication {
+    //Constantes Excepciones de Autenticación
+    private static final String EXCEPT_INVALID_USER = "com.google.firebase.auth.FirebaseAuthInvalidUserException: There is no user record corresponding to this identifier. The user may have been deleted.";
+    private static final String EXCEPT_INVALID_PASSWORD = "com.google.firebase.auth.FirebaseAuthInvalidCredentialsException: The password is invalid or the user does not have a password.";
+    private static final String EXCEPT_SERVER_TIMEOUT = "com.google.firebase.FirebaseNetworkException: A network error (such as timeout, interrupted connection or unreachable host) has occurred.";
+    private static final String EXCEPT_INVALID_PASSWORD_STRENGTH = "com.google.firebase.auth.FirebaseAuthWeakPasswordException: The given password is invalid. [ Password should be at least 6 characters ]";
+    private static final String EXCEPT_ACCOUNT_ALREADY_EXISTS = "com.google.firebase.auth.FirebaseAuthUserCollisionException: The email address is already in use by another account.";
+
+    //Constantes Alta Tipo de Usuario en Database
     private static final String USUARIO_EMPRESA = "EMPRESA";
     private static final String USUARIO_EDUCACION = "EDUCACION";
+
     private FirebaseAuth firebaseAuth;
     private FireDBUsuarios dbUsuarios;
 
-    public FireBaseAuthentication(){
+    public FireBaseAuthentication() {
         firebaseAuth = FirebaseAuth.getInstance();
         dbUsuarios = new FireDBUsuarios() {
             @Override
@@ -47,7 +55,7 @@ public abstract class FireBaseAuthentication {
         };
     }
 
-    public void login(String username, String password){
+    public void login(String username, String password) {
         if (firebaseAuth.getCurrentUser() != null) {
             firebaseAuth.signOut();
         }
@@ -57,10 +65,18 @@ public abstract class FireBaseAuthentication {
             public void onComplete(@NonNull Task<AuthResult> task) {
 
                 if (task.isSuccessful()) {
-                    callBackLogin(true);
+                    callBackLogin(0);
+
                 } else {
-                    Log.e("EXCEPCION_AUTENTICACION", task.getException().toString());
-                    callBackLogin(false);
+                    if (task.getException().toString().equals(EXCEPT_INVALID_USER)) {
+                        callBackLogin(1);
+
+                    } else if (task.getException().toString().equals(EXCEPT_INVALID_PASSWORD)) {
+                        callBackLogin(2);
+
+                    } else if (task.getException().toString().equals(EXCEPT_SERVER_TIMEOUT)) {
+                        callBackLogin(3);
+                    }
                 }
             }
         });
@@ -73,13 +89,14 @@ public abstract class FireBaseAuthentication {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
                     Usuario usuario = new Usuario();
                     usuario.setEmail(firebaseAuth.getCurrentUser().getEmail());
                     usuario.setUid(firebaseAuth.getCurrentUser().getUid());
 
                     if (tipo == 1) {
                         usuario.setTipo(USUARIO_EDUCACION);
+
                     } else {
                         usuario.setTipo(USUARIO_EMPRESA);
                     }
@@ -87,15 +104,26 @@ public abstract class FireBaseAuthentication {
                     firebaseAuth.getCurrentUser().sendEmailVerification();
                     dbUsuarios.agregarUsuarioById(usuario);
 
-                    callBackSignUp(true);
+                    callBackSignUp(0);
 
                 } else {
-                    callBackSignUp(false);
+
+                    if (task.getException().toString().equals(EXCEPT_INVALID_PASSWORD_STRENGTH)) {
+                        callBackSignUp(1);
+
+                    } else if (task.getException().toString().equals(EXCEPT_ACCOUNT_ALREADY_EXISTS)) {
+                        callBackSignUp(2);
+
+                    } else if (task.getException().toString().equals(EXCEPT_SERVER_TIMEOUT)) {
+                        callBackSignUp(3);
+
+                    }
                 }
             }
         });
     }
 
-    public abstract void callBackSignUp(boolean result);
-    public abstract void callBackLogin(boolean result);
+    public abstract void callBackSignUp(int result);
+
+    public abstract void callBackLogin(int result);
 }

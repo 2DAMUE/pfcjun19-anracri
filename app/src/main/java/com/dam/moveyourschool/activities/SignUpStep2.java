@@ -13,10 +13,10 @@ import android.text.TextWatcher;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.services.FireBaseAuthentication;
 import com.dam.moveyourschool.services.FireDBUsuarios;
+import com.dam.moveyourschool.views.CustomDialog;
 import com.dam.moveyourschool.views.ProgressBarAlert;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -71,7 +71,7 @@ public class SignUpStep2 extends AppCompatActivity {
         },1000);
 
         } else {
-            Toast.makeText(getApplicationContext(), getString(R.string.TXT_DEBE_RELLENAR_CORRECTAMENTE), Toast.LENGTH_LONG).show();
+            new CustomDialog(SignUpStep2.this, R.string.TXT_DEBE_RELLENAR_CORRECTAMENTE).show();
         }
     }
 
@@ -88,20 +88,27 @@ public class SignUpStep2 extends AppCompatActivity {
     private void loadAuthenticateService() {
         fireBaseAuthentication = new FireBaseAuthentication() {
             @Override
-            public void callBackSignUp(boolean result) {
+            public void callBackSignUp(int result) {
                 alert.cancel();
 
-                if(result) {
+                if(result == 0) {
                     startActivity(new Intent(SignUpStep2.this, SignUpSuccess.class)
                             .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                             .putExtra(getString(R.string.KEY_MAIL), etxEmail.getText().toString()));
-                } else {
-                    Toast.makeText(getApplicationContext(), getString(R.string.TXT_NO_SE_HA_PODIDO_REGISTRAR), Toast.LENGTH_LONG).show();
+
+                } else if (result == 1){
+                    new CustomDialog(SignUpStep2.this, R.string.VAL_INVALID_PASSWORD_STRENGTH).show();
+
+                } else if (result == 2) {
+                    new CustomDialog(SignUpStep2.this, R.string.VAL_ACCOUNT_ALREADY_EXISTS).show();
+
+                } else if (result == 3) {
+                    new CustomDialog(SignUpStep2.this, R.string.VAL_SERVER_TIMEOUT).show();
                 }
             }
 
             @Override
-            public void callBackLogin(boolean result) {
+            public void callBackLogin(int result) {
 
             }
         };
