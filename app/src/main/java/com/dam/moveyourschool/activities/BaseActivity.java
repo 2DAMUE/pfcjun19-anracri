@@ -1,10 +1,14 @@
 package com.dam.moveyourschool.activities;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.view.ActionProvider;
+import android.view.ContextMenu;
+import android.view.SubMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,39 +18,82 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import com.bumptech.glide.Glide;
 import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.bean.Usuario;
+import com.dam.moveyourschool.services.FireBaseAuthentication;
 import com.dam.moveyourschool.services.FireDBUsuarios;
+import com.dam.moveyourschool.views.CustomDialog;
+import com.dam.moveyourschool.views.DialogLogin;
+import com.dam.moveyourschool.views.ProgressBarAlert;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public abstract class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String EMPRESA = "EMPRESA";
     private static final String INSTITUCION_EDUCATIVA = "EDUCACION";
+    private CircleImageView imgMenuImgUser;
+    private TextView tvMenuInstitucion;
+    private NavigationView navigationView;
     private Usuario user;
+    private FireBaseAuthentication fireBaseAuthentication;
+    private DialogLogin dialogLogin;
+    private ProgressBarAlert progressBarAlert;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
 
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        //Inicialización de los atributos del Nav Header
+        final View hView =  navigationView.getHeaderView(0);
+        imgMenuImgUser = hView.findViewById(R.id.imgMenuUsuario);
+        tvMenuInstitucion = hView.findViewById(R.id.tvMenuInstitucion);
+
         final FirebaseUser userAuth = FirebaseAuth.getInstance().getCurrentUser();
 
         if (userAuth != null) {
+            navigationView.getMenu().findItem(R.id.nav_logout).setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_login).setVisible(false);
+
             new FireDBUsuarios() {
                 @Override
                 public void nodoAgregado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                     if (dataSnapshot.getKey().equals(userAuth.getUid())) {
                         user = dataSnapshot.getValue(Usuario.class);
+
+                        if (user.getUrlFoto() != null && !user.getUrlFoto().equals("")) {
+                            Glide.with(BaseActivity.this).load(user.getUrlFoto()).into(imgMenuImgUser);
+                        }
+
+                        if (user.getNombre() != null && !user.getNombre().equals("")) {
+                            tvMenuInstitucion.setText(user.getNombre());
+                        }
                     }
                 }
 
                 @Override
                 public void nodoModificado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    if (dataSnapshot.getKey().equals(userAuth.getUid())) {
+                        user = dataSnapshot.getValue(Usuario.class);
 
+                        if (user.getUrlFoto() != null && !user.getUrlFoto().equals("")) {
+                            Glide.with(BaseActivity.this).load(user.getUrlFoto()).into(imgMenuImgUser);
+                        }
+
+                        if (user.getNombre() != null && !user.getUrlFoto().equals("")) {
+                            tvMenuInstitucion.setText(user.getNombre());
+                        }
+                    }
                 }
 
                 @Override
@@ -64,6 +111,9 @@ public abstract class BaseActivity extends AppCompatActivity
 
                 }
             };
+        } else {
+            navigationView.getMenu().findItem(R.id.nav_logout).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_login).setVisible(true);
         }
 
 
@@ -71,7 +121,7 @@ public abstract class BaseActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setLogo(R.drawable.ic_movehoriz_large);
+        //toolbar.setLogo(R.drawable.ic_movehoriz_large);
 
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -109,9 +159,6 @@ public abstract class BaseActivity extends AppCompatActivity
         ConstraintLayout rel = (ConstraintLayout) container;
         getLayoutInflater().inflate(cargarLayout(), rel);
 
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
     //Metodo abstracto que utilizamos desde la clase que extienda para cargar el layout.
@@ -133,16 +180,17 @@ public abstract class BaseActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.base, menu);
+
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            menu.getItem(0).setVisible(false);
+        }
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            item.setVisible(false);
-        }
 
         if (item.isVisible()) {
             if (id == R.id.menu_Perfil) {
@@ -174,16 +222,22 @@ public abstract class BaseActivity extends AppCompatActivity
 
         if (id == R.id.nav_Usuarios) {
             startActivity(new Intent(this, UsuariosList.class));
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.nav_MisChats) {
+            startActivity(new Intent(this, UsuariosList.class).putExtra(getString(R.string.KEY_FILTER), true));
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.nav_MisReservas) {
 
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.navActividades) {
 
-        } else if (id == R.id.nav_share) {
+        } else if (id == R.id.nav_login) {
+            loginView();
+            dialogLogin.show();
 
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_logout) {
+            if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+                FirebaseAuth.getInstance().signOut();
+                recreate();
+            }
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -191,10 +245,48 @@ public abstract class BaseActivity extends AppCompatActivity
         return true;
     }
 
-    protected void logOut() {
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            FirebaseAuth.getInstance().signOut();
-            user = null;
-        }
+    public void loginView() {
+        progressBarAlert = new ProgressBarAlert(this);
+
+        dialogLogin = new DialogLogin(this);
+        dialogLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (!dialogLogin.comprobarCamposVacios()) {
+                    progressBarAlert.show();
+                    fireBaseAuthentication.login(dialogLogin.getEtxLoginNombre().getText().toString(), dialogLogin.getEtxLoginPassword().getText().toString());
+                } else {
+                    new CustomDialog(BaseActivity.this, R.string.TXT_DEBE_RELLENAR_CORRECTAMENTE).show();
+                }
+            }
+        });
+
+        fireBaseAuthentication = new FireBaseAuthentication() {
+            @Override
+            public void callBackSignUp(int result) {
+
+            }
+
+            @Override
+            public void callBackLogin(int result) {
+                progressBarAlert.cancel();
+
+                if (result == 0 && FirebaseAuth.getInstance().getCurrentUser() != null) {
+                    dialogLogin.cancel();
+                    recreate();
+
+                } else if (result == 1) {
+                    new CustomDialog(BaseActivity.this, R.string.VAL_USER_INEXISTENT).show();
+
+                } else if (result == 2) {
+                    new CustomDialog(BaseActivity.this, R.string.VAL_INVALID_PASSWORD).show();
+
+                } else if (result == 3) {
+                    new CustomDialog(BaseActivity.this, R.string.VAL_SERVER_TIMEOUT).show();
+
+                }
+            }
+        };
     }
 }

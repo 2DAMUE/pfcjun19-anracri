@@ -102,5 +102,6 @@ public class ChatWindow extends BaseActivity {
 
     public void enviar(View view) {
         fireBaseChatService.enviarMensaje(etxChatBox.getText().toString());
+        etxChatBox.setText("");
     }
 }

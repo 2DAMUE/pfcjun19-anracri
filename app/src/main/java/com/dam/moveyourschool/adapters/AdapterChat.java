@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.bean.Mensaje;
 import com.dam.moveyourschool.bean.Usuario;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -16,13 +18,12 @@ import java.util.Date;
 public class AdapterChat extends RecyclerView.Adapter {
     private Usuario userMe;
     private ArrayList<Mensaje> listaMensajes;
-    private Calendar calendar;
+    private SimpleDateFormat dateFormat;
 
     public AdapterChat(ArrayList<Mensaje> listaMensajes, Usuario userMe) {
         this.listaMensajes = listaMensajes;
         this.userMe = userMe;
-        calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
+        dateFormat = new SimpleDateFormat("HH:mm");
     }
 
     @Override
@@ -57,15 +58,17 @@ public class AdapterChat extends RecyclerView.Adapter {
         HolderReceive holderReceive;
         HolderSend holderSend;
 
+        String fecha = dateFormat.format(new Date());
+
         if (viewHolder.getItemViewType() == 1) {
             holderReceive = (HolderReceive) viewHolder;
             holderReceive.mensajeRemitente.setText(listaMensajes.get(i).getMensaje());
             holderReceive.nickRemitente.setText(listaMensajes.get(i).getUserSender().getNombre());
-            holderReceive.tvHoraRecibo.setText(calendar.getTime().toString());
+            holderReceive.tvHoraRecibo.setText(fecha);
         } else {
             holderSend = (HolderSend) viewHolder;
             holderSend.mensaje_envio.setText(listaMensajes.get(i).getMensaje());
-            holderSend.tvHoraEnvio.setText(calendar.getTime().toString());
+            holderSend.tvHoraEnvio.setText(fecha);
         }
     }
 

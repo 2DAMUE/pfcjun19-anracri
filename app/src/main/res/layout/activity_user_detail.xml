@@ -138,7 +138,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
-                android:layout_marginTop="-15dp"
                 android:fontFamily="@font/slubby"
                 android:text="Nuestro Correo:"
                 android:textColor="@color/blue_pastel"
@@ -219,7 +218,7 @@
             android:layout_marginBottom="30dp"
             android:background="@drawable/button_pastel"
             android:fontFamily="@font/bambino_light"
-            android:onClick="editProfile"
+            android:onClick="enviarMensaje"
             android:text="@string/TXT_ENVIAR_MENSAJE"
             android:textColor="@android:color/white" />
 

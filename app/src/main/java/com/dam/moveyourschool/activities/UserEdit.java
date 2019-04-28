@@ -1,22 +1,33 @@
 package com.dam.moveyourschool.activities;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import com.bumptech.glide.Glide;
 import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.bean.Usuario;
+import com.dam.moveyourschool.services.FireBaseStorage;
 import com.dam.moveyourschool.services.FireDBUsuarios;
+import com.dam.moveyourschool.utils.BitmapToUri;
 import com.dam.moveyourschool.utils.Constantes;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.mvc.imagepicker.ImagePicker;
 import java.util.ArrayList;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserEdit extends BaseActivity {
     private FireDBUsuarios serviceDbUsuarios;
@@ -31,7 +42,9 @@ public class UserEdit extends BaseActivity {
     private String localidad;
     private Usuario userFinal;
     private Spinner spinnerLoc;
+    private CircleImageView imgEdit;
     private ArrayAdapter<String> adapter;
+    private Button btnGuardar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +58,13 @@ public class UserEdit extends BaseActivity {
         etxMunicipio = findViewById(R.id.etxMunicipio);
         etxCodPostal = findViewById(R.id.etxPostal);
         etxDescripcion = findViewById(R.id.etxDescripcion);
+        imgEdit = findViewById(R.id.imgEdit);
+        btnGuardar = findViewById(R.id.btnGuardar);
+
+        ImagePicker.setMinQuality(600, 600);
 
         spinnerLoc = findViewById(R.id.spinnerLoc);
+        spinnerLoc.setPrompt(getString(R.string.VAL_ELIJA_LOCALIDAD));
 
         userFinal = new Usuario();
 
@@ -137,7 +155,7 @@ public class UserEdit extends BaseActivity {
         }
 
         if (usuario.getEmail() != null) {
-            userFinal.setTitular(usuario.getEmail());
+            userFinal.setEmail(usuario.getEmail());
         }
 
         if (usuario.getDireccion() != null) {
@@ -146,7 +164,7 @@ public class UserEdit extends BaseActivity {
         }
 
 
-        if (usuario.getLocalidad() != null) {
+        if (usuario.getLocalidad() != null && !usuario.getLocalidad().equals(getString(R.string.VAL_ELIJA_LOCALIDAD))) {
             userFinal.setLocalidad(usuario.getLocalidad());
             localidad = usuario.getLocalidad();
             spinnerLoc.setSelection(adapter.getPosition(localidad));
@@ -189,7 +207,32 @@ public class UserEdit extends BaseActivity {
         userFinal.setDescripcion(etxDescripcion.getText().toString());
 
         serviceDbUsuarios.updateUserById(userFinal);
+        startActivity(new Intent(this, UserDetail.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        btnGuardar.setEnabled(false);
+        Bitmap bitmap = ImagePicker.getImageFromResult(this, requestCode, resultCode, data);
+
+        if (bitmap != null) {
+            Glide.with(this).load(bitmap).into(imgEdit);
+            Uri uri = BitmapToUri.getImageUri(this, bitmap);
+            new FireBaseStorage() {
+                @Override
+                public void getUrl(String url) {
+                    userFinal.setUrlFoto(url);
+                    btnGuardar.setEnabled(true);
+
+                }
+            }.uploadPhoto(uri);
+        }
+    }
+
+    public void onPickImage(View view) {
+        ImagePicker.pickImage(this, "Escoge una Imagen:");
     }
 
     @Override
@@ -201,4 +244,5 @@ public class UserEdit extends BaseActivity {
     public boolean setDrawer() {
         return false;
     }
+
 }

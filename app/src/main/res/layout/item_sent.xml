@@ -25,10 +25,12 @@
         android:id="@+id/tvHoraEnvio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
         android:layout_marginRight="4dp"
         android:text="11:40"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/tvMensajeRecibir"
-        app:layout_constraintRight_toLeftOf="@+id/tvMensajeRecibir" />
+        app:layout_constraintRight_toLeftOf="@+id/tvMensajeRecibir"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

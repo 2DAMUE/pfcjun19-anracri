@@ -12,6 +12,7 @@ import com.bumptech.glide.RequestManager;
 import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.adapters.AdapterUsuarios;
 import com.dam.moveyourschool.bean.Usuario;
+import com.dam.moveyourschool.services.FireDBMensajes;
 import com.dam.moveyourschool.services.FireDBUsuarios;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -26,6 +27,9 @@ public class UsuariosList extends BaseActivity {
     private ArrayList<Usuario> listaUsuarios;
     private RequestManager glide;
     private FireDBUsuarios databaseServiceUsuarios;
+    private FireDBMensajes serviceDBMensajes;
+    private boolean filter;
+    private ArrayList<String> keysChat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,43 +69,156 @@ public class UsuariosList extends BaseActivity {
     private void loadDatabase() {
         final FirebaseUser userAuth = FirebaseAuth.getInstance().getCurrentUser();
 
-        databaseServiceUsuarios = new FireDBUsuarios() {
-            @Override
-            public void nodoAgregado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+        filter = getIntent().getBooleanExtra(getString(R.string.KEY_FILTER), false);
 
-                if (userAuth != null){
-                    if (!userAuth.getUid().equals(dataSnapshot.getKey())) {
 
-                        Usuario aux = dataSnapshot.getValue(Usuario.class);
+        //Si hay que filtrar porque solo hay que ver los chats del usuario
+        if (filter) {
 
-                        if (aux.getNombre() != null && aux.getTitular() != null) {
-                            listaUsuarios.add(dataSnapshot.getValue(Usuario.class));
-                            adapterUsuarios.notifyItemInserted(listaUsuarios.size() - 1);
+            //Obtenemos la lista de claves donde tienes mensajes el usuario
+            serviceDBMensajes = new FireDBMensajes(userAuth.getUid()) {
+                @Override
+                public void callBackkeysChat() {
+
+                    //Obtenemos una lista con los mensakes
+                    keysChat = serviceDBMensajes.getKeysChat();
+
+                    //Procedemos a comparar la lista de mensajes para mostrar los usuarios que se encuentren en la lista
+                    databaseServiceUsuarios = new FireDBUsuarios() {
+                        @Override
+                        public void nodoAgregado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                            if (userAuth != null) {
+                                if (!userAuth.getUid().equals(dataSnapshot.getKey())) {
+
+                                    Usuario aux = dataSnapshot.getValue(Usuario.class);
+
+                                    if (aux.getNombre() != null && aux.getTitular() != null) {
+
+                                        //Inicializamos la variable que nos confirma si la clave esta disponible
+                                        boolean keyAvailable = false;
+
+
+                                        //Si la clave esta disponible modificamos el flag
+                                        for (String key: keysChat) {
+                                            if (key.equals(aux.getUid())) {
+                                                keyAvailable = true;
+                                            }
+                                        }
+
+                                        //Si el flag confirma la clave añadimos el usuario
+                                        if(keyAvailable) {
+                                            listaUsuarios.add(dataSnapshot.getValue(Usuario.class));
+                                            adapterUsuarios.notifyItemInserted(listaUsuarios.size() - 1);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void nodoModificado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                            if (userAuth != null) {
+                                if (!userAuth.getUid().equals(dataSnapshot.getKey())) {
+
+                                    Usuario aux = dataSnapshot.getValue(Usuario.class);
+
+                                    if (aux.getNombre() != null && aux.getTitular() != null) {
+
+                                        //Inicializamos la variable que nos confirma si la clave esta disponible
+                                        boolean keyAvailable = false;
+
+
+                                        //Si la clave esta disponible modificamos el flag
+                                        for (String key: keysChat) {
+                                            if (key.equals(aux.getUid())) {
+                                                keyAvailable = true;
+                                            }
+                                        }
+
+                                        //Si el flag confirma la clave añadimos el usuario
+                                        if(keyAvailable) {
+                                            listaUsuarios.add(dataSnapshot.getValue(Usuario.class));
+                                            adapterUsuarios.notifyItemInserted(listaUsuarios.size() - 1);
+                                        }
+                                    }
+                                }
+                            }
+
+                        }
+
+                        @Override
+                        public void nodoEliminado(@NonNull DataSnapshot dataSnapshot) {
+
+                        }
+
+                        @Override
+                        public void nodoMovido(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                        }
+
+                        @Override
+                        public void nodoCancelado(@NonNull DatabaseError databaseError) {
+
+                        }
+                    };
+                }
+            };
+
+            //si hay que mostrar todos los usuarios
+        } else {
+
+            databaseServiceUsuarios = new FireDBUsuarios() {
+                @Override
+                public void nodoAgregado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    if (userAuth != null) {
+                        if (!userAuth.getUid().equals(dataSnapshot.getKey())) {
+
+                            Usuario aux = dataSnapshot.getValue(Usuario.class);
+
+                            if (aux.getNombre() != null && aux.getTitular() != null) {
+                                listaUsuarios.add(dataSnapshot.getValue(Usuario.class));
+                                adapterUsuarios.notifyItemInserted(listaUsuarios.size() - 1);
+                            }
                         }
                     }
                 }
-            }
 
-            @Override
-            public void nodoModificado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                @Override
+                public void nodoModificado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-            }
+                    if (userAuth != null) {
+                        if (!userAuth.getUid().equals(dataSnapshot.getKey())) {
 
-            @Override
-            public void nodoEliminado(@NonNull DataSnapshot dataSnapshot) {
+                            Usuario aux = dataSnapshot.getValue(Usuario.class);
 
-            }
+                            if (aux.getNombre() != null && aux.getTitular() != null) {
+                                listaUsuarios.add(dataSnapshot.getValue(Usuario.class));
+                                adapterUsuarios.notifyItemInserted(listaUsuarios.size() - 1);
+                            }
+                        }
+                    }
 
-            @Override
-            public void nodoMovido(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                }
 
-            }
+                @Override
+                public void nodoEliminado(@NonNull DataSnapshot dataSnapshot) {
 
-            @Override
-            public void nodoCancelado(@NonNull DatabaseError databaseError) {
+                }
 
-            }
-        };
+                @Override
+                public void nodoMovido(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                }
+
+                @Override
+                public void nodoCancelado(@NonNull DatabaseError databaseError) {
+
+                }
+            };
+        }
     }
 
     private void startRecyclerListener() {
@@ -109,9 +226,15 @@ public class UsuariosList extends BaseActivity {
             @Override
             public void onClick(View view) {
                 int index = recyclerUsuarios.getChildAdapterPosition(view);
-                startActivity(new Intent(UsuariosList.this, ChatWindow.class)
-                        .putExtra(getString(R.string.KEY_USER), listaUsuarios.get(recyclerUsuarios.getChildAdapterPosition(view))));
-                //startActivity(new Intent(UsuariosList.this, UserDetail.class));
+
+                //Si hay filtro enviamos a la ventana de chat y sino a los detalles del usuario
+                if (filter) {
+                    startActivity(new Intent(UsuariosList.this, ChatWindow.class).putExtra(getString(R.string.KEY_USER), listaUsuarios.get(index)));
+
+                } else {
+                    startActivity(new Intent(UsuariosList.this, UserDetail.class)
+                            .putExtra(getString(R.string.KEY_USER), listaUsuarios.get(index)));
+                }
             }
         });
     }

@@ -35,7 +35,7 @@ public abstract class Constantes {
             public void run() {
 
                 try {
-                    provincias.add("");
+                    provincias.add("Localidad");
                     while (  (linea = reader.readLine()) != null ) {
                         provincias.add(linea);
                     }

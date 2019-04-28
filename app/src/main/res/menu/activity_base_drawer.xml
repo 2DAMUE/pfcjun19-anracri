@@ -5,33 +5,33 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_Usuarios"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="@string/usuarios" />
-        <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/navActividades"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="Actividades" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/nav_Usuarios"
+            android:icon="@drawable/ic_person_black_24dp"
+            android:title="@string/usuarios" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="Mis Opciones">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/nav_login"
+                android:icon="@drawable/ic_lock_red"
+                android:title="Log In" />
             <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_lock_open_black_24dp"
+                android:title="Log Out" />
+            <item
+                android:id="@+id/nav_MisReservas"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="Mis Reservas" />
+            <item
+                android:id="@+id/nav_MisChats"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Mi Chat" />
         </menu>
     </item>
 

@@ -12,8 +12,39 @@
 
     <LinearLayout
         android:layout_width="match_parent"
+        android:focusableInTouchMode="true"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/iconAdd"
+                android:layout_width="44dp"
+                android:layout_height="52dp"
+                android:layout_centerHorizontal="false"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:onClick="onPickImage"
+                app:srcCompat="@drawable/ic_add_circle_black_24dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgEdit"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_centerHorizontal="true"
+                android:clickable="true"
+                android:elevation="5dp"
+                android:onClick="onPickImage"
+                android:padding="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/idea"
+                app:civ_border_color="@android:color/white"
+                app:civ_border_width="3dp" />
+
+        </RelativeLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -26,6 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
+                android:fontFamily="@font/bambino_light"
                 android:hint="Nombre Empresa o Institucion"
                 android:inputType="text"
                 android:textColor="@color/blue_pastel" />
@@ -41,6 +73,7 @@
                 android:id="@+id/etxCif"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/bambino_light"
                 android:drawablePadding="10dp"
                 android:hint="Cif"
                 android:inputType="text"
@@ -60,6 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
+                android:fontFamily="@font/bambino_light"
                 android:hint="Nombre Representante"
                 android:inputType="text"
                 android:textColor="@color/blue_pastel" />
@@ -77,6 +111,7 @@
                 android:id="@+id/etxDir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/bambino_light"
                 android:drawablePadding="10dp"
                 android:hint="Direccion"
                 android:inputType="text"
@@ -112,6 +147,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
+                android:fontFamily="@font/bambino_light"
                 android:hint="Municipio"
                 android:inputType="text"
                 android:textColor="@color/blue_pastel" />
@@ -128,6 +164,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
+                android:fontFamily="@font/bambino_light"
                 android:hint="Codigo Postal"
                 android:inputType="text"
                 android:textColor="@color/blue_pastel" />
@@ -144,6 +181,7 @@
                 android:id="@+id/etxDescripcion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/bambino_light"
                 android:drawablePadding="10dp"
                 android:hint="Descripcion"
                 android:inputType="textMultiLine"
@@ -152,7 +190,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnGuardar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"

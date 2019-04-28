@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
@@ -33,6 +35,9 @@ public class UserDetail extends BaseActivity {
     private TextView tvLocRes;
     private CircleImageView profileImg;
     private RequestManager glide;
+    private Usuario usuarioIntent;
+    private ImageView edit;
+    private Button btnEnviarMensaje;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,8 @@ public class UserDetail extends BaseActivity {
         tvDirRes = findViewById(R.id.tvDirRes);
         tvLocRes = findViewById(R.id.tvLocRes);
         profileImg = findViewById(R.id.profile);
+        edit = findViewById(R.id.edit);
+        btnEnviarMensaje = findViewById(R.id.btnEnviarMensaje);
 
         //Atributos Descripcion
         tvDesc = findViewById(R.id.tvDescripcion);
@@ -58,49 +65,60 @@ public class UserDetail extends BaseActivity {
         //Muestra todos los campos invisibilizados
         visibilidadFalsa();
 
+        btnEnviarMensaje.setVisibility(View.GONE);
+        edit.setVisibility(View.GONE);
+
         //Comprueba el usuario de Firebase e inicializa la consulta en la database si existe
-        final FirebaseUser authUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        if (authUser != null) {
+        if ((usuarioIntent = getIntent().getParcelableExtra(getString(R.string.KEY_USER))) != null) {
+            btnEnviarMensaje.setVisibility(View.VISIBLE);
+            updateFields(usuarioIntent);
 
-            new FireDBUsuarios() {
-                @Override
-                public void nodoAgregado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+        } else {
+            edit.setVisibility(View.VISIBLE);
 
-                    if (dataSnapshot.getKey().equals(authUser.getUid())) {
-                        visibilidadFalsa();
-                        Usuario usuario = dataSnapshot.getValue(Usuario.class);
-                        updateFields(usuario);
+            final FirebaseUser authUser = FirebaseAuth.getInstance().getCurrentUser();
+
+            if (authUser != null) {
+
+                new FireDBUsuarios() {
+                    @Override
+                    public void nodoAgregado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                        if (dataSnapshot.getKey().equals(authUser.getUid())) {
+                            visibilidadFalsa();
+                            Usuario usuario = dataSnapshot.getValue(Usuario.class);
+                            updateFields(usuario);
+                        }
                     }
-                }
 
-                @Override
-                public void nodoModificado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    @Override
+                    public void nodoModificado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                    if (dataSnapshot.getKey().equals(authUser.getUid())) {
-                        visibilidadFalsa();
-                        Usuario usuario = dataSnapshot.getValue(Usuario.class);
-                        updateFields(usuario);
+                        if (dataSnapshot.getKey().equals(authUser.getUid())) {
+                            visibilidadFalsa();
+                            Usuario usuario = dataSnapshot.getValue(Usuario.class);
+                            updateFields(usuario);
+                        }
                     }
-                }
 
-                @Override
-                public void nodoEliminado(@NonNull DataSnapshot dataSnapshot) {
+                    @Override
+                    public void nodoEliminado(@NonNull DataSnapshot dataSnapshot) {
 
-                }
+                    }
 
-                @Override
-                public void nodoMovido(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    @Override
+                    public void nodoMovido(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                }
+                    }
 
-                @Override
-                public void nodoCancelado(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void nodoCancelado(@NonNull DatabaseError databaseError) {
 
-                }
-            };
+                    }
+                };
+            }
         }
-
     }
 
     //Invisibilida Campos
@@ -149,7 +167,7 @@ public class UserDetail extends BaseActivity {
             tvMailRes.setText(usuario.getEmail());
         }
 
-        if(usuario.getUrlFoto() != null) {
+        if(usuario.getUrlFoto() != null && !usuario.getUrlFoto().equals("")) {
             glide.load(UserDetail.this).load(usuario.getUrlFoto()).into(profileImg);
         }
     }
@@ -166,5 +184,9 @@ public class UserDetail extends BaseActivity {
 
     public void editProfile(View view) {
         startActivity(new Intent(this, UserEdit.class));
+    }
+
+    public void enviarMensaje(View view) {
+        startActivity(new Intent(this, ChatWindow.class).putExtra(getString(R.string.KEY_USER), usuarioIntent));
     }
 }

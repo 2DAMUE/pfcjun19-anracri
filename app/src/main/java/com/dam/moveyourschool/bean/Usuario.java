@@ -162,22 +162,4 @@ public class Usuario implements Parcelable {
     public void setUrlFoto(String urlFoto) {
         this.urlFoto = urlFoto;
     }
-
-    @Override
-    public String toString() {
-        return "Usuario{" +
-                "uid='" + uid + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", cif='" + cif + '\'' +
-                ", titular='" + titular + '\'' +
-                ", email='" + email + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", localidad='" + localidad + '\'' +
-                ", municipio='" + municipio + '\'' +
-                ", codigo_postal='" + codigo_postal + '\'' +
-                ", tipo='" + tipo + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", urlFoto='" + urlFoto + '\'' +
-                '}';
-    }
 }
