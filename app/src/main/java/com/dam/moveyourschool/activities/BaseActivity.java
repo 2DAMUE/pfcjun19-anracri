@@ -6,9 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
-import android.view.ActionProvider;
-import android.view.ContextMenu;
-import android.view.SubMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -115,7 +112,6 @@ public abstract class BaseActivity extends AppCompatActivity
             navigationView.getMenu().findItem(R.id.nav_logout).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_login).setVisible(true);
         }
-
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -228,6 +224,7 @@ public abstract class BaseActivity extends AppCompatActivity
         } else if (id == R.id.nav_MisReservas) {
 
         } else if (id == R.id.navActividades) {
+            startActivity(new Intent(this, ActividadForm.class));
 
         } else if (id == R.id.nav_login) {
             loginView();

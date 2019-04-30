@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.Actividad_Form_Step_4">
+
+    <ScrollView
+        android:id="@+id/scrollUserEdit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".activities.ActividadForm">
+
+        <LinearLayout
+            android:id="@+id/above"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/etxDuracion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="10dp"
+                    android:fontFamily="@font/bambino_light"
+                    android:hint="Duracion Actividad"
+                    android:inputType="text"
+                    android:textColor="@color/blue_pastel" />
+            </android.support.design.widget.TextInputLayout>
+
+            <Switch
+                android:id="@+id/swDiversidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/bambino_light"
+                android:lines="3"
+                android:text="Acceso Personas con Diversidad" />
+
+            <Switch
+                android:id="@+id/swCafeteria"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bambino_light"
+                android:lines="3"
+                android:text="Cafetería o Restaurante" />
+
+            <Switch
+                android:id="@+id/swAseos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bambino_light"
+                android:lines="3"
+                android:text="Aseos" />
+
+            <Switch
+                android:id="@+id/swRiesgo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bambino_light"
+                android:lines="3"
+                android:text="Actividad con riesgo de accidente" />
+
+            <Switch
+                android:id="@+id/swBloqueo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bambino_light"
+                android:lines="3"
+                android:text="Bloquear Actividad" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

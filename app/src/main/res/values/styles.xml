@@ -26,4 +26,9 @@
         <item name="android:fontFamily">@font/bambino_light</item>
     </style>
 
+    <style name="SpinnerStyle">
+        <item name="android:textColor">@android:color/darker_gray</item>
+        <item name="android:fontFamily">@font/bambino_light</item>
+    </style>
+
 </resources>

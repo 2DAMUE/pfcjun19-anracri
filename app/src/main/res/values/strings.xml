@@ -62,4 +62,9 @@
     <string name="VAL_SERVER_TIMEOUT">El Sevidor no ha respondido o no hay conexión a la red.</string>
     <string name="VAL_INVALID_PASSWORD_STRENGTH">La contraseña debe tener al menos 6 caracteres</string>
     <string name="VAL_ACCOUNT_ALREADY_EXISTS">La cuenta de correo es inválida. Ya se encuentra registrada en el sistema.</string>
+    <string name="VAL_NEXT">Siguiente</string>
+    <string name="EXCEPT_UNKNOWN_ERROR">Ha ocurrido un error desconocido. Reinicie el proceso.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
