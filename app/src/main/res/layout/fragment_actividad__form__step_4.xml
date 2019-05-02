@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.Actividad_Form_Step_4">
 
     <ScrollView
@@ -22,23 +23,34 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp">
 
-
-            <android.support.design.widget.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="8dp">
+                android:orientation="horizontal">
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/etxDuracion"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="10dp"
+                <TextView
+                    android:id="@+id/tvDuracion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:fontFamily="@font/bambino_light"
-                    android:hint="Duracion Actividad"
-                    android:inputType="text"
-                    android:textColor="@color/blue_pastel" />
-            </android.support.design.widget.TextInputLayout>
+                    android:gravity="center|start"
+                    android:text="Duración en Horas"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp" />
+
+                <NumberPicker
+                    android:id="@+id/pickerDuracion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="54dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_weight="1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+            </LinearLayout>
 
             <Switch
                 android:id="@+id/swDiversidad"
@@ -47,13 +59,15 @@
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/bambino_light"
                 android:lines="3"
-                android:text="Acceso Personas con Diversidad" />
+                android:text="Acceso Personas con Diversidad"
+                android:theme="@style/SwitchActive" />
 
             <Switch
                 android:id="@+id/swCafeteria"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/bambino_light"
+                android:theme="@style/SwitchActive"
                 android:lines="3"
                 android:text="Cafetería o Restaurante" />
 
@@ -61,6 +75,7 @@
                 android:id="@+id/swAseos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:theme="@style/SwitchActive"
                 android:fontFamily="@font/bambino_light"
                 android:lines="3"
                 android:text="Aseos" />
@@ -70,6 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/bambino_light"
+                android:theme="@style/SwitchActive"
                 android:lines="3"
                 android:text="Actividad con riesgo de accidente" />
 
@@ -77,6 +93,7 @@
                 android:id="@+id/swBloqueo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:theme="@style/SwitchActive"
                 android:fontFamily="@font/bambino_light"
                 android:lines="3"
                 android:text="Bloquear Actividad" />

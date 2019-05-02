@@ -1,9 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlSignUpSuccess"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.ActividadFormSuccess">
+    android:clickable="true"
+    android:focusable="true"
+    tools:context=".activities.SignUpSuccess">
 
-</android.support.constraint.ConstraintLayout>
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animation_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/tvBienvenido"
+        app:lottie_fileName="happy.json"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true">
+
+    </com.airbnb.lottie.LottieAnimationView>
+
+    <TextView
+        android:id="@+id/tvBienvenido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="75dp"
+        android:fontFamily="@font/bambino_light"
+        android:gravity="center"
+        android:text="@string/enhorabuena"
+        android:textColor="@color/mochila"
+        android:textSize="40sp" />
+
+    <TextView
+        android:id="@+id/tvsuccess"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/animation_view"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:fontFamily="@font/bambino_light"
+        android:gravity="center"
+        android:text="@string/la_actividad_se_ha_dado_de_alta_con_xito_puede_ver_su_informaci_n_en_mis_actividades"
+        android:textColor="@android:color/background_dark"
+        android:textSize="20sp" />
+
+</RelativeLayout>

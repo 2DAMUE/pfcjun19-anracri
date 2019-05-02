@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.Actividad_Form_Step_1">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:context=".activities.ActividadForm">
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/bambino_light"
+                android:gravity="center"
+                android:text="Elige una Categoría"
+                android:textSize="18sp" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottieGesture"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="10dp"
+                android:adjustViewBounds="true"
+                android:alpha="1"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="gesture.json"
+                app:lottie_loop="true" />
+
+            <LinearLayout
+                android:id="@+id/linear3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-20dp"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:id="@+id/linearArte"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:onClick="categoriaSeleccionada"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/icoArte"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:tint="@color/blue_pastel"
+                        app:srcCompat="@drawable/ic_arte" />
+
+                    <TextView
+                        android:id="@+id/tvArte"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/bambino_light"
+                        android:gravity="center"
+                        android:text="Actividad Artística"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearCiudad"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="categoriaSeleccionada"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/icoCiudad"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:tint="@color/blue_pastel"
+                        app:srcCompat="@drawable/ic_ciudad" />
+
+                    <TextView
+                        android:id="@+id/tvCiudad"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/bambino_light"
+                        android:gravity="center"
+                        android:text="Visita Ciudad"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearDeporte"
+                    android:layout_width="match_parent"
+                    android:onClick="categoriaSeleccionada"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:tint="@color/blue_pastel"
+                        app:srcCompat="@drawable/ic_deporte" />
+
+                    <TextView
+                        android:id="@+id/tv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/bambino_light"
+                        android:gravity="center"
+                        android:text="Actividad Deportiva"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:id="@+id/linearFabrica"
+                    android:layout_width="match_parent"
+                    android:onClick="categoriaSeleccionada"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/icoFabrica"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:tint="@color/blue_pastel"
+                        app:srcCompat="@drawable/ic_fabrica" />
+
+                    <TextView
+                        android:id="@+id/tvFabrica"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/bambino_light"
+                        android:gravity="center"
+                        android:text="Visita Fábrica"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearFiesta"
+                    android:layout_width="match_parent"
+                    android:onClick="categoriaSeleccionada"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/icoFiesta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:tint="@color/blue_pastel"
+                        app:srcCompat="@drawable/ic_fiestapopular" />
+
+                    <TextView
+                        android:id="@+id/tvFiesta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/bambino_light"
+                        android:gravity="center"
+                        android:text="Fiesta Popular"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearReligion"
+                    android:onClick="categoriaSeleccionada"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/icoReligion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:tint="@color/blue_pastel"
+                        app:srcCompat="@drawable/ic_iglesia" />
+
+                    <TextView
+                        android:id="@+id/tvReligion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/bambino_light"
+                        android:gravity="center"
+                        android:text="Actividad Religiosa"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:id="@+id/linearJuego"
+                    android:layout_width="match_parent"
+                    android:onClick="categoriaSeleccionada"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/icoJuego"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:tint="@color/blue_pastel"
+                        app:srcCompat="@drawable/ic_jueg" />
+
+                    <TextView
+                        android:id="@+id/tvJuego"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/bambino_light"
+                        android:gravity="center"
+                        android:text="Juego Educativo"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearMonumental"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="categoriaSeleccionada"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/icoMonumento"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:tint="@color/blue_pastel"
+                        app:srcCompat="@drawable/ic_monumento" />
+
+                    <TextView
+                        android:id="@+id/tvMonumento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/bambino_light"
+                        android:gravity="center"
+                        android:text="Visita Monumental"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearMuseo"
+                    android:layout_width="match_parent"
+                    android:onClick="categoriaSeleccionada"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/icoMuseo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:tint="@color/blue_pastel"
+                        app:srcCompat="@drawable/ic_museo" />
+
+                    <TextView
+                        android:id="@+id/tvMuseo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/bambino_light"
+                        android:gravity="center"
+                        android:text="Visita Museo"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:id="@+id/linearMusica"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="categoriaSeleccionada"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/icoMusica"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:tint="@color/blue_pastel"
+                        app:srcCompat="@drawable/ic_musica" />
+
+                    <TextView
+                        android:id="@+id/tvMusica"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/bambino_light"
+                        android:gravity="center"
+                        android:text="Actividad Musical"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearNaturaleza"
+                    android:onClick="categoriaSeleccionada"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/icoNaturaleza"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:tint="@color/blue_pastel"
+                        app:srcCompat="@drawable/ic_naturaleza" />
+
+                    <TextView
+                        android:id="@+id/tvNaturaleza"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/bambino_light"
+                        android:gravity="center"
+                        android:text="Naturaleza"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearTecnologia"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="categoriaSeleccionada"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/icoTecnologia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:tint="@color/blue_pastel"
+                        app:srcCompat="@drawable/ic_ordenador" />
+
+                    <TextView
+                        android:id="@+id/tvTecnologia"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/bambino_light"
+                        android:gravity="center"
+                        android:text="Tecnología"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linear1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:weightSum="3">
+
+                <LinearLayout
+                    android:id="@+id/linearTaller"
+                    android:layout_width="match_parent"
+                    android:onClick="categoriaSeleccionada"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/icoTaller"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:tint="@color/blue_pastel"
+                        app:srcCompat="@drawable/ic_tallercharla" />
+
+                    <TextView
+                        android:id="@+id/tvTaller"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/bambino_light"
+                        android:gravity="center"
+                        android:text="Taller Educativo"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearTeatro"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="categoriaSeleccionada"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/icoTeatro"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:tint="@color/blue_pastel"
+                        app:srcCompat="@drawable/ic_teatro" />
+
+                    <TextView
+                        android:id="@+id/tvTeatro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/bambino_light"
+                        android:gravity="center"
+                        android:text="Teatro"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearOtros"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:onClick="categoriaSeleccionada"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+
+                    <ImageView
+                        android:id="@+id/icoOtros"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:tint="@color/blue_pastel"
+                        app:srcCompat="@drawable/ic_otros" />
+
+                    <TextView
+                        android:id="@+id/tvOtros"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/bambino_light"
+                        android:gravity="center"
+                        android:text="Otras Actividades"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

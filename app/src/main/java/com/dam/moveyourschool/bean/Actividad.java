@@ -1,6 +1,8 @@
 package com.dam.moveyourschool.bean;
 
-public class Actividad {
+import java.io.Serializable;
+
+public class Actividad implements Serializable {
     private String uid_actividad;
     private String uid_usuario;
     private String titulo;

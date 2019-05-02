@@ -64,9 +64,11 @@ public abstract class FireDBActividades {
     public void agregarActividad(Actividad actividad) {
 
         String key = dbr.child(actividad.getUid_usuario()).push().getKey();
+        getKey(key);
         dbr.child(actividad.getUid_usuario()).child(key).setValue(actividad);
     }
 
+    public abstract void getKey(String key);
     public abstract void nodoAgregado(@NonNull DataSnapshot dataSnapshot, @Nullable String s);
     public abstract void nodoModificado(@NonNull DataSnapshot dataSnapshot, @Nullable String s);
     public abstract void nodoEliminado(@NonNull DataSnapshot dataSnapshot);

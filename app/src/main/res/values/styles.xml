@@ -31,4 +31,8 @@
         <item name="android:fontFamily">@font/bambino_light</item>
     </style>
 
+    <style name="SwitchActive" >
+        <item name="colorControlActivated">@color/blue_pastel</item>
+    </style>
+
 </resources>

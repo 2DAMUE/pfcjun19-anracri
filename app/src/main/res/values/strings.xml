@@ -23,6 +23,23 @@
     <string name="TXT_ERROR_PASSWORD_DIFERENTE">Error, las contraseñas que introduzca han de ser idénticas.</string>
     <string name="TXT_ERROR_EMAIL">La dirección de correo que ha consignado no tiene formato adecuado.</string>
 
+    <!--TEXTOS SIGN UP STEP 1-->
+    <string name="TXT_ACTIVIDAD_ARTISTICA">Actividad Artística</string>
+    <string name="TXT_VISITA_CIUDAD">Visita Ciudad</string>
+    <string name="TXT_ACTIVIDAD_DEPORTIVA">Actividad Deportiva</string>
+    <string name="TXT_VISITA_FABRICA">Visita Fábrica</string>
+    <string name="TXT_FIESTA_POPULAR">Fiesta Popular</string>
+    <string name="TXT_ACTIVIDAD_RELIGIOSA">Actividad Religiosa</string>
+    <string name="TXT_JUEGO_EDUCATIVO">Juego Educativo</string>
+    <string name="TXT_VISITA_MONUMENTAL">Visita Monumental</string>
+    <string name="TXT_VISITA_MUSEO">Visita Museo</string>
+    <string name="TXT_ACTIVIDAD_MUSICAL">Actividad Musical</string>
+    <string name="TXT_ACTIVIDAD_NATURALEZA">Actividad Naturaleza</string>
+    <string name="TXT_ACTIVIDAD_TECNOLOGÍA">Actividad Tecnológica</string>
+    <string name="TXT_TALLER_EDUCATIVO">Taller Educativo</string>
+    <string name="TXT_VISITA_TEATRO">Teatro</string>
+    <string name="TXT_OTRAS_ACTIVIDADES">Otras Actividades</string>
+
     <!--TEXTOS SIGN UP STEP 2-->
     <string name="TXT_ELIGE_OPCION">Elige una opcion</string>
     <string name="TXT_EMPRESA_ACTIVIDADES">Ofrezco Actividades Culturales</string>
@@ -30,6 +47,10 @@
     <string name="TXT_PASO_1_2">Paso 1/2</string>
     <string name="TXT_YA_CASI_ESTA">¡Ya casi está!</string>
     <string name="BTN_REGISTRAR">Registrar</string>
+    <string name="ESCOGER_IMAGEN">Escoja una imagen</string>
+
+    <!--ACTIVITY FORM SUCCESS-->
+    <string name="ACTIVITY_FORM_SUCCESS">Se ha dado de alta la actividad con éxito.</string>
 
     <!--TEXTOS USER DETAIL-->
     <string name="TXT_ENVIAR_MENSAJE">Enviar Mensaje</string>
@@ -45,6 +66,9 @@
     <!--MENUS-->
     <string name="MENU_MI_PERFIL">Mi Perfil</string>
 
+    <!--FORM REGISTRO ACTIVIDADES-->
+    <string name="VAL_NEXT">Siguiente</string>
+
     <!--CLAVES-->
     <string name="KEY_TYPE">KEY_TYPE</string>
     <string name="KEY_MAIL">KEY_MAIL</string>
@@ -52,6 +76,7 @@
     <string name="KEY_FILTER">KEY_FILTER</string>
     <string name="HINT_REPETIR_PASS">Repetir Password</string>
     <string name="TXT_SIGN_IN">SIGN IN</string>
+    <string name="KEY_ACTIVIDAD">KEY_ACTIVIDAD</string>
 
     <!--AUTH EXCEPTIONS-->
     <string name="EXCEPT_USER_INEXISTENT">com.google.firebase.auth.FirebaseAuthInvalidUserException: There is no user record corresponding to this identifier. The user may have been deleted.</string>
@@ -62,9 +87,16 @@
     <string name="VAL_SERVER_TIMEOUT">El Sevidor no ha respondido o no hay conexión a la red.</string>
     <string name="VAL_INVALID_PASSWORD_STRENGTH">La contraseña debe tener al menos 6 caracteres</string>
     <string name="VAL_ACCOUNT_ALREADY_EXISTS">La cuenta de correo es inválida. Ya se encuentra registrada en el sistema.</string>
-    <string name="VAL_NEXT">Siguiente</string>
     <string name="EXCEPT_UNKNOWN_ERROR">Ha ocurrido un error desconocido. Reinicie el proceso.</string>
-
+    <string name="EXCEPT_RELLENAR_TODOS_CAMPOS">Debe rellenar todos los campos</string>
+    <string name="EXCEPT_DEBE_RELLENAR_TITULO_DESCRIPCION_PRECIO">Debe rellenar al menos el Título, la Descripción y el Precio</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="USUARIO_CADUCADO">Su sesión ha caducado o ha hecho Log Out. El proceso debe reiniciarse.</string>
+    <string name="USUARIO_SIN_DATOS">El usuario no dispone de direcciones configuradas en su perfil.</string>
+    <string name="EXCEPT_CAMPOS_NUMERICOS">El precio y el número de personas han de ser números.</string>
+    <string name="EXCEPT_DURACION">La duración de la actividad debe ser mayor a 0 horas.</string>
+    <string name="EXCEPT__CODPOSTAL_CAMPO_NUMERICO">Debe facilitar un codigo postal númerico</string>
+    <string name="enhorabuena">¡Enhorabuena!</string>
+    <string name="la_actividad_se_ha_dado_de_alta_con_xito_puede_ver_su_informaci_n_en_mis_actividades">La actividad se ha dado de alta con éxito. Puede ver su información en Mis Actividades.</string>
 </resources>

@@ -1,11 +1,16 @@
 package com.dam.moveyourschool.activities;
 
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.View;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
@@ -48,6 +53,34 @@ public class UsuariosList extends BaseActivity {
         recyclerUsuarios.setLayoutManager(lm);
         recyclerUsuarios.setAdapter(adapterUsuarios);
         recyclerUsuarios.setHasFixedSize(true);
+
+
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallBack = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public int convertToAbsoluteDirection(int flags, int layoutDirection) {
+                return super.convertToAbsoluteDirection(flags, layoutDirection);
+            }
+
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
+                return false;
+            }
+
+            @Override
+            public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+                viewHolder.itemView.setTranslationX(dX / 5);
+                //super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+
+            }
+        };
+
+// attaching the touch helper to recycler view
+
+        new ItemTouchHelper(itemTouchHelperCallBack).attachToRecyclerView(recyclerUsuarios);
 
         //Inicialización del Listener del Recycler View
         startRecyclerListener();

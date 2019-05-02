@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.NumberPicker;
 import android.widget.Switch;
 import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.activities.ActividadForm;
@@ -16,12 +17,12 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Actividad_Form_Step_4 extends Fragment {
     private Actividad actividad;
-    private TextInputEditText etxDuracion;
     private Switch swDiversidad;
     private Switch swAseos;
     private Switch swRiesgo;
     private Switch swCafeteria;
     private Switch swBloquear;
+    private NumberPicker pickerDuracion;
 
 
     public Actividad_Form_Step_4() {}
@@ -32,12 +33,20 @@ public class Actividad_Form_Step_4 extends Fragment {
                              Bundle savedInstanceState) {
 
         View contenedor = inflater.inflate(R.layout.fragment_actividad__form__step_4, container, false);
-        etxDuracion = contenedor.findViewById(R.id.etxDuracion);
         swDiversidad = contenedor.findViewById(R.id.swDiversidad);
         swAseos = contenedor.findViewById(R.id.swAseos);
         swRiesgo = contenedor.findViewById(R.id.swRiesgo);
         swBloquear = contenedor.findViewById(R.id.swBloqueo);
         swCafeteria = contenedor.findViewById(R.id.swCafeteria);
+        pickerDuracion = contenedor.findViewById(R.id.pickerDuracion);
+        pickerDuracion.setMinValue(0);
+        pickerDuracion.setMaxValue(500);
+        pickerDuracion.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+            @Override
+            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+                actividad.setDuracion(numberPicker.getValue());
+            }
+        });
 
         actividad = ((ActividadForm) (getActivity())).getActividad();
 
@@ -48,13 +57,11 @@ public class Actividad_Form_Step_4 extends Fragment {
         return contenedor;
     }
 
-    public void registrar() {
+    public boolean registrar() {
+        boolean success = false;
 
-        if (checkFields(etxDuracion)) {
+        if (actividad.getDuracion() != 0) {
 
-        } else {
-
-            actividad.setDuracion(Integer.parseInt(etxDuracion.getText().toString()));
             actividad.setAseos(swAseos.isChecked());
             actividad.setPersonasDiversidad(swDiversidad.isChecked());
             actividad.setRiesgoAccidente(swRiesgo.isChecked());
@@ -64,19 +71,21 @@ public class Actividad_Form_Step_4 extends Fragment {
 
             if (FirebaseAuth.getInstance().getCurrentUser() != null) {
                 actividad.setUid_usuario(FirebaseAuth.getInstance().getCurrentUser().getUid());
+                success = true;
+
+            } else {
+                new CustomDialog(getContext(), R.string.USUARIO_CADUCADO).show();
             }
 
             Log.e("actividad", actividad.toString());
-        }
 
-    }
-
-    private boolean checkFields(TextInputEditText field) {
-        if (field.getText().toString().isEmpty()) {
-            return true;
         } else {
-            return false;
+            new CustomDialog(getContext(), R.string.EXCEPT_DURACION).show();
         }
+        return success;
     }
 
+    private boolean comprobacionFinal() {
+        return true;
+    }
 }

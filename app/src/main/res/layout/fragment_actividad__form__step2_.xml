@@ -29,28 +29,22 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/imagenActividad"
-                app:srcCompat="@drawable/ic_add_circle_black_24dp"
-                android:layout_width="44dp"
-                android:layout_height="52dp"
-                android:layout_centerHorizontal="false"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:onClick="onPickImage" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imgEdit"
-                app:civ_border_color="@android:color/white"
-                app:civ_border_width="3dp"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:layout_centerHorizontal="true"
+                android:layout_marginTop="16dp"
                 android:clickable="true"
-                android:elevation="5dp"
-                android:onClick="onPickImage"
-                android:padding="10dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/idea" />
+                android:src="@drawable/demoactivity" />
+
+            <ImageView
+                android:id="@+id/imagenActividad"
+                android:layout_width="44dp"
+                android:layout_height="52dp"
+                android:layout_centerHorizontal="false"
+                android:layout_marginTop="10dp"
+                app:srcCompat="@drawable/ic_add_circle_black_24dp" />
 
         </RelativeLayout>
 
@@ -68,6 +62,7 @@
                 android:fontFamily="@font/bambino_light"
                 android:hint="Titulo"
                 android:inputType="text"
+                android:singleLine="true"
                 android:textColor="@color/blue_pastel" />
         </android.support.design.widget.TextInputLayout>
 
@@ -105,6 +100,7 @@
                 android:fontFamily="@font/bambino_light"
                 android:hint="Precio/Persona"
                 android:inputType="text"
+                android:singleLine="true"
                 android:textColor="@color/blue_pastel" />
         </android.support.design.widget.TextInputLayout>
 
@@ -131,6 +127,7 @@
                     android:fontFamily="@font/bambino_light"
                     android:hint="Max Personas"
                     android:inputType="text"
+                    android:singleLine="true"
                     android:textColor="@color/blue_pastel" />
             </android.support.design.widget.TextInputLayout>
 
@@ -150,6 +147,7 @@
                     android:fontFamily="@font/bambino_light"
                     android:hint="Min Personas"
                     android:inputType="text"
+                    android:singleLine="true"
                     android:textColor="@color/blue_pastel" />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>

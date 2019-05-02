@@ -224,7 +224,7 @@ public abstract class BaseActivity extends AppCompatActivity
         } else if (id == R.id.nav_MisReservas) {
 
         } else if (id == R.id.navActividades) {
-            startActivity(new Intent(this, ActividadForm.class));
+            startActivity(new Intent(this, Actividades.class));
 
         } else if (id == R.id.nav_login) {
             loginView();
