@@ -57,6 +57,9 @@
     <string name="TXT_DESC">El Museo Nacional del Prado, desde que fue inaugurado en 1819 y a lo largo de su historia centenaria, ha cumplido con la alta misión de conservar, exponer y enriquecer el conjunto de las colecciones y obras de arte que, estrechamente vinculadas a la historia de España, constituyen una de las más elevadas manifestaciones de expresión artística de reconocido valor universal.</string>
     <string name="VAL_ELIJA_LOCALIDAD">Localidad</string>
 
+    <!--MIS CHATS-->
+    <string name="CHAT_ELIMINADO">Se ha eliminado la conversación satisfactoriamente.</string>
+
     <!--TEXTOS SIGN UP SUCCESS-->
     <string name="TXT_BIENVENIDO">Bienvenido</string>
     <string name="TXT_CORREO_CONFIRMACION">Te enviaremos un correo a <b>%1$s</b> confirmando el alta de tu cuenta.</string>

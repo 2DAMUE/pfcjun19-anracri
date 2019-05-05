@@ -16,6 +16,7 @@ public class Usuario implements Parcelable {
     private String tipo;
     private String descripcion;
     private String urlFoto;
+    private boolean leido;
 
     public Usuario(){}
 
@@ -161,5 +162,13 @@ public class Usuario implements Parcelable {
 
     public void setUrlFoto(String urlFoto) {
         this.urlFoto = urlFoto;
+    }
+
+    public boolean isLeido() {
+        return leido;
+    }
+
+    public void setLeido(boolean leido) {
+        this.leido = leido;
     }
 }

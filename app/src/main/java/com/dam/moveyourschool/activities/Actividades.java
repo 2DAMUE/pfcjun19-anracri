@@ -65,7 +65,9 @@ public class Actividades extends BaseActivity {
         adapterActividades.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(Actividades.this, ActividadDetail.class);
+                i.putExtra(getString(R.string.KEY_ACTIVIDAD), listaActividades.get(recyclerActividades.getChildAdapterPosition(view)));
+                startActivity(i);
             }
         });
 

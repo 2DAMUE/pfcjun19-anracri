@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignWithParentIfMissing="false"
-        android:layout_below="@+id/imageView"
+        android:layout_below="@+id/imagenActividad"
         android:layout_alignParentStart="false"
         android:layout_alignParentTop="false"
         android:layout_alignParentRight="false"
@@ -20,17 +20,13 @@
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Monday" />
+            android:text="Filtrar por Categoria" />
 
         <android.support.design.widget.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tuesday" />
+            android:text="Ordenar" />
 
-        <android.support.design.widget.TabItem
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Wednesday" />
     </android.support.design.widget.TabLayout>
 
     <android.support.design.widget.FloatingActionButton

@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import com.dam.moveyourschool.R;
@@ -87,7 +88,7 @@ public class ChatWindow extends BaseActivity {
         lm = new LinearLayoutManager(ChatWindow.this);
         recyclerView.setLayoutManager(lm);
         recyclerView.setHasFixedSize(true);
-        fireBaseChatService = new FireBaseChatService(listaMensajes, userOrigen, userDestino, adapterChat);
+        fireBaseChatService = new FireBaseChatService(listaMensajes, userOrigen, userDestino, adapterChat, recyclerView);
     }
 
     @Override
@@ -103,5 +104,20 @@ public class ChatWindow extends BaseActivity {
     public void enviar(View view) {
         fireBaseChatService.enviarMensaje(etxChatBox.getText().toString());
         etxChatBox.setText("");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        fireBaseChatService.stopListener();
+        Log.e("ENTRA ONPAUSE", "ENTRA");
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        fireBaseChatService.stopListener();
+        Log.e("ENTRA ONPAUSE", "ENTRA");
     }
 }

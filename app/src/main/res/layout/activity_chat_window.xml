@@ -11,6 +11,8 @@
         android:id="@+id/reyclerview_message_list"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="130dp"
+        app:layout_constraintBottom_toTopOf="@+id/view2"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"></android.support.v7.widget.RecyclerView>
@@ -18,6 +20,7 @@
     <!-- A horizontal line between the chatbox and RecyclerView -->
 
     <View
+        android:id="@+id/view2"
         android:layout_width="0dp"
         android:layout_height="2dp"
         android:background="#dfdfdf"
@@ -50,6 +53,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_weight="1"
+            android:background="@null"
             android:fontFamily="@font/bambino_light"
             android:hint="Mensaje"
             android:maxLines="6" />

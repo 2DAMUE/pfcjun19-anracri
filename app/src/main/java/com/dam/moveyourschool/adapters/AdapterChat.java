@@ -18,12 +18,10 @@ import java.util.Date;
 public class AdapterChat extends RecyclerView.Adapter {
     private Usuario userMe;
     private ArrayList<Mensaje> listaMensajes;
-    private SimpleDateFormat dateFormat;
 
     public AdapterChat(ArrayList<Mensaje> listaMensajes, Usuario userMe) {
         this.listaMensajes = listaMensajes;
         this.userMe = userMe;
-        dateFormat = new SimpleDateFormat("HH:mm");
     }
 
     @Override
@@ -58,17 +56,15 @@ public class AdapterChat extends RecyclerView.Adapter {
         HolderReceive holderReceive;
         HolderSend holderSend;
 
-        String fecha = dateFormat.format(new Date());
-
         if (viewHolder.getItemViewType() == 1) {
             holderReceive = (HolderReceive) viewHolder;
             holderReceive.mensajeRemitente.setText(listaMensajes.get(i).getMensaje());
             holderReceive.nickRemitente.setText(listaMensajes.get(i).getUserSender().getNombre());
-            holderReceive.tvHoraRecibo.setText(fecha);
+            holderReceive.tvHoraRecibo.setText(listaMensajes.get(i).getHora());
         } else {
             holderSend = (HolderSend) viewHolder;
             holderSend.mensaje_envio.setText(listaMensajes.get(i).getMensaje());
-            holderSend.tvHoraEnvio.setText(fecha);
+            holderSend.tvHoraEnvio.setText(listaMensajes.get(i).getHora());
         }
     }
 

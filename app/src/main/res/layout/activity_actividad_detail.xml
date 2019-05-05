@@ -7,69 +7,48 @@
     tools:context=".activities.ActividadDetail">
 
     <android.support.design.widget.TabLayout
-        android:id="@+id/tabLayout"
+        android:id="@+id/tabActivityDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignWithParentIfMissing="false"
-        android:layout_below="@+id/imageView"
+        android:layout_below="@+id/imagenActividad"
         android:layout_alignParentStart="false"
         android:layout_alignParentTop="false"
         android:layout_alignParentRight="false"
         android:layout_alignParentBottom="false">
 
         <android.support.design.widget.TabItem
+            android:id="@+id/tabGeneral"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Monday" />
+            android:text="General" />
 
         <android.support.design.widget.TabItem
+            android:id="@+id/tabDetalles"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tuesday" />
+            android:text="Detalles" />
 
         <android.support.design.widget.TabItem
+            android:id="@+id/tabLocalizacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Wednesday" />
+            android:text="Localizacion" />
     </android.support.design.widget.TabLayout>
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imagenActividad"
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/imgexample" />
 
     <FrameLayout
-        android:id="@+id/frameLayout"
+        android:id="@+id/detailContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/btnReservar"
-        android:layout_below="@+id/tabLayout">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
-        </LinearLayout>
+        android:layout_below="@+id/tabActivityDetail">
     </FrameLayout>
 
     <Button
@@ -77,9 +56,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="16dp"
         android:layout_marginBottom="30dp"
         android:background="@drawable/button_pastel"
-        android:text="Button" />
+        android:fontFamily="@font/bambino_light"
+        android:text="Solicitar Presupuesto"
+        android:textColor="@android:color/white" />
 
 </RelativeLayout>

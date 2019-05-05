@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -42,6 +43,7 @@ public abstract class BaseActivity extends AppCompatActivity
     private FireBaseAuthentication fireBaseAuthentication;
     private DialogLogin dialogLogin;
     private ProgressBarAlert progressBarAlert;
+    private FireDBUsuarios serviceDBUsuarios;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,7 @@ public abstract class BaseActivity extends AppCompatActivity
             navigationView.getMenu().findItem(R.id.nav_logout).setVisible(true);
             navigationView.getMenu().findItem(R.id.nav_login).setVisible(false);
 
-            new FireDBUsuarios() {
+            serviceDBUsuarios = new FireDBUsuarios() {
                 @Override
                 public void nodoAgregado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                     if (dataSnapshot.getKey().equals(userAuth.getUid())) {
@@ -75,22 +77,14 @@ public abstract class BaseActivity extends AppCompatActivity
                         if (user.getNombre() != null && !user.getNombre().equals("")) {
                             tvMenuInstitucion.setText(user.getNombre());
                         }
+
+                        serviceDBUsuarios.desconectarListener();
                     }
                 }
 
                 @Override
                 public void nodoModificado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    if (dataSnapshot.getKey().equals(userAuth.getUid())) {
-                        user = dataSnapshot.getValue(Usuario.class);
 
-                        if (user.getUrlFoto() != null && !user.getUrlFoto().equals("")) {
-                            Glide.with(BaseActivity.this).load(user.getUrlFoto()).into(imgMenuImgUser);
-                        }
-
-                        if (user.getNombre() != null && !user.getUrlFoto().equals("")) {
-                            tvMenuInstitucion.setText(user.getNombre());
-                        }
-                    }
                 }
 
                 @Override
@@ -117,19 +111,6 @@ public abstract class BaseActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        //toolbar.setLogo(R.drawable.ic_movehoriz_large);
-
-        /*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-         */
 
         //Carga el Drawer
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
