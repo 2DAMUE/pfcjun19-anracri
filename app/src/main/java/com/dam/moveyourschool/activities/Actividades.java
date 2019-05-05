@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import com.bumptech.glide.Glide;
 import com.dam.moveyourschool.R;
@@ -138,6 +139,29 @@ public class Actividades extends BaseActivity {
 
             @Override
             public void nodoModificado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+
+                for (DataSnapshot aux : dataSnapshot.getChildren()) {
+                    Actividad actividad = aux.getValue(Actividad.class);
+                    Log.e("aCGIVI MODIFI", actividad.toString());
+
+                    for (int i = 0; i < listaActividades.size(); i++) {
+                        if (listaActividades.get(i).getUid_actividad().equals(actividad.getUid_actividad())) {
+                            listaActividades.set(i, actividad);
+                            adapterActividades.notifyItemChanged(i);
+                        }
+                    }
+                }
+
+                /*
+                for (DataSnapshot aux : dataSnapshot.getChildren()) {
+                    Actividad actividad = aux.getValue(Actividad.class);
+
+
+                }
+
+
+                 */
 
             }
 

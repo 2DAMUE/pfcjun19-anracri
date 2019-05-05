@@ -64,6 +64,7 @@ public abstract class FireDBActividades {
     public void agregarActividad(Actividad actividad) {
 
         String key = dbr.child(actividad.getUid_usuario()).push().getKey();
+        actividad.setUid_actividad(key);
         getKey(key);
         dbr.child(actividad.getUid_usuario()).child(key).setValue(actividad);
     }

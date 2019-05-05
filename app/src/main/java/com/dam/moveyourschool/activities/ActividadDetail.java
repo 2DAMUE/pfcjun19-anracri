@@ -59,7 +59,6 @@ public class ActividadDetail extends BaseActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.detailContainer, fragmento)
-                .addToBackStack(null)
                 .commit();
     }
 
