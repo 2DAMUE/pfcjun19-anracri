@@ -34,9 +34,11 @@ public class UsuariosList extends BaseActivity {
     private FireDBMensajes serviceDBMensajes;
     private boolean filter;
     private HashMap<String, Boolean> keysChatMap;
+    private boolean primeraVez = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         filter = getIntent().getBooleanExtra(getString(R.string.KEY_FILTER), false);
@@ -188,7 +190,7 @@ public class UsuariosList extends BaseActivity {
 
                 @Override
                 public void nodoModificado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    adapterUsuarios.notifyDataSetChanged();
+                    //adapterUsuarios.notifyDataSetChanged();
                 }
 
                 @Override
@@ -255,6 +257,11 @@ public class UsuariosList extends BaseActivity {
         if (filter) {
             serviceDBMensajes.desconectarListener();
         }
+
+        if (listaUsuarios != null) {
+            listaUsuarios.clear();
+            adapterUsuarios.notifyDataSetChanged();
+        }
         databaseServiceUsuarios.desconectarListener();
     }
 
@@ -266,8 +273,15 @@ public class UsuariosList extends BaseActivity {
             if (serviceDBMensajes != null && databaseServiceUsuarios != null) {
                 recreate();
             }
+        }
+
+        if (primeraVez) {
+            primeraVez = false;
+
         } else {
             databaseServiceUsuarios.conectarListener();
         }
+
+
     }
 }
