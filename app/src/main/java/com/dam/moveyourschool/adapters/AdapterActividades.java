@@ -16,9 +16,13 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
     private View.OnClickListener listener;
     private ArrayList<Actividad> listaActividades;
     private RequestManager glide;
+    private String filtro;
+    private static final String TODAS_LAS_ACTIVIDADES = "TODAS LAS ACTIVIDADES";
+    private static final String FILTRO_MUSEOS = "MUSEO";
 
     public AdapterActividades(ArrayList<Actividad> listaActividades, RequestManager glide) {
         this.listaActividades = listaActividades;
+        filtro = TODAS_LAS_ACTIVIDADES;
         this.glide = glide;
     }
 
@@ -33,6 +37,13 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
 
     @Override
     public void onBindViewHolder(@NonNull HolderActividades holderActividades, int i) {
+
+        if (listaActividades.get(i).getCategoria().equals(filtro)) {
+
+
+        }
+
+
         if (listaActividades.get(i).getUrlFoto() != null && !listaActividades.get(i).getUrlFoto().equals("")) {
             glide.load(listaActividades.get(i).getUrlFoto()).into(holderActividades.imagen);
         }
@@ -78,5 +89,10 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
 
     public void setOnClickListener(View.OnClickListener listener) {
         this.listener = listener;
+    }
+
+    public void filterByCategoria(String categoria) {
+        filtro = categoria;
+        notifyDataSetChanged();
     }
 }

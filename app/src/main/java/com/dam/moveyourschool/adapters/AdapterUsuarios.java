@@ -34,9 +34,7 @@ public class AdapterUsuarios extends RecyclerView.Adapter<AdapterUsuarios.Usuari
     @Override
     public UsuarioHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_swipe_user, viewGroup, false);
-        //v.setOnClickListener(this);
         UsuarioHolder holder = new UsuarioHolder(v);
-        //holder.getRelativeForeground().setOnClickListener(this);
         return holder;
     }
 
@@ -69,7 +67,7 @@ public class AdapterUsuarios extends RecyclerView.Adapter<AdapterUsuarios.Usuari
         usuarioHolder.tvNombre.setText(listaUsuarios.get(i).getNombre());
         usuarioHolder.tvInstituciones.setText(listaUsuarios.get(i).getTitular());
 
-        if (listaUsuarios.get(i).getUrlFoto() == null) {
+        if (listaUsuarios.get(i).getUrlFoto() == null || listaUsuarios.get(i).equals("")) {
             glide.load(R.drawable.idea).into(usuarioHolder.imageView);
         } else {
             glide.load(listaUsuarios.get(i).getUrlFoto()).into(usuarioHolder.imageView);

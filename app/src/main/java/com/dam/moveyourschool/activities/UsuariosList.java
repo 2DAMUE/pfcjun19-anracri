@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
@@ -255,14 +254,19 @@ public class UsuariosList extends BaseActivity {
     protected void onPause() {
         super.onPause();
         if (filter) {
-            serviceDBMensajes.desconectarListener();
+            if(serviceDBMensajes != null) {
+                serviceDBMensajes.desconectarListener();
+            }
         }
 
         if (listaUsuarios != null) {
             listaUsuarios.clear();
             adapterUsuarios.notifyDataSetChanged();
         }
-        databaseServiceUsuarios.desconectarListener();
+
+        if (databaseServiceUsuarios != null) {
+            databaseServiceUsuarios.desconectarListener();
+        }
     }
 
     @Override
@@ -279,9 +283,9 @@ public class UsuariosList extends BaseActivity {
             primeraVez = false;
 
         } else {
-            databaseServiceUsuarios.conectarListener();
+            if (databaseServiceUsuarios != null) {
+                databaseServiceUsuarios.conectarListener();
+            }
         }
-
-
     }
 }

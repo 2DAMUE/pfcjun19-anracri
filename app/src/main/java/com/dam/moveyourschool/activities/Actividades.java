@@ -55,6 +55,8 @@ public class Actividades extends BaseActivity {
         listaActividades = new ArrayList<>();
         adapterActividades = new AdapterActividades(listaActividades, Glide.with(this));
 
+        listaActividades.clone();
+
         //Inicializamos el recyclerview y su layout
         recyclerActividades = findViewById(R.id.recyclerActividades);
         lm = new LinearLayoutManager(this);

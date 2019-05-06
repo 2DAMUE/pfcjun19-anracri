@@ -44,11 +44,14 @@ public abstract class BaseActivity extends AppCompatActivity
     private DialogLogin dialogLogin;
     private ProgressBarAlert progressBarAlert;
     private FireDBUsuarios serviceDBUsuarios;
+    protected boolean showCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base);
+
+        showCart = false;
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -155,12 +158,22 @@ public abstract class BaseActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.base, menu);
+    public boolean onPrepareOptionsMenu(Menu menu) {
 
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            menu.getItem(0).setVisible(false);
+            menu.findItem(R.id.menu_Perfil).setVisible(false);
         }
+
+        if (showCart) {
+            menu.findItem(R.id.icoCart).setVisible(true);
+        }
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.base, menu);
 
         return true;
     }
@@ -173,7 +186,10 @@ public abstract class BaseActivity extends AppCompatActivity
             if (id == R.id.menu_Perfil) {
                 startActivity(new Intent(this, UserDetail.class));
                 return true;
+            }
 
+            if (id == R.id.icoCart) {
+                Intent i = new Intent();
             }
         }
         return super.onOptionsItemSelected(item);

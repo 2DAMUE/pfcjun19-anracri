@@ -76,6 +76,8 @@
     <string name="KEY_TYPE">KEY_TYPE</string>
     <string name="KEY_MAIL">KEY_MAIL</string>
     <string name="KEY_USER">KEY_USER</string>
+    <string name="KEY_USER_ORIGEN">KEY_USER ORIGEN</string>
+    <string name="KEY_USER_DESTINO">KEY_USER DESTINO</string>
     <string name="KEY_FILTER">KEY_FILTER</string>
     <string name="HINT_REPETIR_PASS">Repetir Password</string>
     <string name="TXT_SIGN_IN">SIGN IN</string>

@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public abstract class Constantes {
+    public static final String USUARIO_EMPRESA = "EMPRESA";
+    public static final String USUARIO_EDUCACION = "EDUCACION";
     private ArrayList<String> provincias;
     private static final String fichero = "provincias.txt";
     private BufferedReader reader;

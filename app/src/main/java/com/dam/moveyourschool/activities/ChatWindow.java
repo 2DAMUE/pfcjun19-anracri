@@ -1,8 +1,12 @@
 package com.dam.moveyourschool.activities;
 
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -10,10 +14,13 @@ import android.view.View;
 import android.widget.EditText;
 import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.adapters.AdapterChat;
+import com.dam.moveyourschool.bean.Actividad;
 import com.dam.moveyourschool.bean.Mensaje;
 import com.dam.moveyourschool.bean.Usuario;
 import com.dam.moveyourschool.services.FireBaseChatService;
 import com.dam.moveyourschool.services.FireDBUsuarios;
+import com.dam.moveyourschool.utils.Constantes;
+import com.dam.moveyourschool.views.CustomDialog;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -78,10 +85,16 @@ public class ChatWindow extends BaseActivity {
                 }
             };
         } else {
-
+            new CustomDialog(this, R.string.USUARIO_CADUCADO).setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    startActivity(new Intent(ChatWindow.this, Actividades.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                }
+            });
         }
     }
 
+    @SuppressLint("RestrictedApi")
     private void inicializarServicio() {
         adapterChat = new AdapterChat(listaMensajes, userOrigen);
         recyclerView.setAdapter(adapterChat);
@@ -89,6 +102,13 @@ public class ChatWindow extends BaseActivity {
         recyclerView.setLayoutManager(lm);
         recyclerView.setHasFixedSize(true);
         fireBaseChatService = new FireBaseChatService(listaMensajes, userOrigen, userDestino, adapterChat, recyclerView);
+
+        if (userOrigen.getTipo().equals(Constantes.USUARIO_EMPRESA)) {
+            ((CustomContext)  (getApplicationContext())).setUsuario(userDestino);
+            super.showCart = true;
+            super.supportInvalidateOptionsMenu();
+        }
+
     }
 
     @Override
@@ -110,14 +130,25 @@ public class ChatWindow extends BaseActivity {
     protected void onPause() {
         super.onPause();
         fireBaseChatService.stopListener();
-        Log.e("ENTRA ONPAUSE", "ENTRA");
-
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         fireBaseChatService.stopListener();
-        Log.e("ENTRA ONPAUSE", "ENTRA");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(getString(R.string.KEY_USER_ORIGEN), userOrigen);
+        outState.putParcelable(getString(R.string.KEY_USER_DESTINO), userDestino);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        userOrigen = savedInstanceState.getParcelable(getString(R.string.KEY_USER_ORIGEN));
+        userDestino = savedInstanceState.getParcelable(getString(R.string.KEY_USER_DESTINO));
     }
 }
