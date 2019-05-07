@@ -12,6 +12,10 @@
     <string name="TXT_DEBE_RELLENAR_CORRECTAMENTE">Debe rellenar todos los campos correctamente</string>
     <string name="TXT_NO_SE_HA_PODIDO_REGISTRAR">No se ha podido registrar el usuario</string>
 
+    <!--ACTIVIDADES-->
+    <string name="BTN_CANCEL">CANCELAR</string>
+    <string name="TXT_ELEGIR_FILTRO">Elegir Filtro</string>
+
     <!--LOGIN-->
     <string name="STRING_FILL">%1$s</string>
     <string name="HINT_USUARIO">Usuario</string>

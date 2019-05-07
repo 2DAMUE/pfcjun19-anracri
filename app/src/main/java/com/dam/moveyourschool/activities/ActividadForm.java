@@ -145,17 +145,11 @@ public class ActividadForm extends BaseActivity {
             }
 
             @Override
-            public void nodoAgregado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                //Actividad actividad = dataSnapshot.getValue(Actividad.class);
-                //Log.e("Actividad DEL SERVICIO", actividad.toString());
-                for (DataSnapshot snap: dataSnapshot.getChildren()) {
-                    //Log.e("valor", snap.getValue().toString());
-                }
-            }
+            public void nodoAgregado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {}
 
             @Override
             public void nodoModificado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Log.e("Actividad DEL SERVICIO", actividad.toString());
+
             }
 
             @Override

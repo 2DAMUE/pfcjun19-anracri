@@ -207,7 +207,6 @@ public abstract class BaseActivity extends AppCompatActivity
         } else if (user != null  && user.getTipo().equals(INSTITUCION_EDUCATIVA)) {
 
 
-
         } else {
 
         }

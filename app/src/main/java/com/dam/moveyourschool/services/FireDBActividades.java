@@ -55,7 +55,7 @@ public abstract class FireDBActividades {
     }
 
     public void conectarListener() {
-        if (cel == null) {
+        if (cel != null) {
             dbr.addChildEventListener(cel);
         }
     }
