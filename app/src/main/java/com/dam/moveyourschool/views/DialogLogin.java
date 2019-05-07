@@ -22,6 +22,7 @@ public class DialogLogin extends Dialog implements View.OnClickListener {
     private Button btnLogin;
     private Context context;
     private View.OnClickListener listener;
+    private boolean matchPattern;
 
     public DialogLogin(@NonNull final Context context) {
         super(context);
@@ -45,8 +46,10 @@ public class DialogLogin extends Dialog implements View.OnClickListener {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 if (Patterns.EMAIL_ADDRESS.matcher(charSequence).matches()) {
+                    matchPattern = true;
                     etxLoginNombre.setCompoundDrawablesWithIntrinsicBounds(context.getDrawable(R.drawable.ic_person_black), null, context.getDrawable(R.drawable.ic_check_black), null);
                 } else {
+                    matchPattern = false;
                     etxLoginNombre.setCompoundDrawablesWithIntrinsicBounds(context.getDrawable(R.drawable.ic_person_black), null, null, null);
                 }
             }
@@ -62,7 +65,7 @@ public class DialogLogin extends Dialog implements View.OnClickListener {
     }
     //Método que comprueba si los campos del Dialogo Login estan vacios
     public boolean comprobarCamposVacios(){
-        if (etxLoginNombre.getText().toString().isEmpty() || etxLoginPassword.getText().toString().isEmpty()){
+        if (etxLoginNombre.getText().toString().isEmpty() || etxLoginPassword.getText().toString().isEmpty() || !matchPattern){
             new CustomDialog(context, R.string.TXT_DEBE_RELLENAR_CORRECTAMENTE).show();
             return true;
         } else {

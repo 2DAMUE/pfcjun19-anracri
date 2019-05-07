@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
@@ -90,7 +91,6 @@ public class SignUpStep2 extends AppCompatActivity {
             @Override
             public void callBackSignUp(int result) {
                 alert.cancel();
-
                 if(result == 0) {
                     startActivity(new Intent(SignUpStep2.this, SignUpSuccess.class)
                             .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)

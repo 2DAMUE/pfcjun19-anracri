@@ -31,8 +31,6 @@ public class SplashScreen extends AppCompatActivity {
                 if (!dialogLogin.comprobarCamposVacios()) {
                     progressBarAlert.show();
                     fireBaseAuthentication.login(dialogLogin.getEtxLoginNombre().getText().toString(), dialogLogin.getEtxLoginPassword().getText().toString());
-                } else {
-                    new CustomDialog(SplashScreen.this, R.string.TXT_DEBE_RELLENAR_CORRECTAMENTE).show();
                 }
             }
         });

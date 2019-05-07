@@ -75,7 +75,7 @@ public class ActividadForm extends BaseActivity {
         //Si es el primer fragmento, invocamos el metodo registrar y pasamos al siguiente fragmento
         if (fragmentoActual instanceof Actividad_Form_Step_1) {
 
-            if (actividad != null && !actividad.getCategoria().equals("")) {
+            if (actividad != null && actividad.getCategoria() != null && !actividad.getCategoria().equals("")) {
                 changeFragment(new Actividad_Form_Step2_Frag());
                 btnNext.setVisibility(View.VISIBLE);
 
@@ -179,7 +179,7 @@ public class ActividadForm extends BaseActivity {
     public void categoriaSeleccionada(View view) {
         actividad = new Actividad();
         String id = getResources().getResourceEntryName(view.getId());
-
+        Log.e("EL ID ES", id);
         switch (id) {
             case "linearArte":
                 actividad.setCategoria(getString(R.string.TXT_ACTIVIDAD_ARTISTICA));
@@ -227,6 +227,7 @@ public class ActividadForm extends BaseActivity {
                 actividad.setCategoria(getString(R.string.TXT_OTRAS_ACTIVIDADES));
                 break;
         }
+        Log.e("actividad", actividad.getCategoria().toString());
         nextStep(null);
     }
 
@@ -252,5 +253,11 @@ public class ActividadForm extends BaseActivity {
         actividad = (Actividad) savedInstanceState.get(getString(R.string.KEY_ACTIVIDAD));
         ((CustomContext) (getApplicationContext())).setActividad(actividad);
         primeraVez = false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
     }
 }
