@@ -189,7 +189,10 @@ public abstract class BaseActivity extends AppCompatActivity
             }
 
             if (id == R.id.icoCart) {
-                Intent i = new Intent();
+                String idU = ((ChatWindow) (this)).obtenerUsuarioDestino();
+                Intent i = new Intent(this,NuevaReserva.class);
+                i.putExtra("KEY_ID_USU", idU);
+                startActivity(i);
             }
         }
         return super.onOptionsItemSelected(item);

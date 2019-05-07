@@ -94,6 +94,10 @@ public class ChatWindow extends BaseActivity {
         }
     }
 
+    public String obtenerUsuarioDestino(){
+        return userDestino.getUid();
+    }
+
     @SuppressLint("RestrictedApi")
     private void inicializarServicio() {
         adapterChat = new AdapterChat(listaMensajes, userOrigen);
