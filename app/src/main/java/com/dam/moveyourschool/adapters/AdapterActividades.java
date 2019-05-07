@@ -38,11 +38,6 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
     @Override
     public void onBindViewHolder(@NonNull HolderActividades holderActividades, int i) {
 
-        if (listaActividades.get(i).getCategoria().equals(filtro)) {
-
-
-        }
-
 
         if (listaActividades.get(i).getUrlFoto() != null && !listaActividades.get(i).getUrlFoto().equals("")) {
             glide.load(listaActividades.get(i).getUrlFoto()).into(holderActividades.imagen);
