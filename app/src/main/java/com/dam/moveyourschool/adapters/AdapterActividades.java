@@ -18,11 +18,11 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
     private RequestManager glide;
     private String filtro;
     private static final String TODAS_LAS_ACTIVIDADES = "TODAS LAS ACTIVIDADES";
-    private static final String FILTRO_MUSEOS = "MUSEO";
+    private static final String FILTRO_ARTE = "Actividad Artística";
 
     public AdapterActividades(ArrayList<Actividad> listaActividades, RequestManager glide) {
         this.listaActividades = listaActividades;
-        filtro = TODAS_LAS_ACTIVIDADES;
+        filtro = "dajdsj";
         this.glide = glide;
     }
 
@@ -38,21 +38,34 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
     @Override
     public void onBindViewHolder(@NonNull HolderActividades holderActividades, int i) {
 
+        if (listaActividades.get(i).getCategoria().equals(filtro)){
+            if (listaActividades.get(i).getUrlFoto() != null && !listaActividades.get(i).getUrlFoto().equals("")) {
+                glide.load(listaActividades.get(i).getUrlFoto()).into(holderActividades.imagen);
+            }
 
-        if (listaActividades.get(i).getUrlFoto() != null && !listaActividades.get(i).getUrlFoto().equals("")) {
-            glide.load(listaActividades.get(i).getUrlFoto()).into(holderActividades.imagen);
-        }
+            holderActividades.tvTitulo.setText(listaActividades.get(i).getTitulo());
+            holderActividades.tvLikes.setText(String.valueOf(listaActividades.get(i).getLikes()));
 
-        holderActividades.tvTitulo.setText(listaActividades.get(i).getTitulo());
-        holderActividades.tvLikes.setText(String.valueOf(listaActividades.get(i).getLikes()));
+            if (listaActividades.get(i).getPrecio() % 1 == 0) {
+                holderActividades.tvPrecio.setText(String.valueOf(((int) (listaActividades.get(i).getPrecio())) + " €"));
+            } else {
+                holderActividades.tvPrecio.setText(String.valueOf(listaActividades.get(i).getPrecio() + " €"));
+            }
 
-        if (listaActividades.get(i).getPrecio() % 1 == 0) {
-            holderActividades.tvPrecio.setText(String.valueOf(((int) (listaActividades.get(i).getPrecio())) + " €"));
         } else {
-            holderActividades.tvPrecio.setText(String.valueOf(listaActividades.get(i).getPrecio() + " €"));
+            if (listaActividades.get(i).getUrlFoto() != null && !listaActividades.get(i).getUrlFoto().equals("")) {
+                glide.load(listaActividades.get(i).getUrlFoto()).into(holderActividades.imagen);
+            }
+
+            holderActividades.tvTitulo.setText(listaActividades.get(i).getTitulo());
+            holderActividades.tvLikes.setText(String.valueOf(listaActividades.get(i).getLikes()));
+
+            if (listaActividades.get(i).getPrecio() % 1 == 0) {
+                holderActividades.tvPrecio.setText(String.valueOf(((int) (listaActividades.get(i).getPrecio())) + " €"));
+            } else {
+                holderActividades.tvPrecio.setText(String.valueOf(listaActividades.get(i).getPrecio() + " €"));
+            }
         }
-
-
     }
 
     @Override

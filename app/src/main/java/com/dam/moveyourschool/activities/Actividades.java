@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseError;
 import java.util.ArrayList;
 
 public class Actividades extends BaseActivity {
+    private boolean primeraVez = true;
     private RecyclerView recyclerActividades;
     private LinearLayoutManager lm;
     private ArrayList<Actividad> listaActividades;
@@ -148,6 +149,7 @@ public class Actividades extends BaseActivity {
                     Log.e("aCGIVI MODIFI", actividad.toString());
 
                     for (int i = 0; i < listaActividades.size(); i++) {
+                        Log.e("NULLS", listaActividades.get(i).toString());
                         if (listaActividades.get(i).getUid_actividad().equals(actividad.getUid_actividad())) {
                             listaActividades.set(i, actividad);
                             adapterActividades.notifyItemChanged(i);
@@ -186,5 +188,36 @@ public class Actividades extends BaseActivity {
 
     public void agregarActividad(View view) {
         startActivity(new Intent(this, ActividadForm.class));
+    }
+
+    @Override
+    protected void onPause() {
+        primeraVez = false;
+
+        if (serviceDBActividades != null) {
+            serviceDBActividades.desconectarListener();
+        }
+
+        if (serviceDBUsuarios != null){
+            serviceDBUsuarios.desconectarListener();
+        }
+
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+
+        if (!primeraVez) {
+
+            if (serviceDBActividades != null) {
+                serviceDBActividades.conectarListener();
+            }
+
+            if (serviceDBUsuarios != null) {
+                serviceDBUsuarios.conectarListener();
+            }
+        }
+        super.onResume();
     }
 }

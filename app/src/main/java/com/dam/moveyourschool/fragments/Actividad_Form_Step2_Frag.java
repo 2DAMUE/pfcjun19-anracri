@@ -118,6 +118,7 @@ public class Actividad_Form_Step2_Frag extends Fragment {
 
             if (!exceptions) {
                 success = true;
+                actividad.setCategoria(((ActividadForm) (getActivity())).getActividad().getCategoria());
                 ((ActividadForm) (getActivity())).setActividad(actividad);
             }
         }

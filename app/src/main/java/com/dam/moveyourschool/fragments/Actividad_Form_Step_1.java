@@ -29,12 +29,7 @@ public class Actividad_Form_Step_1 extends Fragment {
     private LinearLayout linearTeatro;
     private LinearLayout linearOtros;
 
-
-
-
-
     public Actividad_Form_Step_1() { }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,7 +52,12 @@ public class Actividad_Form_Step_1 extends Fragment {
         linearTeatro = contenedor.findViewById(R.id.linearTeatro);
         linearTecnologia = contenedor.findViewById(R.id.linearTecnologia);
 
-
         return contenedor;
+    }
+
+    @Override
+    public void onResume() {
+        ((ActividadForm) (getActivity())).getBtnNext().setVisibility(View.GONE);
+        super.onResume();
     }
 }

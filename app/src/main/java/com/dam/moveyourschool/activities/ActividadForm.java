@@ -137,7 +137,7 @@ public class ActividadForm extends BaseActivity {
             @Override
             public void getKey(String key) {
 
-                if (key != null) {
+                if (key != null && !key.equals("")) {
                     startActivity(new Intent(ActividadForm.this, ActividadFormSuccess.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 } else {
                     new CustomDialog(ActividadForm.this, R.string.EXCEPT_UNKNOWN_ERROR).show();
@@ -240,6 +240,10 @@ public class ActividadForm extends BaseActivity {
 
     }
 
+    public Button getBtnNext() {
+        return btnNext;
+    }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putSerializable(getString(R.string.KEY_ACTIVIDAD), actividad);
@@ -253,11 +257,5 @@ public class ActividadForm extends BaseActivity {
         actividad = (Actividad) savedInstanceState.get(getString(R.string.KEY_ACTIVIDAD));
         ((CustomContext) (getApplicationContext())).setActividad(actividad);
         primeraVez = false;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
     }
 }
