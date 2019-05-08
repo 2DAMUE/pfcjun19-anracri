@@ -2,16 +2,21 @@ package com.dam.moveyourschool.services;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
+
 import com.dam.moveyourschool.bean.Actividad;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public abstract class FireDBActividades {
     private ChildEventListener cel;
     private DatabaseReference dbr;
+    private ChildEventListener auxListener;
+    private ValueEventListener valListener;
     private static final String NODO_ACTIVIDADES = "actividades";
 
     public FireDBActividades() {

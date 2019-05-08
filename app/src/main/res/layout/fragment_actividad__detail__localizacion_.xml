@@ -5,10 +5,72 @@
     android:layout_height="match_parent"
     tools:context=".fragments.Actividad_Detail_Localizacion_Frag">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="LOCALIZACION" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvDire"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/bambino_light"
+            android:text="Dirección"
+            android:textColor="@color/blue_pastel" />
+
+        <TextView
+            android:id="@+id/ValDireccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/bambino_light"
+            android:text="Dirección"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvMuni"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/bambino_light"
+            android:text="Municipio"
+            android:textColor="@color/blue_pastel" />
+
+        <TextView
+            android:id="@+id/ValMunicipio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/bambino_light"
+            android:text="Municipio"
+            android:textSize="18sp" />
+
+
+        <TextView
+            android:id="@+id/tvLoc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/bambino_light"
+            android:text="Localidad"
+            android:textColor="@color/blue_pastel" />
+
+        <TextView
+            android:id="@+id/valLocalidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/bambino_light"
+            android:text="Localidad"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
 </FrameLayout>

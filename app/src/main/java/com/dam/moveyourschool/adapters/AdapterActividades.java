@@ -7,14 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
 import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.bean.Actividad;
 import com.makeramen.roundedimageview.RoundedImageView;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 
 public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.HolderActividades> implements View.OnClickListener {
@@ -24,7 +21,6 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
     private RequestManager glide;
     private String filtro;
     public static final String TODAS_LAS_ACTIVIDADES = "ELIMINAR FILTRO";
-    private static final String FILTRO_ARTE = "Actividad Artística";
     private boolean primeraVez = true;
 
     public AdapterActividades(ArrayList<Actividad> listaActividades, RequestManager glide) {
@@ -48,7 +44,7 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
         if (listaActividades.get(i).getUrlFoto() != null && !listaActividades.get(i).getUrlFoto().equals("")) {
             glide.load(listaActividades.get(i).getUrlFoto()).into(holderActividades.imagen);
         } else {
-            glide.load(R.drawable.imgexample).into(holderActividades.imagen);
+            glide.load(R.drawable.demoactivity).into(holderActividades.imagen);
         }
 
         holderActividades.tvTitulo.setText(listaActividades.get(i).getTitulo());
@@ -104,7 +100,6 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
 
         } else {
             filtrar(categoria);
-            Log.e("AQI","A");
         }
         notifyDataSetChanged();
     }
@@ -121,7 +116,6 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
         listaActividades.clear();
 
         for (int i = 0; i < listAuxiliar.size(); i++) {
-            Log.e("NO HAY", listAuxiliar.get(i).toString());
             if (listAuxiliar.get(i).getCategoria().equals(categoria)) {
                 listaActividades.add(listAuxiliar.get(i));
             }

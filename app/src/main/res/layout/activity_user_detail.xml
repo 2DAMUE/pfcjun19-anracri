@@ -9,7 +9,9 @@
 
         android:id="@+id/scrollUser"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnEnviarMensaje"
+        android:layout_marginBottom="91dp">
 
         <RelativeLayout
             android:id="@+id/layout"
@@ -69,7 +71,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="70dp"
                     android:fontFamily="@font/bambino_light"
-                    android:text="Laxman Marothiya"
+                    android:text="¿No tienes Nombre?"
                     android:textColor="@android:color/black"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -82,7 +84,6 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/bambino_light"
-                    android:text="(Adhyaksh)"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
             </RelativeLayout>

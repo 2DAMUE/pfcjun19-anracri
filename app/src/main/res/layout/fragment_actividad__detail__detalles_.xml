@@ -1,14 +1,274 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.Actividad_Detail_Detalles_Frag">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="DETALLES" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearTiempo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:paddingBottom="50dp">
+
+
+            <ImageView
+                android:id="@+id/imgTiempo"
+                android:layout_width="match_parent"
+                android:layout_height="59dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/ic_tiempo" />
+
+            <TextView
+                android:id="@+id/tvDuracion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Duración"
+                android:textColor="@color/blue_pastel" />
+
+            <TextView
+                android:id="@+id/valDuracion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_weight="1"
+                android:fontFamily="@font/bambino_light"
+                android:gravity="center"
+                android:text="72H"
+                android:textSize="24sp" />
+
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:layout_weight="1"
+                android:background="?android:attr/listDivider" />
+
+            <LinearLayout
+                android:id="@+id/linearCaracteristicas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center">
+
+
+                <LinearLayout
+                    android:id="@+id/valAseos"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="0"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        android:id="@+id/imgAseos"
+                        android:layout_width="50dp"
+                        android:layout_height="91dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_inodoro" />
+
+                    <TextView
+                        android:id="@+id/tvtextoAseos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Aseos"
+                        android:textColor="@color/blue_pastel" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/valCafeteria"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="0"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        android:id="@+id/imgCafeteria"
+                        android:layout_width="50dp"
+                        android:layout_height="89dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_cafeteria" />
+
+                    <TextView
+                        android:id="@+id/tvtextoCafeteria"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Cafeteria"
+                        android:textColor="@color/blue_pastel" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/valDiversidad"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_weight="0"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        android:id="@+id/imgDiversidad"
+                        android:layout_width="50dp"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_diversidad" />
+
+                    <TextView
+                        android:id="@+id/tvtextoDiversidad"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="Personas\n con Diversidad"
+                        android:textColor="@color/blue_pastel" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearCaracteristicasBis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:weightSum="0">
+
+
+                <LinearLayout
+                    android:id="@+id/valMinPlazas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        android:id="@+id/imgPersona"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_minpeople" />
+
+                    <TextView
+                        android:id="@+id/tvtextoPersona"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Mínimo Plazas"
+                        android:textColor="@color/blue_pastel" />
+
+
+                    <TextView
+                        android:id="@+id/valTxtMinPlazas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/bambino_light"
+                        android:gravity="center"
+                        android:text="7"
+                        android:textSize="24sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/valMaxPlazas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        android:id="@+id/imgMaxPlazas"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_maxpeople" />
+
+                    <TextView
+                        android:id="@+id/tvtextoMaxPlazas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="Maximo Plazas"
+                        android:textColor="@color/blue_pastel" />
+
+                    <TextView
+                        android:id="@+id/valTxtMaxPlazas"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/bambino_light"
+                        android:gravity="center"
+                        android:text="12"
+                        android:textSize="24sp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/valRiesgo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        android:id="@+id/imgRiesgo"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_riesgo" />
+
+                    <TextView
+                        android:id="@+id/tvtextoRiesgo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="Actividad de Riesgo"
+                        android:textColor="@color/blue_pastel" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+
+
+    </ScrollView>
 
 </FrameLayout>

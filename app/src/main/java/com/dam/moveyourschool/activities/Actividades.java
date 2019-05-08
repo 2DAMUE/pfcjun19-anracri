@@ -11,7 +11,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import com.bumptech.glide.Glide;
 import com.dam.moveyourschool.R;
@@ -85,6 +84,7 @@ public class Actividades extends BaseActivity {
 
         //Cargamos el tab layout
         loadTab();
+        
     }
 
     private void loadTab() {
@@ -234,11 +234,8 @@ public class Actividades extends BaseActivity {
                 for (DataSnapshot aux : dataSnapshot.getChildren()) {
                     if (!filtrando) {
                         Actividad actividad = aux.getValue(Actividad.class);
-                        Log.e("aCGIVI MODIFI", actividad.toString());
 
                         for (int i = 0; i < listaActividades.size(); i++) {
-                            Log.e("aCGIVIdad", listaActividades.get(i).toString());
-                            Log.e("NULLS", listaActividades.get(i).toString());
                             if (listaActividades.get(i).getUid_actividad().equals(actividad.getUid_actividad())) {
                                 listaActividades.set(i, actividad);
                                 adapterActividades.notifyItemChanged(i);
@@ -282,9 +279,8 @@ public class Actividades extends BaseActivity {
     protected void onResume() {
 
         if (!primeraVez) {
-            Log.e("ENTRA SEGUNDA VEZ", "SEGUNDA VEZ");
+
             if (serviceDBActividades != null) {
-                Log.e("CONECTA", "SEGUNDA VEZ");
 
                 if (listaActividades != null) {
                     int size = listaActividades.size();
