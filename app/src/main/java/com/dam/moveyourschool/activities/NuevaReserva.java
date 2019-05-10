@@ -198,7 +198,7 @@ public class NuevaReserva extends BaseActivity{
 
         if(fecha.getText().toString().trim().isEmpty() || numPersonas.getText().toString().trim().isEmpty() || horaTxt.getText().toString().trim().isEmpty() ||
                 precioPersona.getText().toString().trim().isEmpty()  ){
-            Toast toast1 = Toast.makeText(getApplicationContext(), getString(R.string.toast_nueva_alerta), Toast.LENGTH_SHORT);
+            Toast toast1 = Toast.makeText(getApplicationContext(), "RELLENA LA FECHA", Toast.LENGTH_SHORT);
             toast1.show();
         }else{
             /*
