@@ -23,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,6 +46,7 @@ public class NuevaReserva extends BaseActivity{
 
     private DatabaseReference dbR;
     private DatabaseReference dbR2;
+    private ValueEventListener vel;
 
     private ChildEventListener celAct;
 
@@ -163,8 +165,35 @@ public class NuevaReserva extends BaseActivity{
             };
             dbR2.addChildEventListener(celAct);
 
+
         }
+
+        if(vel == null){
+            vel = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    adaptador = new AdapterSpinnerActividades(NuevaReserva.this,listaActividades);
+                    aSpi.setAdapter(adaptador);
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            };
+            dbR2.addListenerForSingleValueEvent(vel);
+        }
+
+
     }
+
+    private void valueEvent(){
+
+    }
+
+
+
 
     public void mandar(View view){
         System.out.println(actSelec);
