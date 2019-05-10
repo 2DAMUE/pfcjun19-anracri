@@ -13,10 +13,12 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.adapters.AdapterSpinnerActividades;
 import com.dam.moveyourschool.bean.Actividad;
+import com.dam.moveyourschool.bean.Reserva;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -188,14 +190,24 @@ public class NuevaReserva extends BaseActivity{
 
     }
 
-    private void valueEvent(){
-
-    }
-
-
-
 
     public void mandar(View view){
-        System.out.println(actSelec);
+
+
+
+
+        if(fecha.getText().toString().trim().isEmpty() || numPersonas.getText().toString().trim().isEmpty() || horaTxt.getText().toString().trim().isEmpty() ||
+                precioPersona.getText().toString().trim().isEmpty()  ){
+            Toast toast1 = Toast.makeText(getApplicationContext(), getString(R.string.toast_nueva_alerta), Toast.LENGTH_SHORT);
+            toast1.show();
+        }else{
+            /*
+            String key = dbR.push().getKey();
+            Reserva res = new Reserva(key,"PENDIENTE",idUsu,idEmpresa,precioPersona.getText(),"Ninguna",fecha.getText(),numPersonas.getText());
+            */
+        }
+
+
+
     }
 }
