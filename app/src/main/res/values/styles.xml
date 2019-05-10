@@ -40,4 +40,8 @@
         <item name="android:background">#e5e5e5</item>
     </style>
 
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/rojo_icons</item>
+    </style>
+
 </resources>

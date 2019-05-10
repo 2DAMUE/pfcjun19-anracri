@@ -1,27 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/PADDING_30"
+    android:paddingRight="@dimen/PADDING_30"
+    android:weightSum="10"
     tools:context=".activities.NuevaReserva">
 
-    <TextView
-        android:id="@+id/idE"
-        android:layout_width="wrap_content"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="81dp"
-        android:text="TextView" />
+        android:layout_weight="1">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/txtNumPersonas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_icon_people"
+            android:drawablePadding="20dp"
+            android:hint="@string/numero_de_personas"
+            android:paddingTop="@dimen/PADDING_10"
+            android:paddingBottom="@dimen/PADDING_15" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/txtPrecioPersona"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_euro"
+            android:drawablePadding="20dp"
+            android:hint="@string/precio_por_persona"
+            android:paddingTop="@dimen/PADDING_10"
+            android:paddingBottom="@dimen/PADDING_15" />
+    </android.support.design.widget.TextInputLayout>
 
     <TextView
-        android:id="@+id/idU"
-        android:layout_width="wrap_content"
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/idE"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="260dp"
-        android:text="TextView" />
-</RelativeLayout>
+        android:layout_weight="1"
+        android:fontFamily="@font/bambino_light"
+        android:paddingTop="@dimen/PADDING_10"
+        android:text="@string/eliga_la_actividad"
+        android:textSize="18sp" />
+
+
+    <Spinner
+        android:id="@+id/spActividades"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/btnFecha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_calendar"
+                android:drawablePadding="20dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="@string/fecha"
+                android:inputType="textMultiLine"
+                android:onClick="Fecha"
+                android:paddingTop="@dimen/PADDING_10"
+                android:paddingBottom="@dimen/PADDING_15" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/btnHora"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:drawableStart="@drawable/ic_wall_clock"
+                android:drawablePadding="20dp"
+                android:focusable="false"
+                android:hint="@string/hora"
+                android:inputType="textMultiLine"
+                android:onClick="Hora"
+                android:paddingTop="@dimen/PADDING_10"
+                android:paddingBottom="@dimen/PADDING_15" />
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnAniadirNA"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="@dimen/PADDING_10"
+        android:layout_marginBottom="@dimen/PADDING_15"
+        android:layout_weight="2"
+        android:background="@drawable/pressed_button_effect"
+        android:onClick="mandar"
+        android:text="@string/enviar_presupuesto"
+        android:textSize="18sp" />
+
+
+</LinearLayout>
