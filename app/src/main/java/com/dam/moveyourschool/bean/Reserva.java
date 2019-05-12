@@ -14,11 +14,12 @@ public class Reserva implements Parcelable {
     private String observaciones;
     private String fecha;
     private int numPersonas;
+    private String hora;
 
     public Reserva() {
     }
 
-    public Reserva(String idReserva, String estado, String idCliente, String idEmpresa, double precioFinal, String observaciones, String fecha, int numPersonas) {
+    public Reserva(String idReserva, String estado, String idCliente, String idEmpresa, double precioFinal, String observaciones, String fecha, int numPersonas,String hora) {
         this.idReserva = idReserva;
         this.estado = estado;
         this.idCliente = idCliente;
@@ -27,7 +28,9 @@ public class Reserva implements Parcelable {
         this.observaciones = observaciones;
         this.fecha = fecha;
         this.numPersonas = numPersonas;
+        this.hora = hora;
     }
+
 
     protected Reserva(Parcel in) {
         idReserva = in.readString();
@@ -38,6 +41,7 @@ public class Reserva implements Parcelable {
         observaciones = in.readString();
         fecha = in.readString();
         numPersonas = in.readInt();
+        hora = in.readString();
     }
 
     @Override
@@ -50,6 +54,7 @@ public class Reserva implements Parcelable {
         dest.writeString(observaciones);
         dest.writeString(fecha);
         dest.writeInt(numPersonas);
+        dest.writeString(hora);
     }
 
     @Override
@@ -133,7 +138,13 @@ public class Reserva implements Parcelable {
         this.numPersonas = numPersonas;
     }
 
+    public String getHora() {
+        return hora;
+    }
 
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
 
     @Override
     public String toString() {
