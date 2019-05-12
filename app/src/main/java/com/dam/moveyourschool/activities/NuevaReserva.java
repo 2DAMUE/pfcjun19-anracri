@@ -19,6 +19,7 @@ import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.adapters.AdapterSpinnerActividades;
 import com.dam.moveyourschool.bean.Actividad;
 import com.dam.moveyourschool.bean.Reserva;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -201,10 +202,20 @@ public class NuevaReserva extends BaseActivity{
             Toast toast1 = Toast.makeText(getApplicationContext(), getString(R.string.error_vacio), Toast.LENGTH_SHORT);
             toast1.show();
         }else{
-            /*
+
             String key = dbR.push().getKey();
-            Reserva res = new Reserva(key,"PENDIENTE",idUsu,idEmpresa,precioPersona.getText(),"Ninguna",fecha.getText(),numPersonas.getText());
-            */
+            Reserva res = new Reserva(key,"PENDIENTE",idUsu,idEmpresa,Double.parseDouble(precioPersona.getText().toString()),
+                    "Ninguna",fecha.getText().toString(),Integer.parseInt(numPersonas.getText().toString()));
+
+            dbR.child(key).setValue(res).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast toast2 = Toast.makeText(getApplicationContext(), getString(R.string.reserva_subida), Toast.LENGTH_SHORT);
+                    toast2.show();
+                    finish();
+                }
+            });
+
         }
 
 

@@ -115,4 +115,5 @@
     <string name="hora">Hora</string>
     <string name="enviar_presupuesto">Enviar Presupuesto</string>
     <string name="error_vacio">No deje ningun campo en blanco</string>
+    <string name="reserva_subida">Presupuesto enviado correctamente</string>
 </resources>
