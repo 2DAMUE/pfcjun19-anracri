@@ -205,7 +205,7 @@ public class NuevaReserva extends BaseActivity{
 
             String key = dbR.push().getKey();
             Reserva res = new Reserva(key,"PENDIENTE",idUsu,idEmpresa,Double.parseDouble(precioPersona.getText().toString()),
-                    "Ninguna",fecha.getText().toString(),Integer.parseInt(numPersonas.getText().toString()),horaTxt.getText().toString());
+                    "Ninguna",fecha.getText().toString(),Integer.parseInt(numPersonas.getText().toString()),horaTxt.getText().toString(),actSelec.getUid_actividad());
 
             dbR.child(key).setValue(res).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
