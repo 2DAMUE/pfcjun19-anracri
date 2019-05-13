@@ -75,24 +75,18 @@ public class AdapterReservas extends RecyclerView.Adapter<AdapterReservas.Holder
     @Override
     public void onBindViewHolder(@NonNull HolderReserva holder, int position) {
 
+        holder.txtTituloReserva.setText(listaReservas.get(position).getTituloActiRef());
+        holder.txtFecha.setText(listaReservas.get(position).getFecha());
+        holder.txtHora.setText(listaReservas.get(position).getHora());
 
+        if (listaReservas.get(position).getUrlFotoAct() == null){
+            Glide.with(context).load(R.drawable.demoactivity).into(holder.imgReserva);
+        }else{
+            Glide.with(context).load(listaReservas.get(position).getUrlFotoAct()).into(holder.imgReserva);
+        }
 
-        Reserva res = listaReservas.get(position);
-
-        //Resto atributos
-        //holder.txtTituloReserva.setText(obtenerImgActi(res));
-        //holder.txtFecha.setText(listaReservas.get(position).getFecha());
-        //holder.txtHora.setText(listaReservas.get(position).getHora());
+        Glide.with(context).load(R.drawable.ic_pendiente).into(holder.imgEstado);
     }
-
-    /*
-    public String obtenerImgActi(Reserva res){
-        DatabaseReference dbR = FirebaseDatabase.getInstance().getReference().child("actividades").child(res.getId).child();
-    }
-    public void obtenerTituloActi(){
-
-    }
-*/
 
 
 }

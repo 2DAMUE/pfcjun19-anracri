@@ -194,9 +194,6 @@ public class NuevaReserva extends BaseActivity{
 
     public void mandar(View view){
 
-
-
-
         if(fecha.getText().toString().trim().isEmpty() || numPersonas.getText().toString().trim().isEmpty() || horaTxt.getText().toString().trim().isEmpty() ||
                 precioPersona.getText().toString().trim().isEmpty()  ){
             Toast toast1 = Toast.makeText(getApplicationContext(), getString(R.string.error_vacio), Toast.LENGTH_SHORT);
@@ -204,8 +201,11 @@ public class NuevaReserva extends BaseActivity{
         }else{
 
             String key = dbR.push().getKey();
+
             Reserva res = new Reserva(key,"PENDIENTE",idUsu,idEmpresa,Double.parseDouble(precioPersona.getText().toString()),
-                    "Ninguna",fecha.getText().toString(),Integer.parseInt(numPersonas.getText().toString()),horaTxt.getText().toString(),actSelec.getUid_actividad());
+                    "Ninguna",fecha.getText().toString(),Integer.parseInt(numPersonas.getText().toString()),horaTxt.getText().toString(),
+                    actSelec.getUid_actividad(),actSelec.getUrlFoto(),actSelec.getTitulo());
+
 
             dbR.child(key).setValue(res).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
