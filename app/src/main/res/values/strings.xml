@@ -86,6 +86,7 @@
     <string name="HINT_REPETIR_PASS">Repetir Password</string>
     <string name="TXT_SIGN_IN">SIGN IN</string>
     <string name="KEY_ACTIVIDAD">KEY_ACTIVIDAD</string>
+    <string name="KEY_RESERVA_INFO">KEY_RESERVA_INFO</string>
 
     <!--AUTH EXCEPTIONS-->
     <string name="EXCEPT_USER_INEXISTENT">com.google.firebase.auth.FirebaseAuthInvalidUserException: There is no user record corresponding to this identifier. The user may have been deleted.</string>
@@ -120,4 +121,10 @@
     <string name="tab_ordenar">Ordenar</string>
     <string name="dialog_opcion">Seleccione una opcion</string>
     <string name="dialog_cancelar">Cancelar</string>
+    <string name="precio_final">Precio final</string>
+    <string name="aceptar_presupuesto">Aceptar presupuesto</string>
+    <string name="rechazar_presupuesto">Rechazar presupuesto</string>
+    <string name="titulo">Titulo</string>
+    <string name="reserva_aceptada">Presupuesto aceptado correctamente</string>
+    <string name="reserva_rechazada">Presupuesto rechazado correctamente</string>
 </resources>

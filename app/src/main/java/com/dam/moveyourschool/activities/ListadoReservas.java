@@ -2,6 +2,7 @@ package com.dam.moveyourschool.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -66,7 +67,12 @@ public class ListadoReservas extends BaseActivity {
             @Override
             public void onClick(View v) {
 
-               //Implementacion en caso de pulsar una reserva para verla en un activity aparte con sus detalles
+                Reserva res = lista.get(recicler.getChildAdapterPosition(v));
+                Intent i = new Intent(ListadoReservas.this,activity_reserva_info.class);
+
+                i.putExtra(getString(R.string.KEY_RESERVA_INFO),res);
+
+                startActivity(i);
 
             }
         });
@@ -125,6 +131,8 @@ public class ListadoReservas extends BaseActivity {
 
                 @Override
                 public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    //FALTARIA QUE CUANDO AL VOLVER DE MODIFICAR EL ESTADO TAMBIEN SE MODIFIQUE AQUI
+
 
                 }
 

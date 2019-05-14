@@ -85,7 +85,18 @@ public class AdapterReservas extends RecyclerView.Adapter<AdapterReservas.Holder
             Glide.with(context).load(listaReservas.get(position).getUrlFotoAct()).into(holder.imgReserva);
         }
 
-        Glide.with(context).load(R.drawable.ic_pendiente).into(holder.imgEstado);
+        String estado = listaReservas.get(position).getEstado();
+
+
+
+        if(estado.equals("PENDIENTE")){
+            Glide.with(context).load(R.drawable.ic_pendiente).into(holder.imgEstado);
+        }else if(estado.equals("ACEPTADA")){
+            Glide.with(context).load(R.drawable.ic_aceptado).into(holder.imgEstado);
+        }else{
+            Glide.with(context).load(R.drawable.ic_rechazado).into(holder.imgEstado);
+        }
+
     }
 
 
