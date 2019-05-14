@@ -205,6 +205,6 @@ public class ListadoReservas extends BaseActivity {
 
     @Override
     public boolean setDrawer() {
-        return false;
+        return true;
     }
 }
