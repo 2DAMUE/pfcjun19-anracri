@@ -10,4 +10,5 @@
     <dimen name="PADDING_10">10dp</dimen>
     <dimen name="PADDING3">3dp</dimen>
     <dimen name="item_height">72dp</dimen>
+    <dimen name="PADDING_5">5dp</dimen>
 </resources>

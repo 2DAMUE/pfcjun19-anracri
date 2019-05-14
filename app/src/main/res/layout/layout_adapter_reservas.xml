@@ -3,12 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="@dimen/PADDING3">
 
     <ImageView
         android:id="@+id/imgRActividad"
-        android:layout_width="220dp"
-        android:layout_height="match_parent"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
         android:layout_weight="1"
         app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
 
@@ -16,7 +17,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/PADDING3">
 
         <TextView
             android:id="@+id/reservaTitulo"
@@ -40,8 +43,8 @@
 
     <ImageView
         android:id="@+id/imgEstado"
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
         android:layout_weight="1"
         app:srcCompat="@drawable/common_google_signin_btn_icon_dark_focused" />
 
