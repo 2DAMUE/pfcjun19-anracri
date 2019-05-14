@@ -131,7 +131,16 @@ public class ListadoReservas extends BaseActivity {
 
                 @Override
                 public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                    //FALTARIA QUE CUANDO AL VOLVER DE MODIFICAR EL ESTADO TAMBIEN SE MODIFIQUE AQUI
+                    Reserva res = dataSnapshot.getValue(Reserva.class);
+
+                    for (int i = 0; i<lista.size();i++){
+
+                        if(lista.get(i).getIdReserva().equals(res.getIdReserva())){
+                            lista.set(i,res);
+                        }
+                    }
+
+                    adapter.notifyDataSetChanged();
 
 
                 }
