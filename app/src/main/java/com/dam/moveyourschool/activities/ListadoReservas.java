@@ -78,7 +78,7 @@ public class ListadoReservas extends BaseActivity {
                 Log.e("TAB", tab.getText().toString());
 
                 if (tab.getText().equals(getString(R.string.tab_filtrar))) {
-
+                    verDialogFiltrar();
                 } else if(tab.getText().equals(getString(R.string.tab_ordenar))) {
                     verDialogOrdenar();
                 }
