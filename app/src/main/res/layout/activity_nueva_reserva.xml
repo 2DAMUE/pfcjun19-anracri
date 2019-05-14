@@ -113,13 +113,15 @@
     <Button
         android:id="@+id/btnAniadirNA"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="28dp"
         android:layout_marginTop="@dimen/PADDING_10"
         android:layout_marginBottom="@dimen/PADDING_15"
-        android:layout_weight="2"
-        android:background="@drawable/pressed_button_effect"
+        android:layout_weight="1"
+        android:background="@drawable/background_send"
+        android:fontFamily="@font/bambino_light"
         android:onClick="mandar"
         android:text="@string/enviar_presupuesto"
+        android:textColor="@android:color/white"
         android:textSize="18sp" />
 
 
