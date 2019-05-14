@@ -100,4 +100,16 @@ public class AdapterReservas extends RecyclerView.Adapter<AdapterReservas.Holder
     }
 
 
+    public void eliminarTodasLasReservas() {
+        int size = listaReservas.size();
+        listaReservas.clear();
+        notifyItemRangeRemoved(0, size);
+    }
+
+    public void agregarReservas(ArrayList<Reserva> alertas) {
+        listaReservas.addAll(alertas);
+        //notifyItemRangeChanged(0, getItemCount());
+        notifyDataSetChanged();
+    }
+
 }

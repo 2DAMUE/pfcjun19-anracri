@@ -38,6 +38,7 @@ public class ListadoReservas extends BaseActivity {
     RecyclerView recicler;
     LinearLayoutManager miLayoutManager;
     ArrayList<Reserva> lista = new ArrayList<>();
+    ArrayList<Reserva> listaCompleta = new ArrayList<>();
 
     ArrayList<Reserva> listaFiltrada = new ArrayList<>();
 
@@ -122,6 +123,7 @@ public class ListadoReservas extends BaseActivity {
 
                     if(user.getUid().equals(res.getIdCliente()) || user.getUid().equals(res.getIdEmpresa())){
                         lista.add(res);
+                        listaCompleta.add(res);
                         adapter.notifyItemInserted(lista.size() - 1);
                     }
 
@@ -137,6 +139,7 @@ public class ListadoReservas extends BaseActivity {
 
                         if(lista.get(i).getIdReserva().equals(res.getIdReserva())){
                             lista.set(i,res);
+                            listaCompleta.set(i,res);
                         }
                     }
 
@@ -194,7 +197,7 @@ public class ListadoReservas extends BaseActivity {
 
     public void verDialogFiltrar(){
 
-        final CharSequence[] lista = {"Aceptadas", "Rechazadas","Pendientes"};
+        final CharSequence[] lista = {"Aceptadas", "Rechazadas","Pendientes","Ver Todas"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.dialog_opcion));
@@ -202,6 +205,8 @@ public class ListadoReservas extends BaseActivity {
         builder.setItems(lista, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+
+                filtrarReservas(lista[i].toString());
 
             }
         });
@@ -212,6 +217,39 @@ public class ListadoReservas extends BaseActivity {
                 dialogInterface.cancel();
             }
         }).create().show();
+    }
+
+    public void filtrarReservas(String id){
+
+        if(id.equals("Ver Todas")){
+
+            adapter.eliminarTodasLasReservas();
+            adapter.agregarReservas(listaCompleta);
+
+        }else if(id.equals("Aceptadas")){
+            aplicarFiltro("ACEPTADA");
+
+        }else if(id.equals("Rechazadas")){
+            aplicarFiltro("RECHAZADA");;
+
+        }else{
+            aplicarFiltro("PENDIENTE");
+        }
+
+
+    }
+
+    private void aplicarFiltro(String tipo){
+        listaFiltrada.clear();
+        for (int i = 0; i< listaCompleta.size();i++){
+
+            if (listaCompleta.get(i).getEstado().equals(tipo)){
+                listaFiltrada.add(listaCompleta.get(i));
+            }
+        }
+        adapter.eliminarTodasLasReservas();
+        adapter.agregarReservas(listaFiltrada);
+
     }
 
 
