@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <ImageView
+        android:id="@+id/imgRActividad"
+        android:layout_width="250dp"
+        android:layout_height="80dp"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/PADDING_5">
+
+        <TextView
+            android:id="@+id/reservaTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bambino_light"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/reservaFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bambino_light"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/reservaHora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bambino_light"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgEstado"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        app:srcCompat="@drawable/common_google_signin_btn_icon_dark_focused" />
+
+</LinearLayout>

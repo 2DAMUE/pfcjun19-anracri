@@ -23,6 +23,7 @@
             android:drawableStart="@drawable/ic_icon_people"
             android:drawablePadding="20dp"
             android:hint="@string/numero_de_personas"
+            android:inputType="numberSigned"
             android:paddingTop="@dimen/PADDING_10"
             android:paddingBottom="@dimen/PADDING_15" />
     </android.support.design.widget.TextInputLayout>
@@ -40,6 +41,7 @@
             android:drawableStart="@drawable/ic_euro"
             android:drawablePadding="20dp"
             android:hint="@string/precio_por_persona"
+            android:inputType="numberDecimal"
             android:paddingTop="@dimen/PADDING_10"
             android:paddingBottom="@dimen/PADDING_15" />
     </android.support.design.widget.TextInputLayout>

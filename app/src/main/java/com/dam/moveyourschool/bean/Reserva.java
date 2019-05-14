@@ -14,11 +14,16 @@ public class Reserva implements Parcelable {
     private String observaciones;
     private String fecha;
     private int numPersonas;
+    private String hora;
+    private String idActividadRef;
+    private String urlFotoAct;
+    private String tituloActiRef;
 
     public Reserva() {
     }
 
-    public Reserva(String idReserva, String estado, String idCliente, String idEmpresa, double precioFinal, String observaciones, String fecha, int numPersonas) {
+    public Reserva(String idReserva, String estado, String idCliente, String idEmpresa, double precioFinal, String observaciones,
+                   String fecha, int numPersonas,String hora,String idActividadRef,String urlFotoAct,String tituloActiRef) {
         this.idReserva = idReserva;
         this.estado = estado;
         this.idCliente = idCliente;
@@ -27,7 +32,12 @@ public class Reserva implements Parcelable {
         this.observaciones = observaciones;
         this.fecha = fecha;
         this.numPersonas = numPersonas;
+        this.hora = hora;
+        this.idActividadRef = idActividadRef;
+        this.urlFotoAct = urlFotoAct;
+        this.tituloActiRef = tituloActiRef;
     }
+
 
     protected Reserva(Parcel in) {
         idReserva = in.readString();
@@ -38,6 +48,10 @@ public class Reserva implements Parcelable {
         observaciones = in.readString();
         fecha = in.readString();
         numPersonas = in.readInt();
+        hora = in.readString();
+        idActividadRef = in.readString();
+        urlFotoAct = in.readString();
+        tituloActiRef = in.readString();
     }
 
     @Override
@@ -50,6 +64,10 @@ public class Reserva implements Parcelable {
         dest.writeString(observaciones);
         dest.writeString(fecha);
         dest.writeInt(numPersonas);
+        dest.writeString(hora);
+        dest.writeString(idActividadRef);
+        dest.writeString(urlFotoAct);
+        dest.writeString(tituloActiRef);
     }
 
     @Override
@@ -133,7 +151,37 @@ public class Reserva implements Parcelable {
         this.numPersonas = numPersonas;
     }
 
+    public String getHora() {
+        return hora;
+    }
 
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
+
+    public String getIdActividadRef() {
+        return idActividadRef;
+    }
+
+    public void setIdActividadRef(String idActividadRef) {
+        this.idActividadRef = idActividadRef;
+    }
+
+    public String getUrlFotoAct() {
+        return urlFotoAct;
+    }
+
+    public void setUrlFotoAct(String urlFotoAct) {
+        this.urlFotoAct = urlFotoAct;
+    }
+
+    public String getTituloActiRef() {
+        return tituloActiRef;
+    }
+
+    public void setTituloActiRef(String tituloActiRef) {
+        this.tituloActiRef = tituloActiRef;
+    }
 
     @Override
     public String toString() {
@@ -146,7 +194,10 @@ public class Reserva implements Parcelable {
                 ", observaciones='" + observaciones + '\'' +
                 ", fecha='" + fecha + '\'' +
                 ", numPersonas=" + numPersonas +
+                ", hora='" + hora + '\'' +
+                ", idActividadRef='" + idActividadRef + '\'' +
+                ", urlFotoAct='" + urlFotoAct + '\'' +
+                ", tituloActiRef='" + tituloActiRef + '\'' +
                 '}';
     }
-
 }

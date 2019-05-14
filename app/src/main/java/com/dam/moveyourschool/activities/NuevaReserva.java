@@ -5,7 +5,6 @@ import android.app.TimePickerDialog;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +18,7 @@ import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.adapters.AdapterSpinnerActividades;
 import com.dam.moveyourschool.bean.Actividad;
 import com.dam.moveyourschool.bean.Reserva;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -193,18 +193,28 @@ public class NuevaReserva extends BaseActivity{
 
     public void mandar(View view){
 
-
-
-
         if(fecha.getText().toString().trim().isEmpty() || numPersonas.getText().toString().trim().isEmpty() || horaTxt.getText().toString().trim().isEmpty() ||
                 precioPersona.getText().toString().trim().isEmpty()  ){
-            Toast toast1 = Toast.makeText(getApplicationContext(), "RELLENA LA FECHA", Toast.LENGTH_SHORT);
+            Toast toast1 = Toast.makeText(getApplicationContext(), getString(R.string.error_vacio), Toast.LENGTH_SHORT);
             toast1.show();
         }else{
-            /*
+
             String key = dbR.push().getKey();
-            Reserva res = new Reserva(key,"PENDIENTE",idUsu,idEmpresa,precioPersona.getText(),"Ninguna",fecha.getText(),numPersonas.getText());
-            */
+
+            Reserva res = new Reserva(key,"PENDIENTE",idUsu,idEmpresa,Double.parseDouble(precioPersona.getText().toString()),
+                    "Ninguna",fecha.getText().toString(),Integer.parseInt(numPersonas.getText().toString()),horaTxt.getText().toString(),
+                    actSelec.getUid_actividad(),actSelec.getUrlFoto(),actSelec.getTitulo());
+
+
+            dbR.child(key).setValue(res).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast toast2 = Toast.makeText(getApplicationContext(), getString(R.string.reserva_subida), Toast.LENGTH_SHORT);
+                    toast2.show();
+                    finish();
+                }
+            });
+
         }
 
 

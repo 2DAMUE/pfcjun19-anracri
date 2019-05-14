@@ -69,11 +69,7 @@ public class AdapterSpinnerActividades extends ArrayAdapter {
             Glide.with(context).load(lista.get(position).getUrlFoto()).into(item.img);
         }
 
-
-
         item.txt1.setText(lista.get(position).getTitulo());
-
-
 
         return convertView;
     }

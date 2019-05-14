@@ -221,6 +221,8 @@ public abstract class BaseActivity extends AppCompatActivity
             startActivity(new Intent(this, UsuariosList.class).putExtra(getString(R.string.KEY_FILTER), true));
 
         } else if (id == R.id.nav_MisReservas) {
+            Intent i = new Intent(this,ListadoReservas.class);
+            startActivity(i);
 
         } else if (id == R.id.navActividades) {
             startActivity(new Intent(this, Actividades.class));
