@@ -38,13 +38,17 @@ public class Actividades extends BaseActivity {
     private TabLayout tabActividades;
     private Usuario user;
     private boolean filtrando;
+    private boolean userActividades;
 
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        userActividades = getIntent().getBooleanExtra(getString(R.string.KEY_USER_ACTIVIDADES), false);
+
         tabActividades = findViewById(R.id.tabActividades);
+        tabActividades.setVisibility(View.GONE);
         fabAgregarActividad = findViewById(R.id.fabAgregar);
         fabAgregarActividad.setVisibility(View.INVISIBLE);
 
@@ -60,7 +64,7 @@ public class Actividades extends BaseActivity {
         listaActividades = new ArrayList<>();
         adapterActividades = new AdapterActividades(listaActividades, Glide.with(this));
 
-        listaActividades.clone();
+        //listaActividades.clone();
 
         //Inicializamos el recyclerview y su layout
         recyclerActividades = findViewById(R.id.recyclerActividades);
@@ -69,6 +73,10 @@ public class Actividades extends BaseActivity {
         //Unimos los componentes del Recycler e inicializamos el listener on click
         recyclerActividades.setLayoutManager(lm);
         recyclerActividades.setAdapter(adapterActividades);
+
+        if (!userActividades) {
+            tabActividades.setVisibility(View.VISIBLE);
+        }
 
         adapterActividades.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +92,6 @@ public class Actividades extends BaseActivity {
 
         //Cargamos el tab layout
         loadTab();
-        
     }
 
     private void loadTab() {
@@ -213,6 +220,12 @@ public class Actividades extends BaseActivity {
         return true;
     }
 
+    public void filterByName(String term) {
+        if (listaActividades != null && adapterActividades != null) {
+            adapterActividades.filtrarByName(term);
+        }
+    }
+
     private void loadDatabaseActividades() {
         serviceDBActividades = new FireDBActividades() {
             @Override
@@ -220,10 +233,26 @@ public class Actividades extends BaseActivity {
 
             @Override
             public void nodoAgregado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                for (DataSnapshot aux : dataSnapshot.getChildren()) {
-                    Actividad actividad = aux.getValue(Actividad.class);
-                    listaActividades.add(actividad);
-                    adapterActividades.notifyItemInserted(listaActividades.size() - 1);
+
+                if (userActividades) {
+
+                    if (dataSnapshot.getKey().equals(user.getUid())) {
+
+                        for (DataSnapshot aux: dataSnapshot.getChildren()) {
+                            Actividad actividad = aux.getValue(Actividad.class);
+                            listaActividades.add(actividad);
+                            adapterActividades.notifyItemInserted(listaActividades.size() - 1);
+                        }
+                    }
+
+                } else {
+
+                    for (DataSnapshot aux : dataSnapshot.getChildren()) {
+                        Actividad actividad = aux.getValue(Actividad.class);
+                        listaActividades.add(actividad);
+                        adapterActividades.notifyItemInserted(listaActividades.size() - 1);
+
+                    }
                 }
             }
 

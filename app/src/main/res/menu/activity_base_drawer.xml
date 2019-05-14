@@ -28,6 +28,12 @@
                 android:id="@+id/nav_MisReservas"
                 android:icon="@drawable/ic_menu_slideshow"
                 android:title="Mis Reservas" />
+
+            <item
+                android:id="@+id/nav_MisActividades"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="Mis Actividades" />
+
             <item
                 android:id="@+id/nav_MisChats"
                 android:icon="@drawable/ic_menu_manage"

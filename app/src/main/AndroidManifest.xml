@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.activity_reserva_info"></activity>
+        <activity android:name=".activities.Actividad_Modificar_Opciones"></activity>
+        <activity android:name=".activities.activity_reserva_info" />
         <activity android:name=".activities.ListadoReservas" />
         <activity android:name=".activities.ActividadFormSuccess" />
         <activity android:name=".activities.ActividadForm" />

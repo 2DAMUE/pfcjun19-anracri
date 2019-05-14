@@ -29,31 +29,43 @@ public class ActividadForm extends BaseActivity {
     private FireDBActividades serviceDBActividades;
     private Button btnNext;
     private boolean primeraVez = true;
+    private boolean modificar = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //Obtenemos un booleano que nos define si vamos a modificar o no una actividad
+        modificar = getIntent().getBooleanExtra(getString(R.string.KEY_MOD_ACTIVITY), false);
+        actividad = (Actividad) getIntent().getSerializableExtra(getString(R.string.KEY_ACTIVIDAD));
 
         //Inicializamos el contenedor de fragments
         fragmentContainer = findViewById(R.id.fragmentContainer);
         btnNext = findViewById(R.id.btnNext);
         btnNext.setVisibility(View.GONE);
 
-        //Inicializamos el Activity con el atributo actividad en null asociado al Contexto Custom
+        //Si no vamos a modificar
+        if (!modificar) {
 
-        if (primeraVez) {
-            ((CustomContext) (getApplicationContext())).setActividad(null);
-            actividad = ((CustomContext) (getApplicationContext())).getActividad();
+            //Inicializamos el Activity con el atributo actividad en null asociado al Contexto Custom
+            if (primeraVez) {
+                ((CustomContext) (getApplicationContext())).setActividad(null);
+                actividad = ((CustomContext) (getApplicationContext())).getActividad();
+            }
+
+            //Cargamos el primer fragmento de la actividad sin agregarlo al backstack
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer, new Actividad_Form_Step_1())
+                    .commit();
+
+            //Inicializamos el servicio de la database con sus listeners
+            listenService();
+
+        } else {
+            btnNext.setText("Guardar Cambios");
         }
 
-        //Cargamos el primer fragmento de la actividad sin agregarlo al backstack
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.fragmentContainer, new Actividad_Form_Step_1())
-                .commit();
-
-        //Inicializamos el servicio de la database con sus listeners
-        listenService();
     }
 
     @Override
@@ -69,49 +81,59 @@ public class ActividadForm extends BaseActivity {
     @TargetApi(Build.VERSION_CODES.M)
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void nextStep(View view) {
-        //Obtenemos el fragmento que se muestra en cada momento
-        Fragment fragmentoActual = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
 
-        //Si es el primer fragmento, invocamos el metodo registrar y pasamos al siguiente fragmento
-        if (fragmentoActual instanceof Actividad_Form_Step_1) {
+        if (!modificar) {
 
-            if (actividad != null && actividad.getCategoria() != null && !actividad.getCategoria().equals("")) {
-                changeFragment(new Actividad_Form_Step2_Frag());
-                btnNext.setVisibility(View.VISIBLE);
+            //Obtenemos el fragmento que se muestra en cada momento
+            Fragment fragmentoActual = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
 
-            } else {
-                new CustomDialog(this, R.string.EXCEPT_UNKNOWN_ERROR).show();
-                recreate();
+            //Si es el primer fragmento, invocamos el metodo registrar y pasamos al siguiente fragmento
+            if (fragmentoActual instanceof Actividad_Form_Step_1) {
+
+                if (actividad != null && actividad.getCategoria() != null && !actividad.getCategoria().equals("")) {
+                    changeFragment(new Actividad_Form_Step2_Frag());
+                    btnNext.setVisibility(View.VISIBLE);
+
+                } else {
+                    new CustomDialog(this, R.string.EXCEPT_UNKNOWN_ERROR).show();
+                    recreate();
+                }
+
             }
+
+            else if (fragmentoActual instanceof Actividad_Form_Step2_Frag) {
+
+                boolean success = ((Actividad_Form_Step2_Frag) fragmentoActual).registrar();
+
+                if (success) {
+                    changeFragment(new Actividad_Form_Step_3_Frag());
+                }
+
+
+            } else if (fragmentoActual instanceof Actividad_Form_Step_3_Frag) {
+                boolean success = ((Actividad_Form_Step_3_Frag) fragmentoActual).registrar();
+
+                if (success) {
+                    changeFragment(new Actividad_Form_Step_4());
+                }
+
+
+            } else if (fragmentoActual instanceof Actividad_Form_Step_4) {
+                boolean success = ((Actividad_Form_Step_4) fragmentoActual).registrar();
+
+                if (success) {
+                    startActivity(new Intent(this, Actividades.class));
+                    listenService();
+                    serviceDBActividades.agregarActividad(actividad);
+                }
+            }
+
+        } else {
+
+
 
         }
 
-        else if (fragmentoActual instanceof Actividad_Form_Step2_Frag) {
-
-            boolean success = ((Actividad_Form_Step2_Frag) fragmentoActual).registrar();
-
-            if (success) {
-                changeFragment(new Actividad_Form_Step_3_Frag());
-            }
-
-
-        } else if (fragmentoActual instanceof Actividad_Form_Step_3_Frag) {
-            boolean success = ((Actividad_Form_Step_3_Frag) fragmentoActual).registrar();
-
-            if (success) {
-                changeFragment(new Actividad_Form_Step_4());
-            }
-
-
-        } else if (fragmentoActual instanceof Actividad_Form_Step_4) {
-            boolean success = ((Actividad_Form_Step_4) fragmentoActual).registrar();
-
-            if (success) {
-                startActivity(new Intent(this, Actividades.class));
-                listenService();
-                serviceDBActividades.agregarActividad(actividad);
-            }
-        }
     }
 
     private void changeFragment(Fragment fragmento) {
@@ -171,7 +193,11 @@ public class ActividadForm extends BaseActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void categoriaSeleccionada(View view) {
-        actividad = new Actividad();
+
+        if (!modificar) {
+            actividad = new Actividad();
+        }
+
         String id = getResources().getResourceEntryName(view.getId());
         Log.e("EL ID ES", id);
         switch (id) {
@@ -251,5 +277,9 @@ public class ActividadForm extends BaseActivity {
         actividad = (Actividad) savedInstanceState.get(getString(R.string.KEY_ACTIVIDAD));
         ((CustomContext) (getApplicationContext())).setActividad(actividad);
         primeraVez = false;
+    }
+
+    protected boolean getModificar() {
+        return modificar;
     }
 }

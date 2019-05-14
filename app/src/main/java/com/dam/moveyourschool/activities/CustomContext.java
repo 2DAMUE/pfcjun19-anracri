@@ -7,6 +7,7 @@ import com.dam.moveyourschool.bean.Usuario;
 
 public class CustomContext extends Application {
     private Actividad actividad;
+    private Actividad modActivity;
     private Usuario usuario;
 
     public Actividad getActividad() {
@@ -23,5 +24,13 @@ public class CustomContext extends Application {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Actividad getModActivity() {
+        return modActivity;
+    }
+
+    public void setModActivity(Actividad modActivity) {
+        this.modActivity = modActivity;
     }
 }

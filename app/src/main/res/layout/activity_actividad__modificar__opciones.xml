@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.Actividad_Modificar_Opciones">
+
+    <TextView
+        android:id="@+id/tvGeneral"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="8dp"
+        android:drawableEnd="@drawable/ic_navigate_next_black_24dp"
+        android:fontFamily="@font/bambino_light"
+        android:text="General"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tvDetalles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:drawableEnd="@drawable/ic_navigate_next_black_24dp"
+        android:fontFamily="@font/bambino_light"
+        android:text="Detalles"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/tvLocalizacion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:drawableEnd="@drawable/ic_navigate_next_black_24dp"
+        android:fontFamily="@font/bambino_light"
+        android:text="Localizacion"
+        android:textSize="24sp" />
+</LinearLayout>

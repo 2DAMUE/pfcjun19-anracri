@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.SearchView;
 import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -16,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.dam.moveyourschool.R;
@@ -45,6 +47,7 @@ public abstract class BaseActivity extends AppCompatActivity
     private ProgressBarAlert progressBarAlert;
     private FireDBUsuarios serviceDBUsuarios;
     protected boolean showCart;
+    private SearchView action_search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -175,6 +178,33 @@ public abstract class BaseActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.base, menu);
 
+        //Buscamos el Elemento de menu que corresponde a la lupa
+        MenuItem myActionMenuItem = menu.findItem( R.id.action_search);
+
+        //Inicializamos el SearchView correspondiente a la lupa como invisible
+        action_search= (SearchView) myActionMenuItem.getActionView();
+        action_search.setVisibility(View.INVISIBLE);
+
+        //Si el activity es una instancia de Lista de Actividades activamos la SearchView
+        if (this instanceof Actividades) {
+            myActionMenuItem.setVisible(true);
+            action_search.setVisibility(View.VISIBLE);
+            action_search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String s) {
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String s) {
+                    ((Actividades) (BaseActivity.this)).filterByName(s);
+                    return true;
+                }
+            });
+        } else {
+            myActionMenuItem.setVisible(false);
+        }
+
         return true;
     }
 
@@ -236,6 +266,10 @@ public abstract class BaseActivity extends AppCompatActivity
                 FirebaseAuth.getInstance().signOut();
                 recreate();
             }
+
+        } else if (id == R.id.nav_MisActividades) {
+            startActivity(new Intent(this, Actividades.class).putExtra(getString(R.string.KEY_USER_ACTIVIDADES), true));
+
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

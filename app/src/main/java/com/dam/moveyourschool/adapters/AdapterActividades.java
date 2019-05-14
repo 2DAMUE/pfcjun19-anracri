@@ -122,6 +122,23 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
         }
     }
 
+    public void filtrarByName(String term) {
+        if (primeraVez) {
+            clonar();
+        }
+
+        listaActividades.clear();
+        Log.e("entra", term);
+        for (int i = 0; i < listAuxiliar.size(); i++) {
+            Log.e("elemento", listAuxiliar.get(i).getTitulo().toString());
+            if (listAuxiliar.get(i).getTitulo().toLowerCase().contains(term.toLowerCase())) {
+                Log.e("lo contiene", "entra y lo contiene");
+                listaActividades.add(listAuxiliar.get(i));
+            }
+        }
+        notifyDataSetChanged();
+    }
+
     public void clonar() {
         Iterator<Actividad> iterator = listaActividades.iterator();
 
