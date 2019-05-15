@@ -86,9 +86,13 @@
     <string name="HINT_REPETIR_PASS">Repetir Password</string>
     <string name="TXT_SIGN_IN">SIGN IN</string>
     <string name="KEY_ACTIVIDAD">KEY_ACTIVIDAD</string>
+    <string name="KEY_SELECTED_FRAGMENT">SELECTED_FRAGMENT</string>
     <string name="KEY_RESERVA_INFO">KEY_RESERVA_INFO</string>
     <string name="KEY_USER_ACTIVIDADES">KEY_USER_ACTIVIDADES</string>
     <string name="KEY_MOD_ACTIVITY">MOD_ACTIVITY</string>
+
+    <!--MODIFICAR ACTIVIDAD-->
+    <string name="VAL_MODIF_ACTIVIDAD">Se ha modificado la actividad con éxito.</string>
 
     <!--AUTH EXCEPTIONS-->
     <string name="EXCEPT_USER_INEXISTENT">com.google.firebase.auth.FirebaseAuthInvalidUserException: There is no user record corresponding to this identifier. The user may have been deleted.</string>

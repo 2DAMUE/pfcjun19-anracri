@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,7 @@ import com.dam.moveyourschool.fragments.Actividad_Form_Step_1;
 import com.dam.moveyourschool.fragments.Actividad_Form_Step_3_Frag;
 import com.dam.moveyourschool.fragments.Actividad_Form_Step_4;
 import com.dam.moveyourschool.services.FireDBActividades;
+import com.dam.moveyourschool.utils.Constantes;
 import com.dam.moveyourschool.views.CustomDialog;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,19 +32,18 @@ public class ActividadForm extends BaseActivity {
     private Button btnNext;
     private boolean primeraVez = true;
     private boolean modificar = false;
+    private String selectedFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Obtenemos un booleano que nos define si vamos a modificar o no una actividad
-        modificar = getIntent().getBooleanExtra(getString(R.string.KEY_MOD_ACTIVITY), false);
-        actividad = (Actividad) getIntent().getSerializableExtra(getString(R.string.KEY_ACTIVIDAD));
-
         //Inicializamos el contenedor de fragments
         fragmentContainer = findViewById(R.id.fragmentContainer);
         btnNext = findViewById(R.id.btnNext);
         btnNext.setVisibility(View.GONE);
+
+        modificar = getIntent().getBooleanExtra(getString(R.string.KEY_MOD_ACTIVITY), false);
 
         //Si no vamos a modificar
         if (!modificar) {
@@ -63,7 +64,15 @@ public class ActividadForm extends BaseActivity {
             listenService();
 
         } else {
-            btnNext.setText("Guardar Cambios");
+            //Obtenemos un booleano que nos define si vamos a modificar o no una actividad
+            selectedFragment = getIntent().getStringExtra(getString(R.string.KEY_SELECTED_FRAGMENT));
+            actividad = (Actividad) getIntent().getSerializableExtra(getString(R.string.KEY_ACTIVIDAD));
+
+            //Activamos el servicio de Firebase
+            listenService();
+
+            //Cargamos el fragment que haya seleccionado el usuario
+            cargarFragmentModificar();
         }
 
     }
@@ -82,6 +91,7 @@ public class ActividadForm extends BaseActivity {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void nextStep(View view) {
 
+        //Si vamos a crear una nueva actividad
         if (!modificar) {
 
             //Obtenemos el fragmento que se muestra en cada momento
@@ -98,7 +108,6 @@ public class ActividadForm extends BaseActivity {
                     new CustomDialog(this, R.string.EXCEPT_UNKNOWN_ERROR).show();
                     recreate();
                 }
-
             }
 
             else if (fragmentoActual instanceof Actividad_Form_Step2_Frag) {
@@ -128,12 +137,55 @@ public class ActividadForm extends BaseActivity {
                 }
             }
 
+            //Si vamos a modificar una actividad ya existente seleccionada por el usuario
         } else {
 
+            Fragment fragmentoActual = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
 
+            if (fragmentoActual instanceof Actividad_Form_Step_1) {
+                serviceDBActividades.modificarActividad(actividad);
+            }
+
+
+            if (fragmentoActual instanceof  Actividad_Form_Step2_Frag) {
+
+                boolean success = ((Actividad_Form_Step2_Frag) fragmentoActual).modificar();
+
+                if (success) {
+                    serviceDBActividades.modificarActividad(actividad);
+                }
+            }
+
+            if (fragmentoActual instanceof  Actividad_Form_Step_4) {
+                boolean success = ((Actividad_Form_Step_4) fragmentoActual).registrar();
+
+                if (success) {
+                    serviceDBActividades.modificarActividad(actividad);
+                }
+            }
 
         }
 
+    }
+
+    private void cargarFragmentModificar() {
+        btnNext.setText("Guardar Cambios");
+        btnNext.setVisibility(View.VISIBLE);
+
+        if (selectedFragment.equals(Constantes.fragmentCategoria)) {
+            btnNext.setVisibility(View.GONE);
+            changeFragmentNoBackStack(new Actividad_Form_Step_1());
+
+        } else if (selectedFragment.equals(Constantes.fragmentGeneral)) {
+            changeFragmentNoBackStack(new Actividad_Form_Step2_Frag());
+
+
+        } else if (selectedFragment.equals(Constantes.fragmentLocalizacion)) {
+            changeFragmentNoBackStack(new Actividad_Form_Step_3_Frag());
+
+        } else if (selectedFragment.equals(Constantes.fragmentDetalles)) {
+            changeFragmentNoBackStack(new Actividad_Form_Step_4());
+        }
     }
 
     private void changeFragment(Fragment fragmento) {
@@ -141,6 +193,13 @@ public class ActividadForm extends BaseActivity {
                 .beginTransaction()
                 .replace(R.id.fragmentContainer, fragmento)
                 .addToBackStack(null)
+                .commit();
+    }
+
+    private void changeFragmentNoBackStack(Fragment fragmento) {
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, fragmento)
                 .commit();
     }
 
@@ -172,6 +231,25 @@ public class ActividadForm extends BaseActivity {
             @Override
             public void nodoModificado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
+                //Cuando se modifica el nodo mostramos un snackbar que confirma que se ha realizado con éxito y regresamos al activity anterior
+                for (DataSnapshot aux : dataSnapshot.getChildren()) {
+                    if (aux.getKey().equals(actividad.getUid_actividad())) {
+                        View view = findViewById(R.id.rlAcForm);
+                        Snackbar snack = Snackbar.make(view, getString(R.string.VAL_MODIF_ACTIVIDAD), Snackbar.LENGTH_SHORT);
+                        snack.addCallback(new Snackbar.Callback() {
+                            @Override
+                            public void onDismissed(Snackbar snackbar, int event) {
+                                finish();
+                            }
+
+                            @Override
+                            public void onShown(Snackbar snackbar) {
+
+                            }
+                        });
+                        snack.show();
+                    }
+                }
             }
 
             @Override
@@ -190,6 +268,7 @@ public class ActividadForm extends BaseActivity {
             }
         };
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public void categoriaSeleccionada(View view) {
@@ -279,7 +358,11 @@ public class ActividadForm extends BaseActivity {
         primeraVez = false;
     }
 
-    protected boolean getModificar() {
+    public boolean getModificar() {
         return modificar;
+    }
+
+    public Actividad getActividadModificar() {
+        return actividad;
     }
 }

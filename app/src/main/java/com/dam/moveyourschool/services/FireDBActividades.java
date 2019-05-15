@@ -77,6 +77,10 @@ public abstract class FireDBActividades {
         }
     }
 
+    public void modificarActividad(Actividad actividad) {
+        dbr.child(actividad.getUid_usuario()).child(actividad.getUid_actividad()).setValue(actividad);
+    }
+
     public abstract void getKey(String key);
     public abstract void nodoAgregado(@NonNull DataSnapshot dataSnapshot, @Nullable String s);
     public abstract void nodoModificado(@NonNull DataSnapshot dataSnapshot, @Nullable String s);

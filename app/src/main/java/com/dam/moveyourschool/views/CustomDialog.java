@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.activities.ActividadForm;
+import com.dam.moveyourschool.fragments.Actividad_Form_Step_1;
 import com.dam.moveyourschool.fragments.Actividad_Form_Step_4;
 
 public class CustomDialog extends Dialog {
@@ -17,9 +18,11 @@ public class CustomDialog extends Dialog {
     private Button btnErrorRegresar;
     private TextView tvErrorGenerico;
     private ImageView imgError;
+    private Context context;
 
     public CustomDialog(@NonNull final Context context, int id) {
         super(context);
+        this.context = context;
         this.id = id;
         setContentView(R.layout.dialog_error);
         btnErrorRegresar = findViewById(R.id.btnErrorRegresar);

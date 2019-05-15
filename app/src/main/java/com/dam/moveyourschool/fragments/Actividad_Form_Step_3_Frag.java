@@ -28,12 +28,12 @@ public class Actividad_Form_Step_3_Frag extends Fragment {
     private TextInputEditText etxDireccion;
     private TextInputEditText etxLocalidad;
     private TextInputEditText etxMunicipio;
-    private TextInputEditText etxCodigoPostal;
     private CheckBox checkBoxDir;
     private FireDBUsuarios serviceDBusuarios;
     private Actividad  actividad;
     private Usuario usuarioActual;
     private ProgressBarAlert progressBarAlert;
+    private boolean modificar;
 
 
     public Actividad_Form_Step_3_Frag() {}
@@ -43,6 +43,7 @@ public class Actividad_Form_Step_3_Frag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        modificar = ((ActividadForm) getActivity()).getModificar();
         actividad = ((ActividadForm) (getActivity())).getActividad();
 
         if (actividad == null) {
@@ -57,17 +58,19 @@ public class Actividad_Form_Step_3_Frag extends Fragment {
         etxMunicipio = contenedor.findViewById(R.id.etxMunicipio);
         checkBoxDir = contenedor.findViewById(R.id.checkDir);
         checkBoxDir.setTypeface(ResourcesCompat.getFont(getActivity(), R.font.bambino_light));
-        etxCodigoPostal = contenedor.findViewById(R.id.etxCodigoPostal);
         progressBarAlert = new ProgressBarAlert(getActivity());
+
+        if (modificar) {
+            etxDireccion.setText(actividad.getDireccion());
+            etxLocalidad.setText(actividad.getLocalidad());
+            etxMunicipio.setText(actividad.getMunicipio());
+        }
 
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
             usuarioActual = new Usuario();
             usuarioActual.setUid(uid);
         }
-
-
-
 
         serviceDBusuarios = new FireDBUsuarios() {
             @Override
@@ -87,10 +90,6 @@ public class Actividad_Form_Step_3_Frag extends Fragment {
 
                         if (aux.getLocalidad() != null && !aux.getLocalidad().equals("")) {
                             usuarioActual.setLocalidad(aux.getLocalidad());
-                        }
-
-                        if (aux.getCodigo_postal() != null && !aux.getCodigo_postal().equals("")) {
-                            usuarioActual.setCodigo_postal(aux.getCodigo_postal());
                         }
                     }
 
@@ -142,11 +141,6 @@ public class Actividad_Form_Step_3_Frag extends Fragment {
                             dir = true;
                         }
 
-                        if (usuarioActual.getCodigo_postal() != null && !usuarioActual.getCodigo_postal().equals("")) {
-                            etxCodigoPostal.setText(usuarioActual.getCodigo_postal());
-                            dir = true;
-                        }
-
                         if (!dir) {
                             new CustomDialog(getActivity(), R.string.USUARIO_SIN_DATOS).show();
                             checkBoxDir.setChecked(false);
@@ -156,7 +150,6 @@ public class Actividad_Form_Step_3_Frag extends Fragment {
                     etxDireccion.setText("");
                     etxMunicipio.setText("");
                     etxLocalidad.setText("");
-                    etxCodigoPostal.setText("");
                 }
             }
         });
@@ -167,26 +160,14 @@ public class Actividad_Form_Step_3_Frag extends Fragment {
 
     public boolean registrar() {
         boolean success = false;
-        boolean exceptions = true;
 
-        if (checkFields(etxDireccion) || checkFields(etxLocalidad) || checkFields(etxMunicipio) || checkFields(etxCodigoPostal)) {
+        if (checkFields(etxDireccion) || checkFields(etxLocalidad) || checkFields(etxMunicipio)) {
             new CustomDialog(getActivity(), R.string.EXCEPT_RELLENAR_TODOS_CAMPOS).show();
         } else {
-            try{
-                Integer.parseInt(etxCodigoPostal.getText().toString());
-                exceptions = false;
-
-            } catch (NumberFormatException e) {
-                new CustomDialog(getActivity(), R.string.EXCEPT__CODPOSTAL_CAMPO_NUMERICO).show();
-            }
-
-            if (!exceptions) {
-                actividad.setDireccion(etxDireccion.getText().toString());
-                actividad.setMunicipio(etxMunicipio.getText().toString());
-                actividad.setLocalidad(etxLocalidad.getText().toString());
+            actividad.setDireccion(etxDireccion.getText().toString());
+            actividad.setMunicipio(etxMunicipio.getText().toString());
+            actividad.setLocalidad(etxLocalidad.getText().toString());
                 success = true;
-                Log.e("actividad", actividad.toString());
-            }
         }
         return success;
     }

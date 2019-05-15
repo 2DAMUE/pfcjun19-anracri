@@ -1,46 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     tools:context=".activities.Actividad_Modificar_Opciones">
 
-    <TextView
-        android:id="@+id/tvGeneral"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="8dp"
-        android:drawableEnd="@drawable/ic_navigate_next_black_24dp"
-        android:fontFamily="@font/bambino_light"
-        android:text="General"
-        android:textSize="24sp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvCategoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:drawableEnd="@drawable/ic_navigate_next_black_24dp"
+            android:fontFamily="@font/bambino_light"
+            android:onClick="modificar"
+            android:tag="Categoria"
+            android:text="Categoria"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvGeneral"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:drawableEnd="@drawable/ic_navigate_next_black_24dp"
+            android:fontFamily="@font/bambino_light"
+            android:onClick="modificar"
+            android:tag="General"
+            android:text="General"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvDetalles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:drawableEnd="@drawable/ic_navigate_next_black_24dp"
+            android:fontFamily="@font/bambino_light"
+            android:onClick="modificar"
+            android:tag="Detalles"
+            android:text="Detalles"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvLocalizacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="8dp"
+            android:clickable="true"
+            android:drawableEnd="@drawable/ic_navigate_next_black_24dp"
+            android:fontFamily="@font/bambino_light"
+            android:onClick="modificar"
+            android:tag="Localizacion"
+            android:text="Localizacion"
+            android:textSize="24sp" />
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/tvDetalles"
+        android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:drawableEnd="@drawable/ic_navigate_next_black_24dp"
+        android:layout_above="@+id/button"
+        android:layout_marginBottom="30dp"
+        android:drawableTop="@drawable/ic_lock_red"
+        android:drawablePadding="10dp"
         android:fontFamily="@font/bambino_light"
-        android:text="Detalles"
-        android:textSize="24sp" />
+        android:text="Puede bloquear sus actividades para que los usuarios no puedan realizar más reservas sobre ella. Al realizar esta operación la actividad dejará de visualizarse pero recuerde que las reservas comprometidas siguen manteniéndose."
+        android:textAlignment="center"
+        android:textColor="@color/mochila"
+        android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/tvLocalizacion"
+    <Button
+        android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="8dp"
-        android:drawableEnd="@drawable/ic_navigate_next_black_24dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/background_send"
         android:fontFamily="@font/bambino_light"
-        android:text="Localizacion"
-        android:textSize="24sp" />
-</LinearLayout>
+        android:text="Bloquear Actividad"
+        android:textColor="@android:color/background_light" />
+
+</RelativeLayout>

@@ -1,9 +1,7 @@
 package com.dam.moveyourschool.fragments;
 
 import android.os.Bundle;
-import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +21,7 @@ public class Actividad_Form_Step_4 extends Fragment {
     private Switch swCafeteria;
     private Switch swBloquear;
     private NumberPicker pickerDuracion;
+    private boolean modificar;
 
 
     public Actividad_Form_Step_4() {}
@@ -31,6 +30,8 @@ public class Actividad_Form_Step_4 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        modificar = ((ActividadForm) getActivity()).getModificar();
 
         View contenedor = inflater.inflate(R.layout.fragment_actividad__form__step_4, container, false);
         swDiversidad = contenedor.findViewById(R.id.swDiversidad);
@@ -52,6 +53,15 @@ public class Actividad_Form_Step_4 extends Fragment {
 
         if (actividad == null) {
             new CustomDialog(getContext(), R.string.EXCEPT_UNKNOWN_ERROR).show();
+        }
+
+        if (modificar) {
+            swDiversidad.setChecked(actividad.isPersonasDiversidad());
+            swAseos.setChecked(actividad.isAseos());
+            swRiesgo.setChecked(actividad.isRiesgoAccidente());
+            swCafeteria.setChecked(actividad.isCafeteria());
+            pickerDuracion.setValue(actividad.getDuracion());
+            swBloquear.setChecked(actividad.isDisponible());
         }
 
         return contenedor;
@@ -76,8 +86,6 @@ public class Actividad_Form_Step_4 extends Fragment {
             } else {
                 new CustomDialog(getContext(), R.string.USUARIO_CADUCADO).show();
             }
-
-            Log.e("actividad", actividad.toString());
 
         } else {
             new CustomDialog(getContext(), R.string.EXCEPT_DURACION).show();

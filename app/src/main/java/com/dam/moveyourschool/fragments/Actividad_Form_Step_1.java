@@ -7,10 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-
 import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.activities.ActividadForm;
-import com.dam.moveyourschool.bean.Actividad;
 
 public class Actividad_Form_Step_1 extends Fragment {
     private LinearLayout linearArte;

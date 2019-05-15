@@ -8,6 +8,10 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public abstract class Constantes {
+    public static final String fragmentCategoria = "Categoria";
+    public static final String fragmentGeneral = "General";
+    public static final String fragmentDetalles = "Detalles";
+    public static final String fragmentLocalizacion = "Localizacion";
     public static final String USUARIO_EMPRESA = "EMPRESA";
     public static final String USUARIO_EDUCACION = "EDUCACION";
     private ArrayList<String> provincias;

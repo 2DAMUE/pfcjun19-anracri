@@ -30,6 +30,7 @@ public class Actividad_Form_Step2_Frag extends Fragment {
     private ImageView imgEdit;
     private String urlFoto;
     private ProgressBarAlert progressBarAlert;
+    private boolean modificar;
 
     public Actividad_Form_Step2_Frag() {}
 
@@ -38,6 +39,7 @@ public class Actividad_Form_Step2_Frag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ImagePicker.setMinQuality(600, 600);
+        modificar = ((ActividadForm) getActivity()).getModificar();
 
         View contenedor = inflater.inflate(R.layout.fragment_actividad__form__step2_, container, false);
         etxTitulo = contenedor.findViewById(R.id.etxNombreActividad);
@@ -47,6 +49,22 @@ public class Actividad_Form_Step2_Frag extends Fragment {
         etxPrecio = contenedor.findViewById(R.id.etxPrecio);
         imgEdit = contenedor.findViewById(R.id.imgEdit);
         progressBarAlert = new ProgressBarAlert(getActivity());
+
+        if (modificar) {
+            Actividad actividadModificar = (((ActividadForm) getActivity()).getActividadModificar());
+
+            if (actividadModificar != null) {
+                etxTitulo.setText(actividadModificar.getTitulo());
+                etxDescripcion.setText(actividadModificar.getDescripcion());
+                etxMaxPersonas.setText(String.valueOf(actividadModificar.getMaxPlazas()));
+                etxMinPersonas.setText(String.valueOf(actividadModificar.getMinPlazas()));
+                etxPrecio.setText(String.valueOf(actividadModificar.getPrecio()));
+
+                if (actividadModificar.getUrlFoto() != null && !actividadModificar.getUrlFoto().equals("")) {
+                    Glide.with(this).load(actividadModificar.getUrlFoto()).into(imgEdit);
+                }
+            }
+        }
 
         imgEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,8 +85,70 @@ public class Actividad_Form_Step2_Frag extends Fragment {
         Glide.with(this).load(url).into(imgEdit);
     }
 
+
+    public boolean modificar() {
+        Actividad actividadModificar = (((ActividadForm) getActivity()).getActividadModificar());
+        boolean success = false;
+        boolean exceptions = true;
+
+        if (checkFields(etxTitulo) || checkFields(etxDescripcion)
+                || checkFields(etxPrecio)) {
+
+            new CustomDialog(getActivity(), R.string.EXCEPT_DEBE_RELLENAR_TITULO_DESCRIPCION_PRECIO).show();
+
+        } else {
+
+            try {
+                Double.parseDouble(etxPrecio.getText().toString());
+
+                if (!etxMinPersonas.getText().toString().isEmpty()) {
+                    Integer.parseInt(etxMinPersonas.getText().toString());
+                }
+
+                if (!etxMaxPersonas.getText().toString().isEmpty()) {
+                    Integer.parseInt(etxMaxPersonas.getText().toString());
+                }
+
+                exceptions = false;
+
+            } catch (NumberFormatException e) {
+                new CustomDialog(getActivity(), R.string.EXCEPT_CAMPOS_NUMERICOS).show();
+            }
+
+            if (!exceptions) {
+                actividadModificar.setTitulo(etxTitulo.getText().toString());
+                actividadModificar.setPrecio(Double.parseDouble(etxPrecio.getText().toString()));
+
+                if (!etxMaxPersonas.getText().toString().isEmpty()) {
+                    actividadModificar.setMaxPlazas(Integer.parseInt(etxMaxPersonas.getText().toString()));
+                }
+
+                if (!etxMinPersonas.getText().toString().isEmpty()) {
+                    actividadModificar.setMinPlazas(Integer.parseInt(etxMinPersonas.getText().toString()));
+                }
+
+                actividadModificar.setDescripcion(etxDescripcion.getText().toString());
+
+                if (urlFoto != null) {
+                    actividadModificar.setUrlFoto(urlFoto);
+                }
+            }
+
+            if (!exceptions) {
+                success = true;
+                actividadModificar.setCategoria(((ActividadForm) (getActivity())).getActividad().getCategoria());
+                ((ActividadForm) (getActivity())).setActividad(actividadModificar);
+            }
+
+
+        }
+        return success;
+    }
+
     public boolean registrar() {
+
         Actividad actividad = null;
+
         boolean success = false;
         boolean exceptions = true;
 
