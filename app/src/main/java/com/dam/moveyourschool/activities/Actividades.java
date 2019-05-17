@@ -257,9 +257,11 @@ public class Actividades extends BaseActivity {
 
                     for (DataSnapshot aux : dataSnapshot.getChildren()) {
                         Actividad actividad = aux.getValue(Actividad.class);
-                        listaActividades.add(actividad);
-                        adapterActividades.notifyItemInserted(listaActividades.size() - 1);
 
+                        if (actividad.isDisponible()) {
+                            listaActividades.add(actividad);
+                            adapterActividades.notifyItemInserted(listaActividades.size() - 1);
+                        }
                     }
                 }
             }

@@ -27,7 +27,7 @@ public abstract class FireBaseStorage {
         //Si el usuario esta loggeado procedemos a realizar la operacion de subida de fotos
         if (userAuth != null) {
 
-            final StorageReference nodoImagenes = mStorageRef.child(userAuth.getUid());
+            final StorageReference nodoImagenes = mStorageRef.child(userAuth.getUid() + uri.getLastPathSegment());
             UploadTask uploadTask = nodoImagenes.putFile(uri);
 
             Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {

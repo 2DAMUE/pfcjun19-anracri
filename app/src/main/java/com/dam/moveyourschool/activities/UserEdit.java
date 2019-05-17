@@ -1,7 +1,7 @@
 package com.dam.moveyourschool.activities;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -19,13 +19,13 @@ import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.bean.Usuario;
 import com.dam.moveyourschool.services.FireBaseStorage;
 import com.dam.moveyourschool.services.FireDBUsuarios;
-import com.dam.moveyourschool.utils.BitmapToUri;
 import com.dam.moveyourschool.utils.Constantes;
+import com.dam.moveyourschool.views.CustomDialog;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.mvc.imagepicker.ImagePicker;
 import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -60,8 +60,6 @@ public class UserEdit extends BaseActivity {
         etxDescripcion = findViewById(R.id.etxDescripcion);
         imgEdit = findViewById(R.id.imgEdit);
         btnGuardar = findViewById(R.id.btnGuardar);
-
-        ImagePicker.setMinQuality(600, 600);
 
         spinnerLoc = findViewById(R.id.spinnerLoc);
         spinnerLoc.setPrompt(getString(R.string.VAL_ELIJA_LOCALIDAD));
@@ -215,11 +213,11 @@ public class UserEdit extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         btnGuardar.setEnabled(false);
-        Bitmap bitmap = ImagePicker.getImageFromResult(this, requestCode, resultCode, data);
 
-        if (bitmap != null) {
-            Glide.with(this).load(bitmap).into(imgEdit);
-            Uri uri = BitmapToUri.getImageUri(this, bitmap);
+        if (resultCode == Activity.RESULT_OK) {
+            Uri fileUri = data.getData();
+            Glide.with(this).load(fileUri).into(imgEdit);
+
             new FireBaseStorage() {
                 @Override
                 public void getUrl(String url) {
@@ -227,12 +225,21 @@ public class UserEdit extends BaseActivity {
                     btnGuardar.setEnabled(true);
 
                 }
-            }.uploadPhoto(uri);
+            }.uploadPhoto(fileUri);
+
+
+        } else if (resultCode == ImagePicker.RESULT_ERROR) {
+            String.format(getString(R.string.CAMERA_ERROR), ImagePicker.Companion.getError(data));
+            new CustomDialog(this, R.string.CAMERA_ERROR).show();
         }
     }
 
     public void onPickImage(View view) {
-        ImagePicker.pickImage(this, "Escoge una Imagen:");
+        ImagePicker.Companion.with(this)
+                //.crop(1f, 1f)       //Crop Square image(Optional)
+                .compress(1024)   //Final image size will be less than 1 MB(Optional)
+                .maxResultSize(1080, 1080) //Final image resolution will be less than 1080 x 1080(Optional)
+                .start();
     }
 
     @Override

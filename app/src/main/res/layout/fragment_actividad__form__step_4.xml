@@ -42,12 +42,15 @@
                 <NumberPicker
                     android:id="@+id/pickerDuracion"
                     android:layout_width="wrap_content"
-                    android:layout_height="54dp"
+                    android:layout_height="157dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
+                    android:theme="@style/NumberPickerText"
                     android:layout_marginEnd="8dp"
                     android:layout_marginBottom="8dp"
                     android:layout_weight="1"
+                    android:dividerPadding="20dp"
+                    android:showDividers="middle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
             </LinearLayout>
@@ -93,10 +96,10 @@
                 android:id="@+id/swBloqueo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/SwitchActive"
                 android:fontFamily="@font/bambino_light"
                 android:lines="3"
-                android:text="Bloquear Actividad" />
+                android:text="Disponible para Reservas"
+                android:theme="@style/SwitchActive" />
 
 
         </LinearLayout>

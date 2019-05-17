@@ -93,6 +93,9 @@
 
     <!--MODIFICAR ACTIVIDAD-->
     <string name="VAL_MODIF_ACTIVIDAD">Se ha modificado la actividad con éxito.</string>
+    <string name="CAMERA_ERROR">%1$s</string>
+    <string name="VAL_TEXT_LOCKED">Puede bloquear sus actividades para que los usuarios no puedan realizar más reservas sobre ella. Al realizar esta operación la actividad dejará de visualizarse pero recuerde que las reservas comprometidas siguen manteniéndose.</string>
+    <string name="VAL_TEXT_UNLOCKED">Puede desbloquear la actividad para que los usuarios tengan acceso a realizar reservas y visualizarla en el menú general de actividades.</string>
 
     <!--AUTH EXCEPTIONS-->
     <string name="EXCEPT_USER_INEXISTENT">com.google.firebase.auth.FirebaseAuthInvalidUserException: There is no user record corresponding to this identifier. The user may have been deleted.</string>

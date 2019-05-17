@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.bean.Actividad;
@@ -18,12 +20,24 @@ import com.google.firebase.database.DatabaseError;
 public class Actividad_Modificar_Opciones extends BaseActivity {
     private Actividad actividadModif;
     private FireDBActividades serviceDBActividades;
+    private TextView tvLock;
+    private Button btnLock;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        tvLock = findViewById(R.id.tvLock);
+        btnLock = findViewById(R.id.btnLock);
+
         actividadModif = (Actividad) getIntent().getSerializableExtra(getString(R.string.KEY_ACTIVIDAD));
+
+        if (actividadModif.isDisponible()) {
+            tvLock.setText(getString(R.string.VAL_TEXT_LOCKED));
+
+        } else {
+            tvLock.setText(getString(R.string.VAL_TEXT_UNLOCKED));
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.dam.moveyourschool.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -19,7 +20,8 @@ import com.dam.moveyourschool.services.FireBaseStorage;
 import com.dam.moveyourschool.utils.BitmapToUri;
 import com.dam.moveyourschool.views.CustomDialog;
 import com.dam.moveyourschool.views.ProgressBarAlert;
-import com.mvc.imagepicker.ImagePicker;
+import com.github.dhaval2404.imagepicker.ImagePicker;
+//import com.mvc.imagepicker.ImagePicker;
 
 public class Actividad_Form_Step2_Frag extends Fragment {
     private TextInputEditText etxTitulo;
@@ -38,7 +40,7 @@ public class Actividad_Form_Step2_Frag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ImagePicker.setMinQuality(600, 600);
+
         modificar = ((ActividadForm) getActivity()).getModificar();
 
         View contenedor = inflater.inflate(R.layout.fragment_actividad__form__step2_, container, false);
@@ -77,7 +79,10 @@ public class Actividad_Form_Step2_Frag extends Fragment {
     }
 
     public void onPickImage() {
-        ImagePicker.pickImage(this, getString(R.string.ESCOGER_IMAGEN));
+        ImagePicker.Companion.with(this)
+                .compress(1024)   //Final image size will be less than 1 MB(Optional)
+                .maxResultSize(1080, 1080) //Final image resolution will be less than 1080 x 1080(Optional)
+                .start();
     }
 
     public void setImageResult(String url) {
@@ -217,18 +222,24 @@ public class Actividad_Form_Step2_Frag extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         progressBarAlert.show();
-        Bitmap bitmap = ImagePicker.getImageFromResult(getActivity(), requestCode, resultCode, data);
 
-        if (bitmap != null) {
-            Uri uri = BitmapToUri.getImageUri(getActivity(), bitmap);
+        if (resultCode == Activity.RESULT_OK) {
+            Uri fileUri = data.getData();
 
             new FireBaseStorage() {
                 @Override
                 public void getUrl(String url) {
                     urlFoto = url;
                     setImageResult(url);
+
                 }
-            }.uploadPhoto(uri);
+            }.uploadPhoto(fileUri);
+
+
+        } else if (resultCode == ImagePicker.RESULT_ERROR) {
+            progressBarAlert.cancel();
+            String.format(getString(R.string.CAMERA_ERROR), ImagePicker.Companion.getError(data));
+            new CustomDialog(getActivity(), R.string.CAMERA_ERROR).show();
         }
         //super.onActivityResult(requestCode, resultCode, data);
     }
