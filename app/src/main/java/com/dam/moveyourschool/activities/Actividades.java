@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,6 +21,7 @@ import com.dam.moveyourschool.bean.Actividad;
 import com.dam.moveyourschool.bean.Usuario;
 import com.dam.moveyourschool.services.FireDBActividades;
 import com.dam.moveyourschool.services.FireDBUsuarios;
+import com.dam.moveyourschool.utils.Constantes;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -38,6 +41,7 @@ public class Actividades extends BaseActivity {
     private TabLayout tabActividades;
     private Usuario user;
     private boolean filtrando;
+    private boolean sorting;
     private boolean userActividades;
 
     @SuppressLint("RestrictedApi")
@@ -109,6 +113,10 @@ public class Actividades extends BaseActivity {
                 if (tab.getPosition() == 0) {
                     verDialogFilter();
                 }
+
+                if (tab.getPosition() == 1){
+                    verDialogOrdenar();
+                }
             }
 
             @Override
@@ -121,8 +129,54 @@ public class Actividades extends BaseActivity {
                 if (tab.getPosition() == 0) {
                     verDialogFilter();
                 }
+
+                if (tab.getPosition() == 1){
+                    verDialogOrdenar();
+                }
             }
         });
+    }
+
+    public void verDialogOrdenar() {
+        final CharSequence[] lista;
+
+        //Si esta filtrando mostramos el boton para cerrar el filtro
+        if (sorting) {
+            lista = new CharSequence[1];
+            lista[0] = AdapterActividades.TODAS_LAS_ACTIVIDADES;
+
+            //Si no esta filtrando mostramos todos los filtros disponibles
+        } else {
+            lista = new CharSequence[2];
+            lista[0] = Constantes.SORT_AZ;
+            lista[1] = Constantes.SORT_ZA;
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.TXT_ELEGIR_FILTRO));
+
+
+        builder.setNeutralButton(getString(R.string.BTN_CANCEL), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        builder.setItems(lista, new DialogInterface.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                adapterActividades.sortByName(lista[i].toString());
+
+                if (sorting) {
+                    sorting = false;
+                } else {
+                    sorting = true;
+                }
+            }
+
+        }).create().show();
     }
 
     public void verDialogFilter() {

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public abstract class Constantes {
     public static final String fragmentCategoria = "Categoria";
+    public static final String SORT_AZ = "Ordenar A-Z";
+    public static final String SORT_ZA = "Ordenar Z-A";
     public static final String fragmentGeneral = "General";
     public static final String fragmentDetalles = "Detalles";
     public static final String fragmentLocalizacion = "Localizacion";

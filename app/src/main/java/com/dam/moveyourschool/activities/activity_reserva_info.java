@@ -44,8 +44,13 @@ public class activity_reserva_info extends BaseActivity {
     private ValueEventListener vel;
     ArrayList<Usuario> users = new ArrayList<>();
 
-    Button acept;
-    Button rech;
+    //Button acept;
+    //Button rech;
+    ImageView imgAceptarReserva;
+    TextView tvAceptaReserva;
+    ImageView imgRechazarReserva;
+    TextView tvRechazaReserva;
+
     Reserva res;
     FirebaseUser user;
 
@@ -62,8 +67,12 @@ public class activity_reserva_info extends BaseActivity {
         hora = findViewById(R.id.horaInforReserva);
         precioFinal = findViewById(R.id.precioFinalInforReserva);
         imgRes = findViewById(R.id.imgResInfo);
-        acept = findViewById(R.id.btnAceptarPresupuesto);
-        rech = findViewById(R.id.btnRechazarPresupuesto);
+        //acept = findViewById(R.id.btnAceptarPresupuesto);
+        //rech = findViewById(R.id.btnRechazarPresupuesto);
+        imgAceptarReserva = findViewById(R.id.imageAceptarReserva);
+        tvAceptaReserva = findViewById(R.id.tvAceptaReserva);
+        imgRechazarReserva = findViewById(R.id.imageRechazarReserva);
+        tvRechazaReserva = findViewById(R.id.tvRechazarReserva);
 
         user  = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -94,8 +103,12 @@ public class activity_reserva_info extends BaseActivity {
     private void desactivarBotones() {
 
         if(res.getEstado().equals("ACEPTADA") || res.getEstado().equals("RECHAZADA") || buscarUsuario()){
-            acept.setEnabled(false);
-            rech.setEnabled(false);
+            //imgAceptarReserva.setVisibility(View.GONE);
+            //tvAceptaReserva.setVisibility(View.GONE);
+            //imgRechazarReserva.setVisibility(View.GONE);
+            //tvRechazaReserva.setVisibility(View.GONE);
+            //acept.setEnabled(false);
+            //rech.setEnabled(false);
         }
 
     }

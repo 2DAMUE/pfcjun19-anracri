@@ -1,8 +1,9 @@
 package com.dam.moveyourschool.adapters;
 
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,12 +11,16 @@ import android.widget.TextView;
 import com.bumptech.glide.RequestManager;
 import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.bean.Actividad;
+import com.dam.moveyourschool.utils.Constantes;
 import com.makeramen.roundedimageview.RoundedImageView;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 
 public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.HolderActividades> implements View.OnClickListener {
     private View.OnClickListener listener;
+    private Comparator<Actividad> sortComparator;
     private ArrayList<Actividad> listaActividades;
     private ArrayList<Actividad> listAuxiliar;
     private RequestManager glide;
@@ -128,15 +133,47 @@ public class AdapterActividades extends RecyclerView.Adapter<AdapterActividades.
         }
 
         listaActividades.clear();
-        Log.e("entra", term);
         for (int i = 0; i < listAuxiliar.size(); i++) {
-            Log.e("elemento", listAuxiliar.get(i).getTitulo().toString());
             if (listAuxiliar.get(i).getTitulo().toLowerCase().contains(term.toLowerCase())) {
-                Log.e("lo contiene", "entra y lo contiene");
                 listaActividades.add(listAuxiliar.get(i));
             }
         }
         notifyDataSetChanged();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void sortByName(String sortingType) {
+
+        if (primeraVez) {
+            clonar();
+        }
+
+        if (sortingType.equals(Constantes.SORT_AZ)) {
+            sortComparator = new Comparator<Actividad>() {
+                @Override
+                public int compare(Actividad actividad, Actividad t1) {
+                    return actividad.getTitulo().toLowerCase().compareTo(t1.getTitulo().toLowerCase());
+                }
+            };
+
+            Collections.sort(listaActividades, sortComparator);
+            notifyDataSetChanged();
+
+        } else if (sortingType.equals(Constantes.SORT_ZA)) {
+            sortComparator = new Comparator<Actividad>() {
+                @Override
+                public int compare(Actividad actividad, Actividad t1) {
+                    return actividad.getTitulo().toLowerCase().compareTo(t1.getTitulo().toLowerCase()) *-1;
+                }
+            };
+
+            Collections.sort(listaActividades, sortComparator);
+            notifyDataSetChanged();
+
+        } else if (sortingType.equals(TODAS_LAS_ACTIVIDADES)) {
+            recuperarOriginal();
+            notifyDataSetChanged();
+        }
     }
 
     public void clonar() {

@@ -9,9 +9,9 @@
 
         android:id="@+id/scrollUser"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_above="@+id/btnEnviarMensaje"
-        android:layout_marginBottom="91dp">
+        android:layout_marginBottom="20dp">
 
         <RelativeLayout
             android:id="@+id/layout"

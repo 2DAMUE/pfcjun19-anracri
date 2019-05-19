@@ -49,7 +49,7 @@
         android:layout_weight="2"
         android:contentDescription="@string/TODO"
         android:onClick="signUpEmpresaActividades"
-        app:srcCompat="@drawable/ic_edificio" />
+        app:srcCompat="@drawable/ic_autobu" />
 
     <TextView
         android:id="@+id/tvDescripcion"
