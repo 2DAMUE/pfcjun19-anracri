@@ -103,10 +103,10 @@ public class activity_reserva_info extends BaseActivity {
     private void desactivarBotones() {
 
         if(res.getEstado().equals("ACEPTADA") || res.getEstado().equals("RECHAZADA") || buscarUsuario()){
-            //imgAceptarReserva.setVisibility(View.GONE);
-            //tvAceptaReserva.setVisibility(View.GONE);
-            //imgRechazarReserva.setVisibility(View.GONE);
-            //tvRechazaReserva.setVisibility(View.GONE);
+            imgAceptarReserva.setVisibility(View.GONE);
+            tvAceptaReserva.setVisibility(View.GONE);
+            imgRechazarReserva.setVisibility(View.GONE);
+            tvRechazaReserva.setVisibility(View.GONE);
             //acept.setEnabled(false);
             //rech.setEnabled(false);
         }
