@@ -6,7 +6,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/navActividades"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_partners"
             android:title="Actividades" />
         <item
             android:id="@+id/nav_Usuarios"
@@ -26,17 +26,17 @@
                 android:title="Log Out" />
             <item
                 android:id="@+id/nav_MisReservas"
-                android:icon="@drawable/ic_menu_slideshow"
+                android:icon="@drawable/ic_cards"
                 android:title="Mis Reservas" />
 
             <item
                 android:id="@+id/nav_MisActividades"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_partners"
                 android:title="Mis Actividades" />
 
             <item
                 android:id="@+id/nav_MisChats"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ic_bubble"
                 android:title="Mi Chat" />
         </menu>
     </item>
