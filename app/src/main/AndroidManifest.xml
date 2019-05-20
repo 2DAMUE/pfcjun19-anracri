@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
@@ -21,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.Actividad_Modificar_Opciones"></activity>
+        <activity android:name=".activities.Reserva_info_empresa"></activity>
+        <activity android:name=".activities.Actividad_Modificar_Opciones" />
         <activity android:name=".activities.activity_reserva_info" />
         <activity android:name=".activities.ListadoReservas" />
         <activity android:name=".activities.ActividadFormSuccess" />

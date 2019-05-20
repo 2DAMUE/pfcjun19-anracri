@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.adapters.AdapterReservas;
 import com.dam.moveyourschool.bean.Reserva;
+import com.dam.moveyourschool.bean.Usuario;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
@@ -31,7 +32,9 @@ import java.util.ArrayList;
 public class ListadoReservas extends BaseActivity {
 
     private DatabaseReference dbR;
+    private DatabaseReference dbRUsers;
     private ChildEventListener cel;
+    private ChildEventListener celUsers;
 
     AdapterReservas adapter;
 
@@ -42,6 +45,8 @@ public class ListadoReservas extends BaseActivity {
 
     ArrayList<Reserva> listaFiltrada = new ArrayList<>();
 
+    ArrayList<Usuario> listaUsers = new ArrayList<>();
+
     private TabLayout alertsTabs;
     FirebaseUser user;
 
@@ -51,6 +56,8 @@ public class ListadoReservas extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         dbR = FirebaseDatabase.getInstance().getReference().child("reservas");
+        dbRUsers = FirebaseDatabase.getInstance().getReference().child("usuario");
+
 
         user  = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -69,12 +76,17 @@ public class ListadoReservas extends BaseActivity {
             public void onClick(View v) {
 
                 Reserva res = lista.get(recicler.getChildAdapterPosition(v));
-                Intent i = new Intent(ListadoReservas.this,activity_reserva_info.class);
+                Intent i = null;
+
+                if(localizarTipoUsuario()){
+                    i = new Intent(ListadoReservas.this,Reserva_info_empresa.class);
+                }else{
+                    i = new Intent(ListadoReservas.this,activity_reserva_info.class);
+                }
 
                 i.putExtra(getString(R.string.KEY_RESERVA_INFO),res);
 
                 startActivity(i);
-
             }
         });
 
@@ -109,8 +121,29 @@ public class ListadoReservas extends BaseActivity {
 
 
         addChildEvent();
+        addChildEventUsers();
     }
 
+    private boolean localizarTipoUsuario() {
+
+        boolean empresa = false;
+        boolean continuar = true;
+
+        for (int i = 0; i< listaUsers.size() && continuar;i++){
+
+            if (user.getUid().equals(listaUsers.get(i).getUid())){
+
+                if (listaUsers.get(i).getTipo().equals("EMPRESA")){
+                    empresa = true;
+                    continuar = false;
+                }
+
+            }
+
+        }
+
+        return empresa;
+    }
 
 
     private void addChildEvent() {
@@ -166,6 +199,46 @@ public class ListadoReservas extends BaseActivity {
             dbR.addChildEventListener(cel);
         }
     }
+
+
+
+    private void addChildEventUsers() {
+        if(celUsers == null) {
+            celUsers = new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    Usuario us = dataSnapshot.getValue(Usuario.class);
+
+                    listaUsers.add(us);
+                }
+
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            };
+            dbRUsers.addChildEventListener(celUsers);
+        }
+    }
+
+
 
 
 
