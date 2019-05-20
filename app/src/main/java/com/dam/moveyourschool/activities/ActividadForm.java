@@ -38,6 +38,8 @@ public class ActividadForm extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        overridePendingTransition(R.anim.anim_down_top, R.anim.anim_top_down);
+
         //Inicializamos el contenedor de fragments
         fragmentContainer = findViewById(R.id.fragmentContainer);
         btnNext = findViewById(R.id.btnNext);
@@ -364,5 +366,11 @@ public class ActividadForm extends BaseActivity {
 
     public Actividad getActividadModificar() {
         return actividad;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.anim_down_top, R.anim.anim_top_down);
     }
 }

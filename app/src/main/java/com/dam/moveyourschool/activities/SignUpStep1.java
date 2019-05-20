@@ -14,6 +14,7 @@ public class SignUpStep1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up_step1);
+        overridePendingTransition(R.anim.anim_left, R.anim.anim_right);
     }
 
     public void signUpInstitucionEducativa(View view) {
@@ -27,5 +28,11 @@ public class SignUpStep1 extends AppCompatActivity {
         Intent i = new Intent(this, SignUpStep2.class);
         i.putExtra(getString(R.string.KEY_TYPE),2 );
         startActivity(i);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.anim_left, R.anim.anim_right);
     }
 }
