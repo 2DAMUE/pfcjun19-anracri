@@ -24,6 +24,7 @@ import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.bean.Usuario;
 import com.dam.moveyourschool.services.FireBaseAuthentication;
 import com.dam.moveyourschool.services.FireDBUsuarios;
+import com.dam.moveyourschool.utils.Constantes;
 import com.dam.moveyourschool.views.CustomDialog;
 import com.dam.moveyourschool.views.DialogLogin;
 import com.dam.moveyourschool.views.ProgressBarAlert;
@@ -66,7 +67,15 @@ public abstract class BaseActivity extends AppCompatActivity
 
         final FirebaseUser userAuth = FirebaseAuth.getInstance().getCurrentUser();
 
+        //Inicialmente los menús que requieren login no estan accesibles
+        navigationView.getMenu().findItem(R.id.nav_MisActividades).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_MisReservas).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_Usuarios).setVisible(false);
+        navigationView.getMenu().findItem(R.id.nav_MisChats).setVisible(false);
+
         if (userAuth != null) {
+            navigationView.getMenu().findItem(R.id.nav_Usuarios).setVisible(true);
+            navigationView.getMenu().findItem(R.id.nav_MisChats).setVisible(true);
             navigationView.getMenu().findItem(R.id.nav_logout).setVisible(true);
             navigationView.getMenu().findItem(R.id.nav_login).setVisible(false);
 
@@ -82,6 +91,15 @@ public abstract class BaseActivity extends AppCompatActivity
 
                         if (user.getNombre() != null && !user.getNombre().equals("")) {
                             tvMenuInstitucion.setText(user.getNombre());
+                        }
+
+                        if (user.getTipo().equals(Constantes.USUARIO_EMPRESA)) {
+                            navigationView.getMenu().findItem(R.id.nav_MisActividades).setVisible(true);
+                            navigationView.getMenu().findItem(R.id.nav_MisReservas).setVisible(true);
+                        }
+
+                        if (user.getTipo().equals(Constantes.USUARIO_EDUCACION)) {
+                            navigationView.getMenu().findItem(R.id.nav_MisReservas).setVisible(true);
                         }
 
                         serviceDBUsuarios.desconectarListener();
