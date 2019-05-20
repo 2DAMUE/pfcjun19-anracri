@@ -1,5 +1,7 @@
 package com.dam.moveyourschool.activities;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +11,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.dam.moveyourschool.R;
 import com.dam.moveyourschool.bean.Reserva;
+import com.dam.moveyourschool.bean.Usuario;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class Reserva_info_empresa extends BaseActivity {
 
@@ -20,10 +31,16 @@ public class Reserva_info_empresa extends BaseActivity {
     TextView estadoActual;
     ImageView imgRes;
     Reserva res;
+    private DatabaseReference dbR;
+    private ChildEventListener cel;
+    private ValueEventListener vel;
+    ArrayList<Usuario> users = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        dbR = FirebaseDatabase.getInstance().getReference().child("usuario");
 
         tituloRes = findViewById(R.id.txtTituloResInfoEmpresa);
         fecha = findViewById(R.id.fechaInforReservaEmpresa);
@@ -63,12 +80,80 @@ public class Reserva_info_empresa extends BaseActivity {
             estadoActual.setText("El cliente aun no ha respondido");
             estadoActual.setCompoundDrawablesRelative(getDrawable(R.drawable.ic_pendiente),null,null,null);
         }
+        addChildEvent();
+    }
+
+    private void addChildEvent() {
+        if(cel == null) {
+            cel = new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    Usuario us = dataSnapshot.getValue(Usuario.class);
+
+                    users.add(us);
+
+                }
+
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+
+
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            };
+            dbR.addChildEventListener(cel);
+        }
+
+        if(vel == null){
+            vel = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    colocarCliente();
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            };
+            dbR.addListenerForSingleValueEvent(vel);
+        }
+    }
+
+    private void colocarCliente() {
+        boolean centinela = true;
+        for (int i = 0; i<users.size() && centinela;i++){
+
+            if(users.get(i).getUid().equals(res.getIdCliente())){
+                cliente.setText(users.get(i).getNombre());
+                centinela = false;
+            }
+
+        }
+
 
     }
 
     @Override
     public int cargarLayout() {
-        return R.layout.activity_reserva_info;
+        return R.layout.activity_reserva_info_empresa;
     }
 
     @Override
