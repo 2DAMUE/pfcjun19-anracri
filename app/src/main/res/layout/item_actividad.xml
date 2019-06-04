@@ -68,7 +68,8 @@
                     android:gravity="center"
                     android:paddingRight="16dp"
                     android:text="10"
-                    android:textAlignment="textEnd" />
+                    android:textAlignment="textEnd"
+                    android:visibility="invisible" />
 
             </LinearLayout>
 

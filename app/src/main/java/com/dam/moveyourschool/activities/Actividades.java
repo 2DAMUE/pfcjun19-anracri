@@ -253,7 +253,7 @@ public class Actividades extends BaseActivity {
             public void nodoAgregado(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Usuario userAux = dataSnapshot.getValue(Usuario.class);
 
-                if (userAux.getUid().equals(user.getUid())) {
+                if (userAux.getUid().equals(user.getUid()) && userAux.getTipo().equals(Constantes.USUARIO_EMPRESA)) {
                     fabAgregarActividad.setVisibility(View.VISIBLE);
                 }
             }

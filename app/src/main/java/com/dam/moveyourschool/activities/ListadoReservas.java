@@ -61,67 +61,74 @@ public class ListadoReservas extends BaseActivity {
 
         user  = FirebaseAuth.getInstance().getCurrentUser();
 
-        recicler = findViewById(R.id.recyclerViewReservas);
-        recicler.setHasFixedSize(true);
+        if (user != null) {
+            recicler = findViewById(R.id.recyclerViewReservas);
+            recicler.setHasFixedSize(true);
 
-        miLayoutManager = new LinearLayoutManager(this);
-        adapter = new AdapterReservas(lista, this);
+            miLayoutManager = new LinearLayoutManager(this);
+            adapter = new AdapterReservas(lista, this);
 
-        recicler.setAdapter(adapter);
-        recicler.setLayoutManager(miLayoutManager);
-        recicler.setItemAnimator(new DefaultItemAnimator());
+            recicler.setAdapter(adapter);
+            recicler.setLayoutManager(miLayoutManager);
+            recicler.setItemAnimator(new DefaultItemAnimator());
 
-        adapter.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
+            adapter.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
 
-                Reserva res = lista.get(recicler.getChildAdapterPosition(v));
-                Intent i = null;
+                    Reserva res = lista.get(recicler.getChildAdapterPosition(v));
+                    Intent i = null;
 
-                if(localizarTipoUsuario()){
-                    i = new Intent(ListadoReservas.this,Reserva_info_empresa.class);
-                }else{
-                    i = new Intent(ListadoReservas.this,activity_reserva_info.class);
+                    if(localizarTipoUsuario()){
+                        i = new Intent(ListadoReservas.this,Reserva_info_empresa.class);
+                    }else{
+                        i = new Intent(ListadoReservas.this,activity_reserva_info.class);
+                    }
+
+                    i.putExtra(getString(R.string.KEY_RESERVA_INFO),res);
+
+                    startActivity(i);
+                }
+            });
+
+            alertsTabs = findViewById(R.id.alertasTabs);
+            alertsTabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
+                    Log.e("TAB", tab.getText().toString());
+
+                    if (tab.getText().equals(getString(R.string.tab_filtrar))) {
+                        verDialogFiltrar();
+                    } else if(tab.getText().equals(getString(R.string.tab_ordenar))) {
+                        verDialogOrdenar();
+                    }
                 }
 
-                i.putExtra(getString(R.string.KEY_RESERVA_INFO),res);
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
 
-                startActivity(i);
-            }
-        });
-
-        alertsTabs = findViewById(R.id.alertasTabs);
-        alertsTabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                Log.e("TAB", tab.getText().toString());
-
-                if (tab.getText().equals(getString(R.string.tab_filtrar))) {
-                    verDialogFiltrar();
-                } else if(tab.getText().equals(getString(R.string.tab_ordenar))) {
-                    verDialogOrdenar();
                 }
-            }
 
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
 
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-                if (tab.getText().equals(getString(R.string.tab_filtrar))) {
-                    verDialogFiltrar();
-                } else if(tab.getText().equals(getString(R.string.tab_ordenar))) {
-                    verDialogOrdenar();
+                    if (tab.getText().equals(getString(R.string.tab_filtrar))) {
+                        verDialogFiltrar();
+                    } else if(tab.getText().equals(getString(R.string.tab_ordenar))) {
+                        verDialogOrdenar();
+                    }
                 }
-            }
-        });
+            });
 
 
-        addChildEvent();
-        addChildEventUsers();
+            addChildEvent();
+            addChildEventUsers();
+
+        } else {
+            startActivity(new Intent(this, Actividades.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        }
+
+
     }
 
     private boolean localizarTipoUsuario() {

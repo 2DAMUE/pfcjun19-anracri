@@ -251,18 +251,6 @@ public abstract class BaseActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (user != null && user.getTipo().equals(EMPRESA)) {
-
-
-
-        } else if (user != null  && user.getTipo().equals(INSTITUCION_EDUCATIVA)) {
-
-
-        } else {
-
-        }
-
-
         if (id == R.id.nav_Usuarios) {
             startActivity(new Intent(this, UsuariosList.class));
         } else if (id == R.id.nav_MisChats) {
