@@ -251,7 +251,7 @@ public class ListadoReservas extends BaseActivity {
 
 
     public void verDialogOrdenar() {
-        final CharSequence[] lista = {"Ordenar por fecha", "Ordenar por estado"};
+        final CharSequence[] lista = {"Ordenar de la A a la Z", "Ordenar de la Z a la A"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(getString(R.string.dialog_opcion));
@@ -260,9 +260,9 @@ public class ListadoReservas extends BaseActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if ( i == 0) {
-                    //adaptador.ordenarAZ();
+                    adapter.ordenarAZ();
                 } else {
-                    //adaptador.ordenarZA();
+                    adapter.ordenarZA();
                 }
             }
         });
