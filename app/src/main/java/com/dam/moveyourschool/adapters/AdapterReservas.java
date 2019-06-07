@@ -16,6 +16,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class AdapterReservas extends RecyclerView.Adapter<AdapterReservas.HolderReserva> implements View.OnClickListener{
 
@@ -109,6 +111,27 @@ public class AdapterReservas extends RecyclerView.Adapter<AdapterReservas.Holder
     public void agregarReservas(ArrayList<Reserva> alertas) {
         listaReservas.addAll(alertas);
         //notifyItemRangeChanged(0, getItemCount());
+        notifyDataSetChanged();
+    }
+
+
+    public void ordenarAZ() {
+        Collections.sort(listaReservas, new Comparator<Reserva>() {
+            @Override
+            public int compare(Reserva res, Reserva t1) {
+                return res.getTituloActiRef().compareToIgnoreCase(t1.getTituloActiRef());
+            }
+        });
+        notifyDataSetChanged();
+    }
+
+    public void ordenarZA() {
+        Collections.sort(listaReservas, new Comparator<Reserva>() {
+            @Override
+            public int compare(Reserva res, Reserva t1) {
+                return (res.getTituloActiRef().compareToIgnoreCase(t1.getTituloActiRef())) * -1;
+            }
+        });
         notifyDataSetChanged();
     }
 
