@@ -32,7 +32,7 @@
     </style>
 
     <style name="SwitchActive" >
-        <item name="colorControlActivated">@color/blue_pastel</item>
+        <item name="colorControlActivated">@color/mochila</item>
     </style>
 
     <style name="SwipeLayout">

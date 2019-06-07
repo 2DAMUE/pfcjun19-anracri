@@ -107,7 +107,7 @@ public class ChatWindow extends BaseActivity {
         recyclerView.setHasFixedSize(true);
         fireBaseChatService = new FireBaseChatService(listaMensajes, userOrigen, userDestino, adapterChat, recyclerView);
 
-        if (userOrigen.getTipo().equals(Constantes.USUARIO_EMPRESA)) {
+        if (userOrigen.getTipo().equals(Constantes.USUARIO_EMPRESA) && userDestino.getTipo().equals(Constantes.USUARIO_EDUCACION)) {
             ((CustomContext)  (getApplicationContext())).setUsuario(userDestino);
             super.showCart = true;
             super.supportInvalidateOptionsMenu();
