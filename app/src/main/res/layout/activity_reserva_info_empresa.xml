@@ -15,7 +15,7 @@
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
         android:layout_weight="2"
-        android:scaleType="centerCrop"
+        android:scaleType="center"
         android:src="@drawable/imgexample"
         app:riv_border_color="#333333"
         app:riv_corner_radius="20dip"
